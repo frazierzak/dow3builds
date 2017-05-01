@@ -30,34 +30,7 @@ header a#logo {
 	font-size: 12px;
 }
 
-header ul {
-	display: inline-block;
-	list-style: none;
-}
-
-header li {
-	display: inline-block;
-	list-style: none;
-}
-
-header li a {
-	padding: 10px;
-	border-right: 1px solid white;
-	font-size: 12px;
-}
-
-header li a:hover {
-	background: white;
-	color: black;
-}
-
-header label {
-	padding: 0 5px 0 10px;
-	color: white;
-	font-size: 12px;
-}
-
-header input {
+#race-select {
 	display: inline-block;
 }
 
@@ -86,4 +59,8 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 
 label.disabled img {
 	filter: grayscale(100%);
+}
+
+.eliteDocs {
+	display: none;
 }

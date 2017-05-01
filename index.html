@@ -11,14 +11,28 @@
 		<header>
 			<a id="logo" href="/">DoW3Builds.com</a>
 			<form>
-				<select id="race" name="race">
+				<!-- <select id="race" name="race">
 					<option value="sm">SM</option>
 					<option value="ork">ORK</option>
 					<option value="eld">ELD</option>
-				</select>
+				</select> -->
+				<div id="race-select">
+					<label>
+						<input type="radio" name="race" value="sm" />
+						<img src="images/races/spacemarines.png">
+					</label>
+					<label>
+						<input type="radio" name="race" value="ork" />
+						<img src="images/races/orks.png">
+					</label>
+					<label>
+						<input type="radio" name="race" value="eld" />
+						<img src="images/races/eldar.png">
+					</label>
+				</div>
 		</header>
 		<section>
-			<div id="smSection">
+			<div id="smSection" style="display: none">
 				<table>
 				<tr>
 					<th>
@@ -65,26 +79,46 @@
 						</div><!-- firstElite -->
 					</td>
 					<td id="firstEliteDocs">
-						<div id="killteam">
+						<div class="eliteDocs" id="killteam">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+								<input type="radio" name="1stEliteDoc" value="deathwatchCommand" />
 								<img src="images/sm/elitedoctrines/killteam1.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+								<input type="radio" name="1stEliteDoc" value="deathwatchPresence" />
 								<img src="images/sm/elitedoctrines/killteam2.png">
 							</label>
 						</div><!-- killteam -->
-						<div id="librarian">
+						<div class="eliteDocs" id="librarian">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+								<input type="radio" name="1stEliteDoc" value="jonahCommand" />
 								<img src="images/sm/elitedoctrines/librarian1.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+								<input type="radio" name="1stEliteDoc" value="jonahPresence" />
 								<img src="images/sm/elitedoctrines/librarian2.png">
 							</label>
 						</div><!-- librarian -->
+						<div class="eliteDocs" id="diomedes">
+							<label>
+								<input type="radio" name="1stEliteDoc" value="jonahCommand" />
+								<img src="images/sm/elitedoctrines/diomedes1.png">
+							</label>
+							<label>
+								<input type="radio" name="1stEliteDoc" value="jonahPresence" />
+								<img src="images/sm/elitedoctrines/diomedes2.png">
+							</label>
+						</div><!-- librarian -->
+						<div class="eliteDocs" id="gabriel">
+							<label>
+								<input type="radio" name="1stEliteDoc" value="gabrielCommand" />
+								<img src="images/sm/elitedoctrines/gabriel1.png">
+							</label>
+							<label>
+								<input type="radio" name="1stEliteDoc" value="gabrielPresence" />
+								<img src="images/sm/elitedoctrines/gabriel2.png">
+							</label>
+						</div><!-- gabriel -->
 					</td>
 					<td>
 						<div id="secondElite">
@@ -107,23 +141,23 @@
 						</div>
 					</td>
 					<td id="secondEliteDocs">
-						<div id="killteam">
+						<div class="eliteDocs" id="killteam">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+								<input type="radio" name="2ndEliteDoc" value="deathwatchCommand" />
 								<img src="images/sm/elitedoctrines/killteam1.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+								<input type="radio" name="2ndEliteDoc" value="deathwatchPresence" />
 								<img src="images/sm/elitedoctrines/killteam2.png">
 							</label>
 						</div><!-- killteam -->
-						<div id="librarian">
+						<div class="eliteDocs" id="librarian">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+								<input type="radio" name="2ndEliteDoc" value="jonahcommand" />
 								<img src="images/sm/elitedoctrines/librarian1.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+								<input type="radio" name="2ndEliteDoc" value="jonahpresence" />
 								<img src="images/sm/elitedoctrines/librarian2.png">
 							</label>
 						</div><!-- librarian -->
@@ -149,23 +183,23 @@
 						</div><!-- thirdElite -->
 					</td>
 					<td id="thirdEliteDocs">
-						<div id="killteam">
+						<div class="eliteDocs" id="killteam">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+								<input type="radio" name="3rdEliteDoc" value="deathwatchCommand" />
 								<img src="images/sm/elitedoctrines/killteam1.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+								<input type="radio" name="3rdEliteDoc" value="deathwatchPresence" />
 								<img src="images/sm/elitedoctrines/killteam2.png">
 							</label>
 						</div><!-- killteam -->
-						<div id="librarian">
+						<div class="eliteDocs" id="librarian">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+								<input type="radio" name="3rdEliteDoc" value="jonahcommand" />
 								<img src="images/sm/elitedoctrines/librarian1.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+								<input type="radio" name="3rdEliteDoc" value="jonahpresence" />
 								<img src="images/sm/elitedoctrines/librarian2.png">
 							</label>
 						</div><!-- librarian -->
@@ -201,18 +235,26 @@
 			});
 
 			function switchRaces() {
-				var e = document.getElementById("race");
-				var race = e.options[e.selectedIndex].value;
-				//alert(race);
+				var race = $('input[name="race"]:checked').val();
 				if(race == "sm") {
 					$("#smSection").show();
 					$("#orkSection").hide();
 					$("#eldSection").hide();
 				};
+				if(race == "ork") {
+					$("#smSection").hide();
+					$("#orkSection").show();
+					$("#eldSection").hide();
+				};
+				if(race == "eld") {
+					$("#smSection").hide();
+					$("#orkSection").hide();
+					$("#eldSection").show();
+				};
 			};
 			switchRaces();
 
-			$('select#race').change(function() {
+			$('input[name="race"]').change(function() {
 				switchRaces();
 			});
 
@@ -264,7 +306,6 @@
 				var e = document.getElementById(changed);
 				$('td#secondEliteDocs').children().hide();
 				var e = 'td#secondEliteDocs #' + changed;
-				alert(e);
 				$(e).show();
 			});
 
