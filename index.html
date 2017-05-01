@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dawn of War 3 Builds</title>
+		<meta name="description" content="Creat and share your custom Dawn of War 3 builds with doctrines, elites, and build orders">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<link rel="stylesheet" type="text/css" href="main.css">
+		  <script src="jquery-3.2.1.min.js"></script>
+	</head>
+	<body>
+		<header>
+			<a id="logo" href="/">DoW3Builds.com</a>
+			<form>
+				<select id="race" name="race">
+					<option value="sm">SM</option>
+					<option value="ork">ORK</option>
+					<option value="eld">ELD</option>
+				</select>
+		</header>
+		<section>
+			<div id="smSection">
+				<table>
+				<tr>
+					<th>
+						Select 1st Elite
+					</th>
+					<th>
+						Select 1st Elite Doctrine
+					</th>
+					<th>
+						Select 2nd Elite
+					</th>
+					<th>
+						Select 2nd Elite Doctrine
+					</th>
+					<th>
+						Select 3rd Elite
+					</th>
+					<th>
+						Select 3rd Elite Doctrine
+					</th>
+					<th>
+						Select Race Doctrines
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<div id="firstElite">
+							<label>
+								<input class="single-checkbox" type="radio" name="1stElite" value="Elite1" />
+								<img src="images/sm/elites/killteamironmaw.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="1stElite" value="Elite2" />
+								<img src="images/sm/elites/librarianjonahorion.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="1stElite" value="Elite3" />
+								<img src="images/sm/elites/chaplaindiomedes.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="1stElite" value="Elite4" />
+								<img src="images/sm/elites/gabrielangelos.png">
+							</label>
+						</div><!-- firstElite -->
+					</td>
+					<td>
+						<label>
+							<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc1" />
+							<img src="images/sm/elitedoctrines/killteam1.png">
+						</label>
+						<label>
+							<input class="single-checkbox" type="radio" name="1stEliteDoc" value="Doc2" />
+							<img src="images/sm/elitedoctrines/killteam2.png">
+						</label>
+					</td>
+					<td>
+						<div id="secondElite">
+							<label>
+								<input class="single-checkbox" type="radio" name="2ndElite" value="Elite1" />
+								<img src="images/sm/elites/killteamironmaw.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="2ndElite" value="Elite2" />
+								<img src="images/sm/elites/librarianjonahorion.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="2ndElite" value="Elite3" />
+								<img src="images/sm/elites/chaplaindiomedes.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="2ndElite" value="Elite4" />
+								<img src="images/sm/elites/gabrielangelos.png">
+							</label>
+						</div>
+					</td>
+					<td>
+						<label>
+							<input class="single-checkbox" type="radio" name="2ndEliteDoc" value="Doc1" />
+							<img src="images/sm/elitedoctrines/killteam1.png">
+						</label>
+						<label>
+							<input class="single-checkbox" type="radio" name="2ndEliteDoc" value="Doc2" />
+							<img src="images/sm/elitedoctrines/killteam2.png">
+						</label>
+					</td>
+					<td>
+						<div id="thirdElite">
+							<label>
+								<input class="single-checkbox" type="radio" name="3rdElite" value="Elite1" />
+								<img src="images/sm/elites/killteamironmaw.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="3rdElite" value="Elite2" />
+								<img src="images/sm/elites/librarianjonahorion.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="3rdElite" value="Elite3" />
+								<img src="images/sm/elites/chaplaindiomedes.png">
+							</label>
+							<label>
+								<input class="single-checkbox" type="radio" name="3rdElite" value="Elite4" />
+								<img src="images/sm/elites/gabrielangelos.png">
+							</label>
+						</div><!-- thirdElite -->
+					</td>
+					<td>
+						<label>
+							<input class="single-checkbox" type="radio" name="3rdEliteDoc" value="Doc1" />
+							<img src="images/sm/elitedoctrines/killteam1.png">
+						</label>
+						<label>
+							<input class="single-checkbox" type="radio" name="3rdEliteDoc" value="Doc2" />
+							<img src="images/sm/elitedoctrines/killteam2.png">
+						</label>
+					</td>
+					<td>
+						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc1">Doctron #1<br/>
+						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc2">Doctron #2<br/>
+						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc3">Doctron #3<br/>
+						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc4">Doctron #4<br/>
+						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc5">Doctron #5<br/>
+					</td>
+				</tr>
+				</table>
+			</div><!-- smSection -->
+			</form>
+		</section>
+		<p><tt id="results"></tt></p>
+		<script>
+			function showValues() {
+				var str = $( "form" ).serialize();
+				$( "#results" ).text( str );
+			}
+			$( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
+			$( "select" ).on( "change", showValues );
+			showValues();
+
+			var limit = 3;
+			$('input.doctrines-checkbox').change(function() {
+			   if($(this).siblings(':checked').length >= limit) {
+			       this.checked = false;
+			       showValues();
+			   }
+			});
+
+			function switchRaces() {
+				var e = document.getElementById("race");
+				var race = e.options[e.selectedIndex].value;
+				//alert(race);
+				if(race == "sm") {
+					$("#smSection").show();
+					$("#orkSection").hide();
+					$("#eldSection").hide();
+				};
+			};
+			switchRaces();
+
+			$('select#race').change(function() {
+				switchRaces();
+			});
+
+			function disableRadio(changed, x) {
+				if ($(x).val() == changed) {
+					$(x).prop('checked', false);
+					$(x).attr('disabled',true);
+					$(x).parent().addClass('disabled');
+		        } else {
+		        	//if(jQuery.inArray($(x).val(), elites_array) != -1) {
+	        			//$(x).parent().removeClass('disabled');
+	        			//$(x).attr('disabled',false);
+	        		//} else {
+						//elites_array.splice($.inArray($(x).val(), elites_array),1);
+	        		//}
+		        };
+
+			};
+
+			var elites_array = [];
+
+			$('#firstElite input.single-checkbox').change(function() {
+				var changed = $(this).val();
+				elites_array.push(changed);
+				$('#secondElite input.single-checkbox').each(function() {
+					disableRadio(changed, $(this));
+					showValues();
+				});
+				$('#thirdElite input.single-checkbox').each(function() {
+					disableRadio(changed, $(this));
+			        showValues();
+				});
+				//alert(elites_array);
+			});
+
+			$('#secondElite input.single-checkbox').change(function() {
+				var changed = $(this).val();
+				elites_array.push(changed);
+				$('#firstElite input.single-checkbox').each(function() {
+					disableRadio(changed, $(this));
+			        showValues();
+				});
+				$('#thirdElite input.single-checkbox').each(function() {
+					disableRadio(changed, $(this));
+			        showValues();
+				});
+				//alert(elites_array);
+			});
+
+			$('#thirdElite input.single-checkbox').change(function() {
+				var changed = $(this).val();
+				elites_array.push(changed);
+				$('#firstElite input.single-checkbox').each(function() {
+					disableRadio(changed, $(this));
+			        showValues();
+				});
+				$('#secondElite input.single-checkbox').each(function() {
+					disableRadio(changed, $(this));
+					showValues();
+				});
+				//alert(elites_array);
+			});
+
+		</script>
+	</body>
+</html>

@@ -1,0 +1,89 @@
+*{
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	color: orange;
+	text-decoration: none;
+}
+
+a:hover {
+	color: white;
+}
+
+body {
+	background: black;
+	color: white;
+}
+
+header {
+	border-bottom: 1px solid white;
+	white-space: nowrap;
+	font-size: 0;
+}
+
+header a#logo {
+	display: inline-block;
+	padding: 10px;
+	border-right: 1px solid white;
+	font-size: 12px;
+}
+
+header ul {
+	display: inline-block;
+	list-style: none;
+}
+
+header li {
+	display: inline-block;
+	list-style: none;
+}
+
+header li a {
+	padding: 10px;
+	border-right: 1px solid white;
+	font-size: 12px;
+}
+
+header li a:hover {
+	background: white;
+	color: black;
+}
+
+header label {
+	padding: 0 5px 0 10px;
+	color: white;
+	font-size: 12px;
+}
+
+header input {
+	display: inline-block;
+}
+
+table th {
+	text-align: center;
+	padding: 5px 20px;
+}
+
+table td {
+	padding: 20px;
+}
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+
+label > input + img{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:1px solid transparent;
+  border-radius: 3px;
+}
+label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:1px solid yellow;
+}
+
+label.disabled img {
+	filter: grayscale(100%);
+}
