@@ -4,32 +4,33 @@
 		<title>Dawn of War 3 Builds</title>
 		<meta name="description" content="Creat and share your custom Dawn of War 3 builds with doctrines, elites, and build orders">
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
+		<script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="main.css">
-		  <script src="jquery-3.2.1.min.js"></script>
 	</head>
 	<body>
 		<header>
-			<a id="logo" href="/">DoW3Builds.com</a>
-			<form>
-				<!-- <select id="race" name="race">
-					<option value="sm">SM</option>
-					<option value="ork">ORK</option>
-					<option value="eld">ELD</option>
-				</select> -->
-				<div id="race-select">
-					<label>
-						<input type="radio" name="race" value="sm" />
-						<img src="images/races/spacemarines.png">
-					</label>
-					<label>
-						<input type="radio" name="race" value="ork" />
-						<img src="images/races/orks.png">
-					</label>
-					<label>
-						<input type="radio" name="race" value="eld" />
-						<img src="images/races/eldar.png">
-					</label>
-				</div>
+			<!-- <a id="logo" href="/">DoW3Builds.com</a> -->
+
+			<form id="form">
+			<div id="race-select">
+				<label>
+					<input type="radio" name="race" value="sm" />
+					<img src="images/races/spacemarines.png">
+				</label>
+				<label>
+					<input type="radio" name="race" value="ork" />
+					<img src="images/races/orks.png">
+				</label>
+				<label>
+					<input type="radio" name="race" value="eld" />
+					<img src="images/races/eldar.png">
+				</label>
+			</div>
+			<a href="index.html" id="clear">Clear</a>
+			<button id="submit">Submit</button>
 		</header>
 		<section>
 			<div id="smSection" style="display: none">
@@ -53,32 +54,30 @@
 					<th>
 						Select 3rd Elite Doctrine
 					</th>
-					<th>
-						Select Race Doctrines
-					</th>
 				</tr>
 				<tr>
-					<td>
+					<td class="elites">
 						<div id="firstElite">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="killteam" />
-								<img src="images/sm/elites/killteamironmaw.png">
+								<input class="single-checkbox" type="radio" name="1stElite" value="killteam" alt="Kill Team Ironmaw" />
+								<img title="<h2>Kill Team Ironmaw</h2><h3>Assassin</h3>Flexible ranged infantry squad that can choose between weapon packages when deployed. Their vortex grenades slow enemies and mark them for death, dealing damage over time and remaining as long as the Deathwatch attack the target." src="images/sm/elites/killteamironmaw.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="librarian" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="librarian" alt="Librarian Jonah Orion" />
 								<img src="images/sm/elites/librarianjonahorion.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="diomedes" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="diomedes" alt="Chaplain Diomedes" />
 								<img src="images/sm/elites/chaplaindiomedes.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="gabriel" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="gabriel" alt="Gabriel Angelos" />
 								<img src="images/sm/elites/gabrielangelos.png">
 							</label>
 						</div><!-- firstElite -->
+						<div id="firstElite_name"></div>
 					</td>
-					<td id="firstEliteDocs">
+					<td id="firstEliteDocs" class="eliteDoctrines">
 						<div class="eliteDocs" id="killteam">
 							<label>
 								<input type="radio" name="1stEliteDoc" value="deathwatchCommand" />
@@ -101,14 +100,14 @@
 						</div><!-- librarian -->
 						<div class="eliteDocs" id="diomedes">
 							<label>
-								<input type="radio" name="1stEliteDoc" value="jonahCommand" />
+								<input type="radio" name="1stEliteDoc" value="diomedesCommand" />
 								<img src="images/sm/elitedoctrines/diomedes1.png">
 							</label>
 							<label>
-								<input type="radio" name="1stEliteDoc" value="jonahPresence" />
+								<input type="radio" name="1stEliteDoc" value="diomedesPresence" />
 								<img src="images/sm/elitedoctrines/diomedes2.png">
 							</label>
-						</div><!-- librarian -->
+						</div><!-- diomedes -->
 						<div class="eliteDocs" id="gabriel">
 							<label>
 								<input type="radio" name="1stEliteDoc" value="gabrielCommand" />
@@ -123,22 +122,23 @@
 					<td>
 						<div id="secondElite">
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="killteam" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="killteam" alt="Kill Team Ironmaw" />
 								<img src="images/sm/elites/killteamironmaw.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="librarian" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="librarian" alt="Librarian Jonah Orion" />
 								<img src="images/sm/elites/librarianjonahorion.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="diomedes" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="diomedes" alt="Chaplain Diomedes" />
 								<img src="images/sm/elites/chaplaindiomedes.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="gabriel" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="gabriel" alt="Gabriel Angelos" />
 								<img src="images/sm/elites/gabrielangelos.png">
 							</label>
 						</div>
+						<div id="secondElite_name"></div>
 					</td>
 					<td id="secondEliteDocs">
 						<div class="eliteDocs" id="killteam">
@@ -153,34 +153,55 @@
 						</div><!-- killteam -->
 						<div class="eliteDocs" id="librarian">
 							<label>
-								<input type="radio" name="2ndEliteDoc" value="jonahcommand" />
+								<input type="radio" name="2ndEliteDoc" value="jonahCommand" />
 								<img src="images/sm/elitedoctrines/librarian1.png">
 							</label>
 							<label>
-								<input type="radio" name="2ndEliteDoc" value="jonahpresence" />
+								<input type="radio" name="2ndEliteDoc" value="jonahPresence" />
 								<img src="images/sm/elitedoctrines/librarian2.png">
 							</label>
 						</div><!-- librarian -->
+						<div class="eliteDocs" id="diomedes">
+							<label>
+								<input type="radio" name="2ndEliteDoc" value="diomedesCommand" />
+								<img src="images/sm/elitedoctrines/diomedes1.png">
+							</label>
+							<label>
+								<input type="radio" name="2ndEliteDoc" value="diomedesPresence" />
+								<img src="images/sm/elitedoctrines/diomedes2.png">
+							</label>
+						</div><!-- diomedes -->
+						<div class="eliteDocs" id="gabriel">
+							<label>
+								<input type="radio" name="2ndEliteDoc" value="gabrielCommand" />
+								<img src="images/sm/elitedoctrines/gabriel1.png">
+							</label>
+							<label>
+								<input type="radio" name="2ndEliteDoc" value="gabrielPresence" />
+								<img src="images/sm/elitedoctrines/gabriel2.png">
+							</label>
+						</div><!-- gabriel -->
 					</td>
 					<td>
 						<div id="thirdElite">
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="killteam" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="killteam" alt="Kill Team Ironmaw" />
 								<img src="images/sm/elites/killteamironmaw.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="librarian" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="librarian" alt="Librarian Jonah Orion" />
 								<img src="images/sm/elites/librarianjonahorion.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="diomedes" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="diomedes" alt="Chaplain Diomedes" />
 								<img src="images/sm/elites/chaplaindiomedes.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="gabriel" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="gabriel" alt="Gabriel Angelos" />
 								<img src="images/sm/elites/gabrielangelos.png">
 							</label>
 						</div><!-- thirdElite -->
+						<div id="thirdElite_name"></div>
 					</td>
 					<td id="thirdEliteDocs">
 						<div class="eliteDocs" id="killteam">
@@ -195,45 +216,177 @@
 						</div><!-- killteam -->
 						<div class="eliteDocs" id="librarian">
 							<label>
-								<input type="radio" name="3rdEliteDoc" value="jonahcommand" />
+								<input type="radio" name="3rdEliteDoc" value="jonahCommand" />
 								<img src="images/sm/elitedoctrines/librarian1.png">
 							</label>
 							<label>
-								<input type="radio" name="3rdEliteDoc" value="jonahpresence" />
+								<input type="radio" name="3rdEliteDoc" value="jonahPresence" />
 								<img src="images/sm/elitedoctrines/librarian2.png">
 							</label>
 						</div><!-- librarian -->
+						<div class="eliteDocs" id="diomedes">
+							<label>
+								<input type="radio" name="3rdEliteDoc" value="diomedesCommand" />
+								<img src="images/sm/elitedoctrines/diomedes1.png">
+							</label>
+							<label>
+								<input type="radio" name="3rdEliteDoc" value="diomedesPresence" />
+								<img src="images/sm/elitedoctrines/diomedes2.png">
+							</label>
+						</div><!-- diomedes -->
+						<div class="eliteDocs" id="gabriel">
+							<label>
+								<input type="radio" name="3rdEliteDoc" value="gabrielCommand" />
+								<img src="images/sm/elitedoctrines/gabriel1.png">
+							</label>
+							<label>
+								<input type="radio" name="3rdEliteDoc" value="gabrielPresence" />
+								<img src="images/sm/elitedoctrines/gabriel2.png">
+							</label>
+						</div><!-- gabriel -->
 					</td>
-					<td>
+				</tr>
+				<!-- <tr>
+					<td colspan="6">
 						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc1">Doctron #1<br/>
 						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc2">Doctron #2<br/>
 						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc3">Doctron #3<br/>
 						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc4">Doctron #4<br/>
 						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc5">Doctron #5<br/>
 					</td>
-				</tr>
+				</tr> -->
 				</table>
 			</div><!-- smSection -->
 			</form>
 		</section>
 		<p><tt id="results"></tt></p>
+		
 		<script>
+
+			//Clear code
+			function clear() {
+				$('#form')[0].reset();
+				//alert("clear!");
+				var oldURL = "file:///D:/Work/Personal/DoW3BuildSite/index.html";
+				var new_url = oldURL.substring(0, oldURL.indexOf('?'));
+				
+			}
+
+			$("#clear").click(clear);
+
+			function submit() {
+			}
+
+			function hideEliteDoctrines(elite, query) {
+				$(elite).children().each(function() {
+					if ($(this).attr('id') != query) {
+						$(this).hide();
+					}
+				})
+			}
+
+			//Elite selection code
+			function disableRadio(changed, x) {
+				if ($(x).val() == changed) {
+					$(x).attr('disabled',true);
+					$(x).parent().addClass('disabled');
+				} else {
+					if ($(x).val() != first_elite && $(x).val() != second_elite && $(x).val() != third_elite) {
+						$(x).parent().removeClass('disabled');
+						$(x).attr('disabled',false);
+					};
+				};
+			};
+
+			var first_elite;
+			var second_elite;
+			var third_elite;
+
+			//url parser
+			var r = /[?|&](\w+)=(\w+)+/g;  //matches against a kv pair a=b
+			var query = r.exec(window.location.href);  //gets the first query from the url
+
+			while (query != null) {
+				$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
+				
+				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "firstElite") {
+					var changed = query[2];
+					first_elite = changed;
+					var firstEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+					$("#firstElite_name").text(firstEliteName);
+					$('#secondElite input.single-checkbox').each(function() {
+						disableRadio(changed, $(this));
+					});
+					$('#thirdElite input.single-checkbox').each(function() {
+						disableRadio(changed, $(this));
+					});
+					hideEliteDoctrines('#firstEliteDocs', query[2]);
+					var e = document.getElementById(changed);
+					$('td#firstEliteDocs').children().hide();
+					var e = 'td#firstEliteDocs #' + changed;
+					$(e).show();
+				}
+				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "secondElite") {
+					var changed = query[2];
+					second_elite = changed;
+					var secondEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+					$("#secondElite_name").text(secondEliteName);
+					$('#firstElite input.single-checkbox').each(function() {
+						disableRadio(changed, $(this));
+					});
+					$('#thirdElite input.single-checkbox').each(function() {
+						disableRadio(changed, $(this));
+					});
+					hideEliteDoctrines('#secondEliteDocs', query[2]);
+					var e = document.getElementById(changed);
+					$('td#secondEliteDocs').children().hide();
+					var e = 'td#secondEliteDocs #' + changed;
+					$(e).show();
+				}
+				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "thirdElite") {
+					var changed = query[2];
+					third_elite = changed;
+					var thirdEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+					$("#thirdElite_name").text(thirdEliteName);
+					$('#secondElite input.single-checkbox').each(function() {
+						disableRadio(changed, $(this));
+					});
+					$('#firstElite input.single-checkbox').each(function() {
+						disableRadio(changed, $(this));
+					});
+					hideEliteDoctrines('#thirdEliteDocs', query[2]);
+					$('td#thirdEliteDocs').children().hide();
+					var e = 'td#thirdEliteDocs #' + changed;
+					$(e).show();
+				}
+				showValues();
+				switchRaces();
+				query = r.exec(window.location.href);  //repeats to get next capture
+			}
+
+			$("#submit").click(submit);
+
+			//Show parameters on page
 			function showValues() {
 				var str = $( "form" ).serialize();
 				$( "#results" ).text( str );
+				
 			}
+
 			$( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
 			$( "select" ).on( "change", showValues );
 			showValues();
 
+			//Doctrines limitation code
 			var limit = 3;
 			$('input.doctrines-checkbox').change(function() {
 			   if($(this).siblings(':checked').length >= limit) {
-			       this.checked = false;
-			       showValues();
+				   this.checked = false;
+				   showValues();
 			   }
 			});
 
+			//Race selection code
 			function switchRaces() {
 				var race = $('input[name="race"]:checked').val();
 				if(race == "sm") {
@@ -256,35 +409,20 @@
 
 			$('input[name="race"]').change(function() {
 				switchRaces();
-			});
-
-			function disableRadio(changed, x) {
-				if ($(x).val() == changed) {
-					$(x).prop('checked', false);
-					$(x).attr('disabled',true);
-					$(x).parent().addClass('disabled');
-		        } else {
-		        	if ($(x).val() != first_elite && $(x).val() != second_elite && $(x).val() != third_elite) {
-		        		$(x).parent().removeClass('disabled');
-	        			$(x).attr('disabled',false);
-		        	};
-		        };
-			};
-
-			var first_elite;
-			var second_elite;
-			var third_elite;
+			});			
 
 			$('#firstElite input.single-checkbox').change(function() {
 				var changed = $(this).val();
 				first_elite = changed;
+				var firstEliteName = $(this).attr('alt');
+				$("#firstElite_name").text(firstEliteName);
 				$('#secondElite input.single-checkbox').each(function() {
 					disableRadio(changed, $(this));
 					showValues();
 				});
 				$('#thirdElite input.single-checkbox').each(function() {
 					disableRadio(changed, $(this));
-			        showValues();
+					showValues();
 				});
 				var e = document.getElementById(changed);
 				$('td#firstEliteDocs').children().hide();
@@ -295,13 +433,15 @@
 			$('#secondElite input.single-checkbox').change(function() {
 				var changed = $(this).val();
 				second_elite = changed;
+				var secondEliteName = $(this).attr('alt');
+				$("#secondElite_name").text(secondEliteName);
 				$('#firstElite input.single-checkbox').each(function() {
 					disableRadio(changed, $(this));
-			        showValues();
+					showValues();
 				});
 				$('#thirdElite input.single-checkbox').each(function() {
 					disableRadio(changed, $(this));
-			        showValues();
+					showValues();
 				});
 				var e = document.getElementById(changed);
 				$('td#secondEliteDocs').children().hide();
@@ -312,9 +452,11 @@
 			$('#thirdElite input.single-checkbox').change(function() {
 				var changed = $(this).val();
 				third_elite = changed;
+				var thirdEliteName = $(this).attr('alt');
+				$("#thirdElite_name").text(thirdEliteName);
 				$('#firstElite input.single-checkbox').each(function() {
 					disableRadio(changed, $(this));
-			        showValues();
+					showValues();
 				});
 				$('#secondElite input.single-checkbox').each(function() {
 					disableRadio(changed, $(this));
@@ -325,7 +467,40 @@
 				var e = 'td#thirdEliteDocs #' + changed;
 				$(e).show();
 			});
+			
+			// function chooseEliteFromDoc(elite_owner, elite_set, doc_set, doc) {
+			// 	$(elite_set + ' label input[value="'+elite_owner+'"]').attr('checked',true);
+			// 	$(doc_set).children().hide();
+			// 	$(doc).parents().show();
+			// }
 
+			
+
+			// $('#firstEliteDocs input').change(function() {
+			// 	var elite_owner = $(this).parents('div').attr('id');
+			// 	chooseEliteFromDoc(elite_owner, '#firstElite', 'td#firstEliteDocs', $(this))
+			// })
+
+			// $('#secondEliteDocs input').change(function() {
+			// 	var elite_owner = $(this).parents('div').attr('id');
+			// 	chooseEliteFromDoc(elite_owner, '#secondElite', 'td#secondEliteDocs', $(this))
+			// })
+
+			// $('#thirdEliteDocs input').change(function() {
+			// 	var elite_owner = $(this).parents('div').attr('id');
+			// 	chooseEliteFromDoc(elite_owner, '#thirdElite', 'td#thirdEliteDocs', $(this))
+			// })
+
+			//tooltip code
+			$( function() {
+				$( document ).tooltip({
+					tooltipClass: "tooltips",
+					position: { my: "top+45", at: "center" },
+					content: function () {
+						return this.getAttribute("title")
+					},
+				});
+			} );	
 		</script>
 	</body>
 </html>
