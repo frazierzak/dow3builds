@@ -35,8 +35,8 @@ header a#logo {
 	border-right: 1px solid white;
 }
 
-header a#logo img {
-	
+header#build_header #view {
+	margin: 0 0 0 10px;
 }
 
 #race-select {
@@ -103,8 +103,17 @@ section {
 	padding: 20px;
 }
 
+section#build_section {
+	text-align: center;
+}
+
 table {
 	width: 100%;
+}
+
+table#build_table {
+	width: initial;
+	display: inline-block;
 }
 
 table th {

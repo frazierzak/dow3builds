@@ -11,16 +11,17 @@
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<header>
+		<header id="build_header">
 			<a id="logo" href="/"><img src="images/logo.png" /></a>
+			<a href="#" id="view">Edit this Build</a>
 		</header>
-		<section>
+		<section id="build_section">
 			
-		</section>
+		
 		<table id="build_table">
 			<tr>
 				<th>Race</th>
-				<th>Elites</th>
+				<th>Elites and their Doctrines</th>
 				<th>Doctrines</th>
 			</tr>
 			<tr>
@@ -98,6 +99,7 @@
 			<img title="<h2>Solaria's Presence - Inferno Missiles</h2>When Solaria is deployed, Whirlwind rockets leave behind a pool of fire when they explode. Causes Damage over time in a Circle." src="images/sm/elitedoctrines/imperialknightsolaria1.png" alt="imperialknightsolariaPresence">
 			<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fireonmove.png" alt="imperialknightsolariaCommand">
 		</div>
+		</section>
 		<script>
 			//url parser
 			var r = /[?|&](\w+)=(\w+)+/g;
@@ -116,16 +118,42 @@
 					var thirdElite = query[2];
 				}
 				if(query[1] == "1stEliteDoc") {
-					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ firstElite + '"]').show().css("margin-right", "10px");
+					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ firstElite + '"]').show().css({
+						"margin-right": "15px",
+						"margin-left": "5px",
+						"width": "50px",
+						"height": "auto",
+						"margin-bottom": "15px"
+						});
 				}
 				if(query[1] == "2ndEliteDoc") {
-					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ secondElite + '"]').show().css("margin-right", "10px");
+					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ secondElite + '"]').show().css({
+						"margin-right": "15px",
+						"margin-left": "5px",
+						"width": "50px",
+						"height": "auto",
+						"margin-bottom": "15px"
+						});
 				}
 				if(query[1] == "3rdEliteDoc") {
-					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ thirdElite + '"]').show().css("margin-right", "10px");
+					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ thirdElite + '"]').show().css({
+						"margin-left": "5px",
+						"width": "50px",
+						"height": "auto",
+						"margin-bottom": "15px"
+						});
 				}
 				query = r.exec(window.location.href);
 			}
+
+			//Show parameters on page
+			function showValues() {
+				var url = window.location.href; // Returns full URL
+				url = url.split('build.html?')[1]
+				var str = "index.html?" + url;
+				$("#view").attr('href', str);
+			}
+			showValues();
 
 			//tooltip code
 			$( function() {
