@@ -108,16 +108,16 @@
 			while (query != null) {
 				
 				$('img[alt="'+ query[2] + '"]').show();
-				if(query[1] == "1stElite") {
+				if(query[1] == "e1") {
 					var firstElite = query[2];
 				}
-				if(query[1] == "2ndElite") {
+				if(query[1] == "e2") {
 					var secondElite = query[2];
 				}
-				if(query[1] == "3rdElite") {
+				if(query[1] == "e3") {
 					var thirdElite = query[2];
 				}
-				if(query[1] == "1stEliteDoc") {
+				if(query[1] == "e1d") {
 					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ firstElite + '"]').show().css({
 						"margin-right": "15px",
 						"margin-left": "5px",
@@ -126,7 +126,7 @@
 						"margin-bottom": "15px"
 						});
 				}
-				if(query[1] == "2ndEliteDoc") {
+				if(query[1] == "e2d") {
 					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ secondElite + '"]').show().css({
 						"margin-right": "15px",
 						"margin-left": "5px",
@@ -135,7 +135,7 @@
 						"margin-bottom": "15px"
 						});
 				}
-				if(query[1] == "3rdEliteDoc") {
+				if(query[1] == "e3d") {
 					$('.build_elite_docs img[alt="'+ query[2] + '"]').clone().insertAfter('.build_elites img[alt="'+ thirdElite + '"]').show().css({
 						"margin-left": "5px",
 						"width": "50px",
