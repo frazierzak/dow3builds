@@ -31,13 +31,72 @@ header a#clear {
 
 header a#logo {
 	display: inline-block;
-	padding: 10px;
+	padding: 20px;
 	border-right: 1px solid white;
-	font-size: 12px;
+}
+
+header a#logo img {
+	
 }
 
 #race-select {
 	display: inline-block;
+	padding: 20px;
+	text-align: center;
+	
+}
+
+#race-select p {
+	font-size: 12px;
+	padding: 0;
+}
+
+button {
+	border: none;
+	background: none;
+	color: orange;
+	font-family: 'Roboto Condensed', sans-serif;
+	cursor: pointer;
+	border-right: 1px solid white;
+	padding: 0 10px 0 0;
+}
+
+button:hover {
+	color: white;
+}
+
+a#copy {
+	font-size: 12px;
+	margin: 0 10px 0 0px;
+	cursor: pointer;
+	padding: 0 10px 0 0;
+	border-right: 1px solid white;
+}
+
+p#share {
+	display: inline-block;
+	margin: 0 0 0 10px;
+	font-size: 12px;
+}
+
+p#share input {
+	background: black;
+	color: orange;
+	font-family: 'Roboto Condensed', sans-serif;
+	border: 1px solid orange;
+	padding: 2px;
+	border-radius: 3px;
+	margin: 0 10px 0 0;
+}
+
+a#view {
+	font-size: 12px;
+	margin: 0 10px 0 0;
+}
+
+a#clear {
+	border-left: 1px solid white;
+	padding: 0 0 0 10px;
 }
 
 section {
@@ -61,6 +120,10 @@ table td {
 	vertical-align: top;
 }
 
+table tr td:last-child {
+	border-right: none;
+}
+
 table td.elites {
 	width: 15%;
 }
@@ -77,11 +140,11 @@ label > input{ /* HIDE RADIO */
 
 label > input + img{ /* IMAGE STYLES */
   cursor:pointer;
-  border:1px solid transparent;
+  border:2px solid transparent;
   border-radius: 3px;
 }
 label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
-  border:1px solid yellow;
+  border:2px solid yellow;
 }
 
 label.disabled img {
@@ -119,4 +182,15 @@ label.disabled img {
 
 .selected_title {
 	margin: 20px 0 0 0;
+}
+
+table#build_table tr td {
+	vertical-align: middle;
+}
+
+.build_races img, .build_elites img, .build_doctrines img, .build_elite_docs {
+	display: none;
+}
+.build_elites img {
+	/*margin: 0;*/
 }

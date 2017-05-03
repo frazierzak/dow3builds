@@ -12,10 +12,10 @@
 	</head>
 	<body>
 		<header>
-			<!-- <a id="logo" href="/">DoW3Builds.com</a> -->
-
 			<form id="form">
+			<a id="logo" href="/"><img src="images/logo.png" /></a>
 			<div id="race-select">
+				<!-- <p>SELECT RACE</p> -->
 				<label>
 					<input type="radio" name="race" value="sm" />
 					<img src="images/races/spacemarines.png">
@@ -29,12 +29,19 @@
 					<img src="images/races/eldar.png">
 				</label>
 			</div>
-			<a href="index.html" id="clear">Clear</a>
-			<button id="submit">Submit</button>
+			
+			<button id="submit">Temporarily Save</button>
+			<p id="share">Your build URL: <input type="text" id="results"/></p>
+			<a id="copy">Copy URL to Share</a>
+			<a href="#" id="view">View your Build Page</a>
+			<a href="index.html" id="clear">Reset</a>
 		</header>
 		<section>
 			<div id="smSection" style="display: none">
 				<table>
+				<tr>
+					<th colspan="6"><h1>Elite Selection</h1></th>
+				</tr>
 				<tr>
 					<th>
 						Select 1st Elite
@@ -59,19 +66,19 @@
 					<td class="elites">
 						<div id="firstElite">
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="killteam" alt="Kill Team Ironmaw" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="killteamironmaw" alt="Kill Team Ironmaw" />
 								<img title="<h2>Kill Team Ironmaw</h2><h3>Assassin</h3>Flexible ranged infantry squad that can choose between weapon packages when deployed. Their vortex grenades slow enemies and mark them for death, dealing damage over time and remaining as long as the Deathwatch attack the target." src="images/sm/elites/killteamironmaw.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="librarian" alt="Librarian Jonah Orion" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="librarianjonahorion" alt="Librarian Jonah Orion" />
 								<img title="<h2>Librarian Jonah Orion</h2><h3>Support / Crowd Control</h3>Flexible infantry spellcaster with dual-natured abilities that enhance allies while controlling and damaging enemies. Can summon a ring of stone around himself that absorbs shots and blocks movement." src="images/sm/elites/librarianjonahorion.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="diomedes" alt="Chaplain Diomedes" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="chaplaindiomedes" alt="Chaplain Diomedes" />
 								<img title="<h2>Chaplain Diomedes</h2><h3>Support / Tank</h3>Melee infantry unit capable of withstanding conisderable punishment and enhancing allies. Diomedes critical strikes empower his allies and increase in potency the longer he remains in combat." src="images/sm/elites/chaplaindiomedes.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="1stElite" value="gabriel" alt="Gabriel Angelos" />
+								<input class="single-checkbox" type="radio" name="1stElite" value="gabrielangelos" alt="Gabriel Angelos" />
 								<img title="<h2>Gabriel Angelos</h2><h3>Nuker / Crowd Control</h3>Melee infantry unit that specializes in high area of effect damage and disruption. Gabriel's legendary hammer God-Splitter charges up over time, imbuing his abilities with additional properties." src="images/sm/elites/gabrielangelos.png">
 							</label>
 							<label>
@@ -98,7 +105,7 @@
 						<div id="firstElite_name" class="selected_title"></div>
 					</td>
 					<td id="firstEliteDocs" class="eliteDoctrines">
-						<div class="eliteDocs" id="killteam">
+						<div class="eliteDocs" id="killteamironmaw">
 							<label>
 								<input type="radio" name="1stEliteDoc" value="deathwatchCommand" alt="Deathwatch Command - Land Speeder Mark" />
 								<img src="images/sm/elitedoctrines/killteam1.png" title="<h2>Death Watch Command - Land Speeder Mark</h2>Land Speeders apply a Debuff to their target. Increases Damage Taken and Reveals the target for a duration. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -108,7 +115,7 @@
 								<img src="images/sm/elitedoctrines/killteam2.png" title="<h2>Deathwatch Presence - Death from Above</h2>Deathwatch can be deployed anywhere you have vision. When the Deathwatch are deployed, your other Elites can be deployed around the Deathwatch.">
 							</label>
 						</div><!-- killteam -->
-						<div class="eliteDocs" id="librarian">
+						<div class="eliteDocs" id="librarianjonahorion">
 							<label>
 								<input type="radio" name="1stEliteDoc" value="jonahCommand" alt="Jonah Orion's Command - Blind Grenade" />
 								<img src="images/sm/elitedoctrines/librarian1.png" title="<h2>Jonah Orion's Command - Blind Grenade</h2>Scount grenades Blind and Silence the enemy for a duration. The duration increases as you Tier up. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -118,17 +125,17 @@
 								<img src="images/sm/elitedoctrines/librarian2.png" title="<h2>Jonah Orion's Presence - Standard Stonewall</h2>When Jonah Orion is deployed, the Standard erects a magical barrier in a Circle around itself. Blocks movement and Absorbs shots that pass through it.">
 							</label>
 						</div><!-- librarian -->
-						<div class="eliteDocs" id="diomedes">
+						<div class="eliteDocs" id="chaplaindiomedes">
 							<label>
 								<input type="radio" name="1stEliteDoc" value="diomedesCommand" alt="Diomedes' Command - Final Slam" />
-								<img src="images/sm/elitedoctrines/diomedes1.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
+								<img src="images/sm/doctrines/finalslam.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
 							</label>
 							<label>
 								<input type="radio" name="1stEliteDoc" value="diomedesPresence" alt="Diomedes' Presence - Rosarius" />
 								<img src="images/sm/elitedoctrines/diomedes2.png" title="<h2>Diomedes' Presence - Rosarius</h2>When Diomedes is deployed, elites become temporarirly Invulnerable for a duration instead of dying. Has a long Cooldown between uses.">
 							</label>
 						</div><!-- diomedes -->
-						<div class="eliteDocs" id="gabriel">
+						<div class="eliteDocs" id="gabrielangelos">
 							<label>
 								<input type="radio" name="1stEliteDoc" value="gabrielCommand" alt="Gabriel Angelos' Command - Slam Barrier" />
 								<img src="images/sm/elitedoctrines/gabriel1.png" title="<h2>Gabriel Angelos' Command - Slam Barrier</h2>The Dreadnought's Slam ability creates a temporary barrier. Absorbs shots and Reflects projectiles. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -145,7 +152,7 @@
 							</label>
 							<label>
 								<input type="radio" name="1stEliteDoc" value="terminatorsCommand" alt="Terminators' Command - Focused Shot" />
-								<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/terminators2.png">
+								<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/focusedshot.png">
 							</label>
 						</div><!-- terminators -->
 						<div class="eliteDocs" id="assaultterminators">
@@ -154,8 +161,8 @@
 								<img title="<h2>Assault Terminators' Presence - Charging Slam</h2>When the Assault Terminators are deployed, the Dreadnought can charge in the target direction. Causes Damage, Knockback and Vehicle Stuns to units it passes through. At the end of his charge, or when activated during the charge the Dreadnought performs a Slam. They lose the ability to perform Slam without initiating a Charging Slam." src="images/sm/elitedoctrines/assaultterminators1.png">
 							</label>
 							<label>
-								<input type="radio" name="1stEliteDoc" value="assaultterminatorsCommand" alt="Assault Terminators' Command - Focused Shot" />
-								<img title="<h2>Assault Terminators' Command - Focused Shot</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/assaultterminators2.png">
+								<input type="radio" name="1stEliteDoc" value="assaultterminatorsCommand" alt="Assault Terminators' Command - Frag Grenade" />
+								<img title="<h2>Assault Terminators' Command - Frag Grenade</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fraggrenade.png">
 							</label>
 						</div><!-- assaultterminators -->
 						<div class="eliteDocs" id="venerabledreadnought">
@@ -185,7 +192,7 @@
 							</label>
 							<label>
 								<input type="radio" name="1stEliteDoc" value="imperialknightsolariaCommand" alt="Solaria's Command - Fire on Move" />
-								<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/imperialknightsolaria2.png">
+								<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fireonmove.png">
 							</label>
 						</div><!-- imperialknightsolaria -->
 						<div id="firstEliteDoc_name" class="selected_title"></div>
@@ -193,19 +200,19 @@
 					<td class="elites">
 						<div id="secondElite">
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="killteam" alt="Kill Team Ironmaw" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="killteamironmaw" alt="Kill Team Ironmaw" />
 								<img title="<h2>Kill Team Ironmaw</h2><h3>Assassin</h3>Flexible ranged infantry squad that can choose between weapon packages when deployed. Their vortex grenades slow enemies and mark them for death, dealing damage over time and remaining as long as the Deathwatch attack the target." src="images/sm/elites/killteamironmaw.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="librarian" alt="Librarian Jonah Orion" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="librarianjonahorion" alt="Librarian Jonah Orion" />
 								<img title="<h2>Librarian Jonah Orion</h2><h3>Support / Crowd Control</h3>Flexible infantry spellcaster with dual-natured abilities that enhance allies while controlling and damaging enemies. Can summon a ring of stone around himself that absorbs shots and blocks movement." src="images/sm/elites/librarianjonahorion.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="diomedes" alt="Chaplain Diomedes" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="chaplaindiomedes" alt="Chaplain Diomedes" />
 								<img title="<h2>Chaplain Diomedes</h2><h3>Support / Tank</h3>Melee infantry unit capable of withstanding conisderable punishment and enhancing allies. Diomedes critical strikes empower his allies and increase in potency the longer he remains in combat." src="images/sm/elites/chaplaindiomedes.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="2ndElite" value="gabriel" alt="Gabriel Angelos" />
+								<input class="single-checkbox" type="radio" name="2ndElite" value="gabrielangelos" alt="Gabriel Angelos" />
 								<img title="<h2>Gabriel Angelos</h2><h3>Nuker / Crowd Control</h3>Melee infantry unit that specializes in high area of effect damage and disruption. Gabriel's legendary hammer God-Splitter charges up over time, imbuing his abilities with additional properties." src="images/sm/elites/gabrielangelos.png">
 							</label>
 							<label>
@@ -232,7 +239,7 @@
 						<div id="secondElite_name" class="selected_title"></div>
 					</td>
 					<td id="secondEliteDocs" class="eliteDoctrines">
-						<div class="eliteDocs" id="killteam">
+						<div class="eliteDocs" id="killteamironmaw">
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="deathwatchCommand" alt="Deathwatch Command - Land Speeder Mark" />
 								<img src="images/sm/elitedoctrines/killteam1.png" title="<h2>Death Watch Command - Land Speeder Mark</h2>Land Speeders apply a Debuff to their target. Increases Damage Taken and Reveals the target for a duration. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -242,7 +249,7 @@
 								<img src="images/sm/elitedoctrines/killteam2.png" title="<h2>Deathwatch Presence - Death from Above</h2>Deathwatch can be deployed anywhere you have vision. When the Deathwatch are deployed, your other Elites can be deployed around the Deathwatch.">
 							</label>
 						</div><!-- killteam -->
-						<div class="eliteDocs" id="librarian">
+						<div class="eliteDocs" id="librarianjonahorion">
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="jonahCommand" alt="Jonah Orion's Command - Blind Grenade" />
 								<img src="images/sm/elitedoctrines/librarian1.png" title="<h2>Jonah Orion's Command - Blind Grenade</h2>Scount grenades Blind and Silence the enemy for a duration. The duration increases as you Tier up. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -252,17 +259,17 @@
 								<img src="images/sm/elitedoctrines/librarian2.png" title="<h2>Jonah Orion's Presence - Standard Stonewall</h2>When Jonah Orion is deployed, the Standard erects a magical barrier in a Circle around itself. Blocks movement and Absorbs shots that pass through it.">
 							</label>
 						</div><!-- librarian -->
-						<div class="eliteDocs" id="diomedes">
+						<div class="eliteDocs" id="chaplaindiomedes">
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="diomedesCommand" alt="Diomedes' Command - Final Slam" />
-								<img src="images/sm/elitedoctrines/diomedes1.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
+								<img src="images/sm/doctrines/finalslam.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
 							</label>
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="diomedesPresence" alt="Diomedes' Presence - Rosarius" />
 								<img src="images/sm/elitedoctrines/diomedes2.png" title="<h2>Diomedes' Presence - Rosarius</h2>When Diomedes is deployed, elites become temporarirly Invulnerable for a duration instead of dying. Has a long Cooldown between uses.">
 							</label>
 						</div><!-- diomedes -->
-						<div class="eliteDocs" id="gabriel">
+						<div class="eliteDocs" id="gabrielangelos">
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="gabrielCommand" alt="Gabriel Angelos' Command - Slam Barrier" />
 								<img src="images/sm/elitedoctrines/gabriel1.png" title="<h2>Gabriel Angelos' Command - Slam Barrier</h2>The Dreadnought's Slam ability creates a temporary barrier. Absorbs shots and Reflects projectiles. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -279,7 +286,7 @@
 							</label>
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="terminatorsCommand" alt="Terminators' Command - Focused Shot" />
-								<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/terminators2.png">
+								<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/focusedshot.png">
 							</label>
 						</div><!-- terminators -->
 						<div class="eliteDocs" id="assaultterminators">
@@ -289,7 +296,7 @@
 							</label>
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="assaultterminatorsCommand" alt="Assault Terminators' Command - Focused Shot" />
-								<img title="<h2>Assault Terminators' Command - Focused Shot</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/assaultterminators2.png">
+								<img title="<h2>Assault Terminators' Command - Focused Shot</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fraggrenade.png">
 							</label>
 						</div><!-- assaultterminators -->
 						<div class="eliteDocs" id="venerabledreadnought">
@@ -319,7 +326,7 @@
 							</label>
 							<label>
 								<input type="radio" name="2ndEliteDoc" value="imperialknightsolariaCommand" alt="Solaria's Command - Fire on Move" />
-								<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/imperialknightsolaria2.png">
+								<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fireonmove.png">
 							</label>
 						</div><!-- imperialknightsolaria -->
 						<div id="secondEliteDoc_name" class="selected_title"></div>
@@ -327,19 +334,19 @@
 					<td class="elites">
 						<div id="thirdElite">
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="killteam" alt="Kill Team Ironmaw" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="killteamironmaw" alt="Kill Team Ironmaw" />
 								<img title="<h2>Kill Team Ironmaw</h2><h3>Assassin</h3>Flexible ranged infantry squad that can choose between weapon packages when deployed. Their vortex grenades slow enemies and mark them for death, dealing damage over time and remaining as long as the Deathwatch attack the target." src="images/sm/elites/killteamironmaw.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="librarian" alt="Librarian Jonah Orion" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="librarianjonahorion" alt="Librarian Jonah Orion" />
 								<img title="<h2>Librarian Jonah Orion</h2><h3>Support / Crowd Control</h3>Flexible infantry spellcaster with dual-natured abilities that enhance allies while controlling and damaging enemies. Can summon a ring of stone around himself that absorbs shots and blocks movement." src="images/sm/elites/librarianjonahorion.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="diomedes" alt="Chaplain Diomedes" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="chaplaindiomedes" alt="Chaplain Diomedes" />
 								<img title="<h2>Chaplain Diomedes</h2><h3>Support / Tank</h3>Melee infantry unit capable of withstanding conisderable punishment and enhancing allies. Diomedes critical strikes empower his allies and increase in potency the longer he remains in combat." src="images/sm/elites/chaplaindiomedes.png">
 							</label>
 							<label>
-								<input class="single-checkbox" type="radio" name="3rdElite" value="gabriel" alt="Gabriel Angelos" />
+								<input class="single-checkbox" type="radio" name="3rdElite" value="gabrielangelos" alt="Gabriel Angelos" />
 								<img title="<h2>Gabriel Angelos</h2><h3>Nuker / Crowd Control</h3>Melee infantry unit that specializes in high area of effect damage and disruption. Gabriel's legendary hammer God-Splitter charges up over time, imbuing his abilities with additional properties." src="images/sm/elites/gabrielangelos.png">
 							</label>
 							<label>
@@ -366,7 +373,7 @@
 						<div id="thirdElite_name" class="selected_title"></div>
 					</td>
 					<td id="thirdEliteDocs" class="eliteDoctrines">
-						<div class="eliteDocs" id="killteam">
+						<div class="eliteDocs" id="killteamironmaw">
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="deathwatchCommand" alt="Deathwatch Command - Land Speeder Mark" />
 								<img src="images/sm/elitedoctrines/killteam1.png" title="<h2>Death Watch Command - Land Speeder Mark</h2>Land Speeders apply a Debuff to their target. Increases Damage Taken and Reveals the target for a duration. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -376,7 +383,7 @@
 								<img src="images/sm/elitedoctrines/killteam2.png" title="<h2>Deathwatch Presence - Death from Above</h2>Deathwatch can be deployed anywhere you have vision. When the Deathwatch are deployed, your other Elites can be deployed around the Deathwatch.">
 							</label>
 						</div><!-- killteam -->
-						<div class="eliteDocs" id="librarian">
+						<div class="eliteDocs" id="librarianjonahorion">
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="jonahCommand" alt="Jonah Orion's Command - Blind Grenade" />
 								<img src="images/sm/elitedoctrines/librarian1.png" title="<h2>Jonah Orion's Command - Blind Grenade</h2>Scount grenades Blind and Silence the enemy for a duration. The duration increases as you Tier up. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -386,17 +393,17 @@
 								<img src="images/sm/elitedoctrines/librarian2.png" title="<h2>Jonah Orion's Presence - Standard Stonewall</h2>When Jonah Orion is deployed, the Standard erects a magical barrier in a Circle around itself. Blocks movement and Absorbs shots that pass through it.">
 							</label>
 						</div><!-- librarian -->
-						<div class="eliteDocs" id="diomedes">
+						<div class="eliteDocs" id="chaplaindiomedes">
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="diomedesCommand" alt="Diomedes' Command - Final Slam" />
-								<img src="images/sm/elitedoctrines/diomedes1.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
+								<img src="images/sm/doctrines/finalslam.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
 							</label>
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="diomedesPresence" alt="Diomedes' Presence - Rosarius" />
 								<img src="images/sm/elitedoctrines/diomedes2.png" title="<h2>Diomedes' Presence - Rosarius</h2>When Diomedes is deployed, elites become temporarirly Invulnerable for a duration instead of dying. Has a long Cooldown between uses.">
 							</label>
 						</div><!-- diomedes -->
-						<div class="eliteDocs" id="gabriel">
+						<div class="eliteDocs" id="gabrielangelos">
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="gabrielCommand" alt="Gabriel Angelos' Command - Slam Barrier" />
 								<img src="images/sm/elitedoctrines/gabriel1.png" title="<h2>Gabriel Angelos' Command - Slam Barrier</h2>The Dreadnought's Slam ability creates a temporary barrier. Absorbs shots and Reflects projectiles. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
@@ -413,7 +420,7 @@
 							</label>
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="terminatorsCommand" alt="Terminators' Command - Focused Shot" />
-								<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/terminators2.png">
+								<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/focusedshot.png">
 							</label>
 						</div><!-- terminators -->
 						<div class="eliteDocs" id="assaultterminators">
@@ -423,7 +430,7 @@
 							</label>
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="assaultterminatorsCommand" alt="Assault Terminators' Command - Focused Shot" />
-								<img title="<h2>Assault Terminators' Command - Focused Shot</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/assaultterminators2.png">
+								<img title="<h2>Assault Terminators' Command - Focused Shot</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fraggrenade.png">
 							</label>
 						</div><!-- assaultterminators -->
 						<div class="eliteDocs" id="venerabledreadnought">
@@ -453,26 +460,151 @@
 							</label>
 							<label>
 								<input type="radio" name="3rdEliteDoc" value="imperialknightsolariaCommand" alt="Solaria's Command - Fire on Move" />
-								<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/elitedoctrines/imperialknightsolaria2.png">
+								<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fireonmove.png">
 							</label>
 						</div><!-- imperialknightsolaria -->
 						<div id="thirdEliteDoc_name" class="selected_title"></div>
 					</td>
 				</tr>
-				<!-- <tr>
-					<td colspan="6">
-						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc1">Doctron #1<br/>
-						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc2">Doctron #2<br/>
-						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc3">Doctron #3<br/>
-						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc4">Doctron #4<br/>
-						<input class="doctrines-checkbox" type="checkbox" name="doctrines" value="doc5">Doctron #5<br/>
+				<tr>
+					<td colspan="6"><h1>Army Doctrine Selection</h1><p>Select up to three</p></td>
+				</tr>
+				<tr>
+					<th colspan="2">Infantry</th>
+					<th colspan="2">Vehicles &amp; Walkers</th>
+					<th>Structures</th>
+					<th>Faction Mechanics</th>
+				<tr>
+					<td colspan="2">
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="blindgrenade" alt="Jonah Orion's Command - Blind Grenade" />
+							<img title="<h2>Jonah Orion's Command - Blind Grenade</h2>Scount grenades Blind and Silence the enemy for a duration. The duration increases as you Tier up. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/blindgrenade.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="fireonmove" alt="Solaria's Command - Fire on Move" />
+							<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fireonmove.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="shieldwall" alt="Paladin's Command - Shield Wall" />
+							<img title="<h2>Paladin's Command - Shield Wall</h2>Devastator Marines gain a Shield if they've been stationary for a duration. Moving removes the Shield but if it is destroyed or the unit is disabled, it will take time fo rthe Shield to regenerate. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/shieldwall.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="fraggrenade" alt="Assault Terminators' Command - Frag Grenade" />
+							<img title="<h2>Assault Terminators' Command - Frag Grenade</h2>Tactical Marines throw a grenade at the target position. Causes Knockback and Damage in a Circle. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fraggrenade.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="pin" alt="Pin" />
+							<img title="<h2>Pin</h2>Devastators use their heavy bolters to Immobilize the target. The ability is cancelled if the target is Disabled, Jumps, Teleports or is behind a Shot Absorber." src="images/sm/doctrines/pin.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="hidden" alt="Hidden" />
+							<img title="<h2>Hidden</h2>Snipers that remain stationary in Stealth Cover for a duration gain Stealth that persists even if they leave. Stealth is removed if they attack or get Detected." src="images/sm/doctrines/hidden.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="overwatch" alt="Overwatch" />
+							<img title="<h2>Overwatch</h2>Scout Snipers set watch on a Circle around a target position. When an enemy steps into the Circle area, Scout Snipers fire with increased Attack Speed at the target and get a bonus shot for each Charge they've accumulated. Scout Snipers build up to 10 Charges over time while Overwatch is channeling." src="images/sm/doctrines/overwatch.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="tireless" alt="Tireless" />
+							<img title="<h2>Tireless</h2>Tactical Marines increase Speed when not in combat." src="images/sm/doctrines/tireless.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="scoutstrike" alt="Scout Strike" />
+							<img title="<h2>Scout Strike</h2>When Scouts are Stealthed they do bonus Damage on their initial attack." src="images/sm/doctrines/scoutstrike.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="slowdeath" alt="Slow Death" />
+							<img title="<h2>Slow Death</h2>The Tactical Marines Flamer ability Slows Infantry and Immobilizes Vehicles." src="images/sm/doctrines/slowdeath.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="coverfire" alt="Cover Fire" />
+							<img title="<h2>Cover Fire</h2>If Scout Snipers are in Stealth or Heavy Cover their ranged attacks Slow." src="images/sm/doctrines/coverfire.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="improvedscope" alt="Improved Scope" />
+							<img title="<h2>Improved Scope</h2>Devastator Marines have increased weapon range while in Stealth or Heavy Cover." src="images/sm/doctrines/improvedscope.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="assaultleap" alt="Venerable Dreadnought's Command - Assault Leap" />
+							<img title="<h2>Venerable Dreadnought's Command - Assault Leap</h2>Assault Marines perform a low flying leap in the target direction. Causes Damage to units it passes through. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/assaultleap.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="focusedshot" alt="Terminators' Command - Focused Shot" />
+							<img title="<h2>Terminators' Command - Focused Shot</h2>Devastors fire a focused lascannon shot at the target vehicle. Causees Silence, Slow and Disables Attacks. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/focusedshot.png">
+						</label>
 					</td>
-				</tr> -->
+					<td colspan="2">
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="thunderhawkredeployment" alt="Thunderhawk Re-Deployement" />
+							<img title="<h2>Thunderhawk Re-Deployement</h2>The Whirlwind calls in a Thunderhawk that re-deploys them to the target position after a delay." src="images/sm/doctrines/thunderhawkredeployment.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="destructordevastation" alt="Destructor Devastation" />
+							<img title="<h2>Destructor Devastation</h2>When a Predator Destructor deals Damage it gains a temporary increase in weapon range and Attack Speed. Can stack multiple times." src="images/sm/doctrines/destructordevastation.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="lonewolf" alt="Lone Wolf" />
+							<img title="<h2>Lone Wolf</h2>Land Speeders fight harder when they are behind enemy lines. Increases Damage and reduces Damage Taken when not near allies in a Circle." src="images/sm/doctrines/lonewolf.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="slambarrier" alt="Gabriel Angelos' Command - Slam Barrier" />
+							<img title="<h2>Gabriel Angelos' Command - Slam Barrier</h2>The Dreadnought's Slam ability creates a temporary barrier. Absorbs shots and Reflects projectiles. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/slambarrier.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="landspeedermark" alt="Deathwatch Command - Land Speeder Mark" />
+							<img title="<h2>Death Watch Command - Land Speeder Mark</h2>Land Speeders apply a Debuff to their target. Increases Damage Taken and Reveals the target for a duration. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/landspeedermark.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="finalslam" alt="Diomedes' Command - Final Slam" />
+							<img title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/finalslam.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="ablativearmourlandspeeder" alt="Ablative Armour - Landspeeder" />
+							<img title="<h2>Ablative Armour - Landspeeder</h2>Land Speeders gain a Shield that regenerates." src="images/sm/doctrines/ablativearmourlandspeeder.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="invigoratingslam" alt="Invigorating Slam" />
+							<img title="<h2>Invigorating Slam</h2>Activating Slam invigorates the Dreadnought. Grants a temporary Shield that increases Speed while active. The bonus is only applied while Invigorating Slam has a Charge." src="images/sm/doctrines/invigoratingslam.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="ablativearmourpredator" alt="Ablative Armour - Predator" />
+							<img title="<h2>Ablative Armour - Predator</h2>Predators gain a Shield that regenerates." src="images/sm/doctrines/ablativearmourpredator.png">
+						</label>
+					</td>
+					<td>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="blessingsoftheomnissiah" alt="Blessings of the Omnissiah" />
+							<img title="<h2>Blessings of the Omnissiah</h2>Production Structures and Listening Posts Heal you and your allies' Vehicles in a Circle. Vehicles need to be out of combat for a while before they can Heal this way." src="images/sm/doctrines/blessingsoftheomnissiah.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="tipofthespear" alt="Tip of the Spear" />
+							<img title="<h2>Tip of the Spear</h2>Your Listening Posts can be used to Reinforce yours and allied squads as well as Heal Elite Units." src="images/sm/doctrines/tipofthespear.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="improvedlisteningpost" alt="Improved Listening Post" />
+							<img title="<h2>Improved Listening Post</h2>Listening Posts you build have increased Health and do bonus Damage." src="images/sm/doctrines/improvedlisteningpost.png">
+						</label>
+					</td>
+					<td>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="emperorsinfluence" alt="Emperors Influence" />
+							<img title="<h2>Emperors Influence</h2>Reduces the ability Cooldown of Plant the Standard." src="images/sm/doctrines/emperorsinfluence.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="improveddeathstorms" alt="Improved Deathstorms" />
+							<img title="<h2>Improved Deathstorms</h2>Deathstorm Drop Pods remain deployed for a longer period of time." src="images/sm/doctrines/improveddeathstorms.png">
+						</label>
+						<label>
+							<input class="doctrines-checkbox" type="checkbox" name="sm_doctrines" value="rapiddroppods" alt="Rapid Drop Pods" />
+							<img title="<h2>Rapid Drop Pods</h2>Orbital Relays become available sooner after deploying units from Drop Pods and Thunderhawks." src="images/sm/doctrines/rapiddroppods.png">
+						</label>
+					</td>
+				</tr>
 				</table>
 			</div><!-- smSection -->
 			</form>
 		</section>
-		<p><tt id="results"></tt></p>
+		
 		
 		<script>
 
@@ -486,9 +618,6 @@
 			}
 
 			$("#clear").click(clear);
-
-			function submit() {
-			}
 
 			function hideEliteDoctrines(elite, query) {
 				$(elite).children().each(function() {
@@ -521,6 +650,7 @@
 
 			while (query != null) {
 				$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
+				$('input[type="checkbox"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
 				
 				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "firstElite") {
 					var changed = query[2];
@@ -587,10 +717,6 @@
 					$("#thirdEliteDoc_name").text(thirdEliteDocName);
 					$("#thirdEliteDoc_name").show();
 				}
-
-				// var firstEliteDocName = $(this).attr('alt');
-				// $("#firstEliteDoc_name").text(firstEliteDocName);
-				// $("#firstEliteDoc_name").show();
 				showValues();
 				switchRaces();
 				query = r.exec(window.location.href);  //repeats to get next capture
@@ -600,8 +726,12 @@
 
 			//Show parameters on page
 			function showValues() {
-				// var str = $( "form" ).serialize();
-				// $( "#results" ).text( str );
+				var str = $("form").serialize();
+				var url = window.location.href; // Returns full URL
+				url = url.split('index.html')[0]
+				str = url + "build.html?" + str;
+				$("#results").val(str);
+				$("#view").attr('href', str);
 				
 			}
 
@@ -610,13 +740,15 @@
 			showValues();
 
 			//Doctrines limitation code
-			var limit = 3;
+			var limit = 4;
 			$('input.doctrines-checkbox').change(function() {
-			   if($(this).siblings(':checked').length >= limit) {
+			   if(document.querySelectorAll('input.doctrines-checkbox[type="checkbox"]:checked').length >= limit) {
 				   this.checked = false;
 				   showValues();
 			   }
+			   // alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
 			});
+
 
 			//Race selection code
 			function switchRaces() {
@@ -727,7 +859,17 @@
 						return this.getAttribute("title")
 					},
 				});
-			} );	
+			} );
+
+			//Copy to Clipboard code
+			function copyToClipboard() {
+				$('#results').select();
+				document.execCommand("copy");
+			}
+
+			$('a#copy').click(function() {
+				copyToClipboard();
+			});
 		</script>
 	</body>
 </html>
