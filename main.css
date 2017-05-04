@@ -20,18 +20,13 @@ body {
 
 header {
 	border-bottom: 1px solid white;
-	white-space: nowrap;
-	font-size: 0;
 }
 
-header a#clear {
-	font-size: 14px;
-	margin: 0 5px 0 0;
-}
+
 
 header a#logo {
 	display: inline-block;
-	padding: 20px;
+	padding: 10px;
 	border-right: 1px solid white;
 }
 
@@ -39,19 +34,55 @@ header#build_header #view {
 	margin: 0 0 0 10px;
 }
 
-#race-select {
+#select_race {
 	display: inline-block;
-	padding: 20px;
-	text-align: center;
-	
+	padding: 0;
+	margin: 0 0 0 10px;
+	font-size: 12px;
 }
 
-#race-select p {
+#race-select {
+	display: inline;
+	text-align: center;
+	margin: 0 0 0 15px;
+	border-right: 1px solid white;
+	height: 14px;
+}
+
+#race-select label {
 	font-size: 12px;
-	padding: 0;
+}
+
+#race-select div {
+	cursor: pointer;
+}
+
+#race-select label div {
+	width: 75px;
+	height: 14px;
+	display: inline-block;
+}
+
+#spacemarines_button {
+	background: url('images/races/spacemarines_simple.png');
+}
+
+#orks_button {
+	background: url('images/races/orks_simple.png');
+}
+
+#eldar_button {
+	background: url('images/races/eldar_simple.png');
+}
+
+#menu {
+	display: inline-block;
+	margin: 0 0 5px 0;
+	vertical-align: middle;
 }
 
 button {
+	display: inline;
 	border: none;
 	background: none;
 	color: orange;
@@ -59,10 +90,21 @@ button {
 	cursor: pointer;
 	border-right: 1px solid white;
 	padding: 0 10px 0 0;
+	margin: 0 0 0 10px;
+	font-size: 12px;
 }
 
 button:hover {
 	color: white;
+}
+
+button img {
+	margin-bottom: -3px;
+	margin-right: 5px;
+}
+
+button:hover img {
+	filter: brightness(0) invert(1);
 }
 
 a#copy {
@@ -71,6 +113,15 @@ a#copy {
 	cursor: pointer;
 	padding: 0 10px 0 0;
 	border-right: 1px solid white;
+}
+
+a#copy img {
+	margin-bottom: -3px;
+	margin-right: 5px;
+}
+
+a#copy:hover img {
+	filter: brightness(0) invert(1);
 }
 
 p#share {
@@ -94,7 +145,18 @@ a#view {
 	margin: 0 10px 0 0;
 }
 
+a#view img {
+	margin-bottom: -3px;
+	margin-right: 5px;
+}
+
+a#view:hover img {
+	filter: brightness(0) invert(1);
+}
+
 a#clear {
+	font-size: 12px;
+	margin: 0 5px 0 0;
 	border-left: 1px solid white;
 	padding: 0 0 0 10px;
 }
@@ -135,11 +197,15 @@ table tr td:last-child {
 
 table td.elites {
 	width: 15%;
+	min-width: 300px;
 }
 
 table td.eliteDoctrines {
 	width: 10%;
+}
 
+table td.eliteDoctrines label {
+	display: block;
 }
 
 label > input{ /* HIDE RADIO */
@@ -152,12 +218,24 @@ label > input + img{ /* IMAGE STYLES */
   border:2px solid transparent;
   border-radius: 3px;
 }
+
 label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
   border:2px solid yellow;
 }
-
+#race-select label > input + div{
+	border: none;
+}
+#race-select label > input:checked + div{
+	background-position: bottom;
+}
+#race-select label:hover > div {
+	background-position: bottom;
+}
 label.disabled img {
 	filter: grayscale(100%);
+}
+label.used img {
+	opacity: 0;
 }
 
 .eliteDocs {
@@ -167,7 +245,7 @@ label.disabled img {
 .tooltips {
 	border-width: 1px !important;
 	padding: 0px !important;
-	border-color: white;
+	border-color: #ffa500;
 	border-style: solid;
 	border-radius: 5px;
 	background: black;
@@ -187,6 +265,56 @@ label.disabled img {
 .tooltips h3 {
 	font-weight: 400;
 	margin: 0 0 5px 0;
+}
+
+.ui-tooltip-content::after, .ui-tooltip-content::before {
+    top: 100%;
+    border: solid transparent;
+    content: " ";
+    height: 0;
+    width: 0;
+    position: absolute;
+}
+
+.bottom .ui-tooltip-content::after {
+    border-color: rgba(118, 118, 118, 0);
+    border-top-color: #ffa500;
+    border-width: 10px;
+    left: 50%;
+    margin-left: -10px;
+}
+
+.bottom .ui-tooltip-content::before {
+    border-color: rgba(118, 118, 118, 0);
+    border-top-color: #767676;
+    border-width: 11px;
+    left: 50%;
+    margin-left: -11px;
+}
+
+.top .ui-tooltip-content::after {
+    top: -10px;
+    left: 50%;
+    border-color: #ffa500 transparent;
+    border-width: 0 10px 10px;
+    margin-left: -10px;
+}
+
+.top .ui-tooltip-content::before {
+     border-color: rgba(118, 118, 118, 0);
+     border-bottom-color: #767676;
+     top: -11px;
+     left: 50%;
+     border-width: 0 11px 11px;
+     margin-left: -11px;
+}
+
+.bottom.left .ui-tooltip-content::after, 
+.bottom.left .ui-tooltip-content::before,
+.top.left .ui-tooltip-content::after,
+.top.left .ui-tooltip-content::before
+{
+	left: 25%;
 }
 
 .selected_title {

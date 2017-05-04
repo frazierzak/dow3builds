@@ -13,34 +13,34 @@
 	<body>
 		<header>
 			<form id="form">
-			<a id="logo" href="/"><img src="images/logo.png" /></a>
+			<a id="logo" href="index.html"><img src="images/logo.png" /></a>
 			<div id="race-select">
-				<!-- <p>SELECT RACE</p> -->
 				<label>
 					<input type="radio" name="r" value="sm" />
-					<img src="images/races/spacemarines.png">
+					<div id="spacemarines_button"></div><!-- <img src="images/races/spacemarines_simple.png"> -->
 				</label>
 				<label>
 					<input type="radio" name="r" value="ork" />
-					<img src="images/races/orks.png">
+					<div id="orks_button"></div><!-- <img src="images/races/orks_simple.png"> -->
 				</label>
 				<label>
 					<input type="radio" name="r" value="eld" />
-					<img src="images/races/eldar.png">
+					<div id="eldar_button"></div><!-- <img src="images/races/eldar_simple.png"> -->
 				</label>
 			</div>
-			
-			<button id="submit">Temporarily Save</button>
-			<p id="share">Your build URL: <input type="text" id="results"/></p>
-			<a id="copy">Copy URL to Share</a>
-			<a href="#" id="view">View your Build Page</a>
-			<a href="index.html" id="clear">Reset</a>
+			<div id="menu">
+				<button id="submit" title="Updates the URL of this page with your build. Bookmark this URL for saving the edit page."><img src="images/build.png" />Temporarily Save</button>
+				<p id="share">Your build URL: <input type="text" id="results" title="This is your Build Page URL. You can click copy to the right to copy it to clipboard for sharing."/></p>
+				<a id="copy" title="Click this to copy the Build Page URL to your clipboard for sharing or bookmark this link for future viewing."><img src="images/copy.png" />Copy URL to Share</a>
+				<a href="#" id="view" title="Go to your Build Page"><img src="images/build.png" />View your Build Page</a>
+				<a href="#" id="clear" title="Clear the page and start over">Reset</a>
+			</div>
 		</header>
 		<section>
 			<div id="smSection" style="display: none">
 				<table>
 				<tr>
-					<th colspan="6"><h1>Elite Selection</h1></th>
+					<th colspan="6"><h1>Space Marines</h1><h3>Elite Selection</h3></th>
 				</tr>
 				<tr>
 					<th>
@@ -76,7 +76,7 @@
 							<label>
 								<input class="single-checkbox" type="radio" name="e1" value="cha" alt="Chaplain Diomedes" />
 								<img title="<h2>Chaplain Diomedes</h2><h3>Support / Tank</h3>Melee infantry unit capable of withstanding conisderable punishment and enhancing allies. Diomedes critical strikes empower his allies and increase in potency the longer he remains in combat." src="images/sm/elites/chaplaindiomedes.png">
-							</label>
+							</label><br>
 							<label>
 								<input class="single-checkbox" type="radio" name="e1" value="gab" alt="Gabriel Angelos" />
 								<img title="<h2>Gabriel Angelos</h2><h3>Nuker / Crowd Control</h3>Melee infantry unit that specializes in high area of effect damage and disruption. Gabriel's legendary hammer God-Splitter charges up over time, imbuing his abilities with additional properties." src="images/sm/elites/gabrielangelos.png">
@@ -88,7 +88,7 @@
 							<label>
 								<input class="single-checkbox" type="radio" name="e1" value="ast" alt="Assault Terminators" />
 								<img title="<h2>Assault Terminators</h2><h3>Tank / Crowd Control</h3>Heavy melee infatry squad that specializes in killing heavily armoured targets and structures. Can teleport into position and disrupt enemies in a large area." src="images/sm/elites/assaultterminators.png">
-							</label>
+							</label><br>
 							<label>
 								<input class="single-checkbox" type="radio" name="e1" value="ven" alt="Venerable Dreadnought" />
 								<img title="<h2>Venerable Dreadnought</h2><h3>Nuker</h3>Ranged walker effective against heavily armoured targets and structures. Its plasma cannon can unleash a devasting shot that deals high damage and leaves behind a smoldering crater that deals damage over time in an area." src="images/sm/elites/venerabledreadnought.png">
@@ -210,7 +210,7 @@
 							<label>
 								<input class="single-checkbox" type="radio" name="e2" value="cha" alt="Chaplain Diomedes" />
 								<img title="<h2>Chaplain Diomedes</h2><h3>Support / Tank</h3>Melee infantry unit capable of withstanding conisderable punishment and enhancing allies. Diomedes critical strikes empower his allies and increase in potency the longer he remains in combat." src="images/sm/elites/chaplaindiomedes.png">
-							</label>
+							</label><br>
 							<label>
 								<input class="single-checkbox" type="radio" name="e2" value="gab" alt="Gabriel Angelos" />
 								<img title="<h2>Gabriel Angelos</h2><h3>Nuker / Crowd Control</h3>Melee infantry unit that specializes in high area of effect damage and disruption. Gabriel's legendary hammer God-Splitter charges up over time, imbuing his abilities with additional properties." src="images/sm/elites/gabrielangelos.png">
@@ -222,7 +222,7 @@
 							<label>
 								<input class="single-checkbox" type="radio" name="e2" value="ast" alt="Assault Terminators" />
 								<img title="<h2>Assault Terminators</h2><h3>Tank / Crowd Control</h3>Heavy melee infatry squad that specializes in killing heavily armoured targets and structures. Can teleport into position and disrupt enemies in a large area." src="images/sm/elites/assaultterminators.png">
-							</label>
+							</label><br>
 							<label>
 								<input class="single-checkbox" type="radio" name="e2" value="ven" alt="Venerable Dreadnought" />
 								<img title="<h2>Venerable Dreadnought</h2><h3>Nuker</h3>Ranged walker effective against heavily armoured targets and structures. Its plasma cannon can unleash a devasting shot that deals high damage and leaves behind a smoldering crater that deals damage over time in an area." src="images/sm/elites/venerabledreadnought.png">
@@ -344,7 +344,7 @@
 							<label>
 								<input class="single-checkbox" type="radio" name="e3" value="cha" alt="Chaplain Diomedes" />
 								<img title="<h2>Chaplain Diomedes</h2><h3>Support / Tank</h3>Melee infantry unit capable of withstanding conisderable punishment and enhancing allies. Diomedes critical strikes empower his allies and increase in potency the longer he remains in combat." src="images/sm/elites/chaplaindiomedes.png">
-							</label>
+							</label><br>
 							<label>
 								<input class="single-checkbox" type="radio" name="e3" value="gab" alt="Gabriel Angelos" />
 								<img title="<h2>Gabriel Angelos</h2><h3>Nuker / Crowd Control</h3>Melee infantry unit that specializes in high area of effect damage and disruption. Gabriel's legendary hammer God-Splitter charges up over time, imbuing his abilities with additional properties." src="images/sm/elites/gabrielangelos.png">
@@ -356,7 +356,7 @@
 							<label>
 								<input class="single-checkbox" type="radio" name="e3" value="ast" alt="Assault Terminators" />
 								<img title="<h2>Assault Terminators</h2><h3>Tank / Crowd Control</h3>Heavy melee infatry squad that specializes in killing heavily armoured targets and structures. Can teleport into position and disrupt enemies in a large area." src="images/sm/elites/assaultterminators.png">
-							</label>
+							</label><br>
 							<label>
 								<input class="single-checkbox" type="radio" name="e3" value="ven" alt="Venerable Dreadnought" />
 								<img title="<h2>Venerable Dreadnought</h2><h3>Nuker</h3>Ranged walker effective against heavily armoured targets and structures. Its plasma cannon can unleash a devasting shot that deals high damage and leaves behind a smoldering crater that deals damage over time in an area." src="images/sm/elites/venerabledreadnought.png">
@@ -610,11 +610,14 @@
 
 			//Clear code
 			function clear() {
+				$('input').removeAttr('checked');
+				$('input').removeAttr('disabled');
+				$('label').removeClass('disabled');
+				$('label').removeClass('used');
 				$('#form')[0].reset();
-				//alert("clear!");
-				var oldURL = "file:///D:/Work/Personal/DoW3BuildSite/index.html";
-				var new_url = oldURL.substring(0, oldURL.indexOf('?'));
-				
+				$("#smSection").hide();
+				$("#orkSection").hide();
+				$("#eldSection").hide();
 			}
 
 			$("#clear").click(clear);
@@ -631,13 +634,42 @@
 			function disableRadio(changed, x) {
 				if ($(x).val() == changed) {
 					$(x).attr('disabled',true);
-					$(x).parent().addClass('disabled');
+					$(x).parent().addClass('used');
 				} else {
 					if ($(x).val() != first_elite && $(x).val() != second_elite && $(x).val() != third_elite) {
-						$(x).parent().removeClass('disabled');
+						$(x).parent().removeClass('used');
 						$(x).attr('disabled',false);
 					};
 				};
+			};
+
+			//Race selection code
+			function switchRaces(thisObj) {
+				var race = thisObj.val();
+				$('input').removeAttr('checked');
+				$('input').removeAttr('disabled');
+				$('label').removeClass('disabled');
+				$('label').removeClass('used');
+				$('#form')[0].reset();
+				if(race == "sm") {
+					$("input[value='" + race + "']").prop('checked', true);
+					$("#smSection").show();
+					$("#orkSection").hide();
+					$("#eldSection").hide();
+				};
+				if(race == "ork") {
+					$("input[value='" + race + "']").prop('checked', true);
+					$("#smSection").hide();
+					$("#orkSection").show();
+					$("#eldSection").hide();
+				};
+				if(race == "eld") {
+					$("input[value='" + race + "']").prop('checked', true);
+					$("#smSection").hide();
+					$("#orkSection").hide();
+					$("#eldSection").show();
+				};
+				showValues();
 			};
 
 			var first_elite;
@@ -718,7 +750,10 @@
 					$("#thirdEliteDoc_name").show();
 				}
 				showValues();
-				switchRaces();
+				if (query[1] == "r") {
+					switchRaces($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]'))
+				}
+				$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]')
 				query = r.exec(window.location.href);  //repeats to get next capture
 			}
 
@@ -737,6 +772,13 @@
 			$( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
 			$( "select" ).on( "change", showValues );
 			showValues();
+
+			$('.eliteDocs input').on('change', function(e) {
+				if ($(this).attr("checked", true)) {
+					$(this).parent('label').siblings('label').addClass("disabled");
+					$(this).parent('label').removeClass("disabled");
+				};
+			});
 
 			//Doctrines limitation code
 			$('input.doctrines-checkbox').on('change', function(e) {
@@ -767,31 +809,31 @@
 				};
 			});
 
-			//Race selection code
-			function switchRaces() {
-				var race = $('input[name="r"]:checked').val();
-				if(race == "sm") {
-					$("#smSection").show();
-					$("#orkSection").hide();
-					$("#eldSection").hide();
-				};
-				if(race == "ork") {
-					$("#smSection").hide();
-					$("#orkSection").show();
-					$("#eldSection").hide();
-				};
-				if(race == "eld") {
-					$("#smSection").hide();
-					$("#orkSection").hide();
-					$("#eldSection").show();
-				};
-			};
-			switchRaces();
-
+			//Check for race switch
 			$('input[name="r"]').change(function() {
-				switchRaces();
-			});			
+				switchRaces($(this));
+			});		
 
+			//Greyscale all other elites after three picked
+			if ($(".elites input.single-checkbox:checked").length == 3) {
+				$(".elites label").addClass("disabled");
+				$(".elites input.single-checkbox:checked").each(function() {
+					$(this).parent('label').removeClass("disabled");
+				})
+			};
+
+			//Greyscale all other elites after three picked
+			$('.elites input.single-checkbox').change(function() {
+				if ($(".elites input.single-checkbox:checked").length == 3) {
+					$(".elites label").addClass("disabled");
+					$(".elites input.single-checkbox:checked").each(function() {
+						$(this).parent('label').removeClass("disabled");
+					})
+				};
+			});	
+
+
+			//Disable selected elites in other columns
 			$('#firstElite input.single-checkbox').change(function() {
 				var changed = $(this).val();
 				first_elite = changed;
@@ -810,7 +852,6 @@
 				var e = 'td#firstEliteDocs #' + changed;
 				$(e).show();
 			});
-
 			$('#secondElite input.single-checkbox').change(function() {
 				var changed = $(this).val();
 				second_elite = changed;
@@ -829,7 +870,6 @@
 				var e = 'td#secondEliteDocs #' + changed;
 				$(e).show();
 			});
-
 			$('#thirdElite input.single-checkbox').change(function() {
 				var changed = $(this).val();
 				third_elite = changed;
@@ -849,6 +889,8 @@
 				$(e).show();
 			});
 
+
+			//Show Elite Doctrine Names
 			$('#firstEliteDocs input').change(function() {
 				var firstEliteDocName = $(this).attr('alt');
 				$("#firstEliteDoc_name").text(firstEliteDocName);
@@ -871,7 +913,17 @@
 			$( function() {
 				$( document ).tooltip({
 					tooltipClass: "tooltips",
-					position: { my: "top+45", at: "center" },
+					position: { 
+						my: "center bottom-20",
+                		at: "center top", 
+                		using: function( position, feedback ) {
+		                    $( this ).css( position );
+		                    $( this ).addClass( feedback.vertical );
+		                    //$( this ).addClass( feedback.horizontal );
+		                    // alert(feedback.vertical);
+		                    // alert(feedback.horizontal);
+		                }
+                	},
 					content: function () {
 						return this.getAttribute("title")
 					},
