@@ -474,7 +474,7 @@
 					<th colspan="2">Vehicles &amp; Walkers</th>
 					<th>Structures</th>
 					<th>Faction Mechanics</th>
-				<tr>
+				<tr id="faction_doctrines">
 					<td colspan="2">
 						<label>
 							<input class="doctrines-checkbox" type="checkbox" name="smd" value="blg" alt="Jonah Orion's Command - Blind Grenade" />
@@ -739,15 +739,33 @@
 			showValues();
 
 			//Doctrines limitation code
-			var limit = 4;
-			$('input.doctrines-checkbox').change(function() {
-			   if(document.querySelectorAll('input.doctrines-checkbox[type="checkbox"]:checked').length >= limit) {
-				   this.checked = false;
-				   showValues();
-			   }
-			   // alert(document.querySelectorAll('input[type="checkbox"]:checked').length);
+			$('input.doctrines-checkbox').on('change', function(e) {
+				if ($(".doctrines-checkbox:checked").length == 3) {
+					$("#faction_doctrines input").each(function() {
+						$(this).parent('label').addClass("disabled");
+					});
+				};
+				if ($(".doctrines-checkbox:checked").length >= 4) {
+					$(this).prop('checked', false);
+				}
+				$("#faction_doctrines input").each(function() {
+					if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
+						$(this).parent('label').removeClass("disabled");
+					};
+				});
+				showValues();
 			});
 
+			if ($(".doctrines-checkbox:checked").length == 3) {
+				$("#faction_doctrines input").each(function() {
+					$(this).parent('label').addClass("disabled");
+				});
+			};
+			$("#faction_doctrines input").each(function() {
+				if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
+					$(this).parent('label').removeClass("disabled");
+				};
+			});
 
 			//Race selection code
 			function switchRaces() {
