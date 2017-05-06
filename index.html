@@ -38,7 +38,7 @@
 		    var uid = user.uid;
 		    var providerData = user.providerData;
 		    user.getToken().then(function(accessToken) {
-		      document.getElementById('sign-in-status').textContent = 'Signed in with' + email;
+		      document.getElementById('sign-in-status').textContent = 'Signed in with ' + email;
 		      document.getElementById('sign-in').textContent = 'Sign out';
 		      // document.getElementById('account-details').textContent = JSON.stringify({
 		      //   displayName: displayName,

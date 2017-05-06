@@ -85,8 +85,6 @@ function showValues() {
     $("#view").attr('href', str);
 }
 
-
-
 //Show parameters on page
 function saveValues() {
     "use strict";
@@ -137,7 +135,7 @@ var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
 function writeUserData(buildId, buildURL) {
   var ref = firebase.database().ref("builds");
-  
+  var uid = user.uid;
   //alert(newPostKey);
   ref.once('value', function(snapshot) {
     if (snapshot.hasChild(newPostKey)) {
@@ -149,7 +147,7 @@ function writeUserData(buildId, buildURL) {
       firebase.database().ref('builds/' + newPostKey).set({
         title: "example title",
         buildURL: buildURL,
-        author: "example user id",
+        author: uid,
         desc: "example description",
         votes: 0
       });
