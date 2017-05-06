@@ -9,6 +9,7 @@
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="main.css">
+		
 	</head>
 	<body>
 		<header>
@@ -29,7 +30,7 @@
 				</label>
 			</div>
 			<div id="menu">
-				<button id="submit" title="Updates the URL of this page with your build. Bookmark this URL for saving the edit page."><img src="images/build.png" />Temporarily Save</button>
+				<button id="submit" title="Updates the URL of this page with your build. Bookmark this URL for saving the edit page."><img src="images/save.png" />Temporarily Save</button>
 				<p id="share">Your build URL: <input type="text" id="results" title="This is your Build Page URL. You can click copy to the right to copy it to clipboard for sharing."/></p>
 				<a id="copy" title="Click this to copy the Build Page URL to your clipboard for sharing or bookmark this link for future viewing."><img src="images/copy.png" />Copy URL to Share</a>
 				<a href="#" id="view" title="Go to your Build Page"><img src="images/build.png" />View your Build Page</a>
@@ -608,337 +609,353 @@
 		
 		<script>
 
-			//Clear code
-			function clear() {
-				$('input').removeAttr('checked');
-				$('input').removeAttr('disabled');
-				$('label').removeClass('disabled');
-				$('label').removeClass('used');
-				$('#form')[0].reset();
-				$("#smSection").hide();
-				$("#orkSection").hide();
-				$("#eldSection").hide();
-			}
+			// //Clear code
+			// function clear() {
+			// 	$('input').removeAttr('checked');
+			// 	$('input').removeAttr('disabled');
+			// 	$('label').removeClass('disabled');
+			// 	$('label').removeClass('used');
+			// 	$('#form')[0].reset();
+			// 	$("#smSection").hide();
+			// 	$("#orkSection").hide();
+			// 	$("#eldSection").hide();
+			// }
 
-			$("#clear").click(clear);
+			// $("#clear").click(clear);
 
-			function hideEliteDoctrines(elite, query) {
-				$(elite).children().each(function() {
-					if ($(this).attr('id') != query) {
-						$(this).hide();
-					}
-				})
-			}
+			// function hideEliteDoctrines(elite, query) {
+			// 	$(elite).children().each(function() {
+			// 		if ($(this).attr('id') != query) {
+			// 			$(this).hide();
+			// 		}
+			// 	})
+			// }
 
-			//Elite selection code
-			function disableRadio(changed, x) {
-				if ($(x).val() == changed) {
-					$(x).attr('disabled',true);
-					$(x).parent().addClass('used');
-				} else {
-					if ($(x).val() != first_elite && $(x).val() != second_elite && $(x).val() != third_elite) {
-						$(x).parent().removeClass('used');
-						$(x).attr('disabled',false);
-					};
-				};
-			};
+			// //Elite selection code
+			// function disableRadio(changed, x) {
+			// 	if ($(x).val() == changed) {
+			// 		$(x).attr('disabled',true);
+			// 		$(x).parent().addClass('used');
+			// 	} else {
+			// 		if ($(x).val() != first_elite && $(x).val() != second_elite && $(x).val() != third_elite) {
+			// 			$(x).parent().removeClass('used');
+			// 			$(x).attr('disabled',false);
+			// 		};
+			// 	};
+			// };
 
-			//Race selection code
-			function switchRaces(thisObj) {
-				var race = thisObj.val();
-				$('input').removeAttr('checked');
-				$('input').removeAttr('disabled');
-				$('label').removeClass('disabled');
-				$('label').removeClass('used');
-				$('#form')[0].reset();
-				if(race == "sm") {
-					$("input[value='" + race + "']").prop('checked', true);
-					$("#smSection").show();
-					$("#orkSection").hide();
-					$("#eldSection").hide();
-				};
-				if(race == "ork") {
-					$("input[value='" + race + "']").prop('checked', true);
-					$("#smSection").hide();
-					$("#orkSection").show();
-					$("#eldSection").hide();
-				};
-				if(race == "eld") {
-					$("input[value='" + race + "']").prop('checked', true);
-					$("#smSection").hide();
-					$("#orkSection").hide();
-					$("#eldSection").show();
-				};
-				showValues();
-			};
+			// //Race selection code
+			// function switchRaces(thisObj) {
+			// 	var race = thisObj.val();
+			// 	$('input').removeAttr('checked');
+			// 	$('input').removeAttr('disabled');
+			// 	$('label').removeClass('disabled');
+			// 	$('label').removeClass('used');
+			// 	$('#form')[0].reset();
+			// 	if(race == "sm") {
+			// 		$("input[value='" + race + "']").prop('checked', true);
+			// 		$("#smSection").show();
+			// 		$("#orkSection").hide();
+			// 		$("#eldSection").hide();
+			// 	};
+			// 	if(race == "ork") {
+			// 		$("input[value='" + race + "']").prop('checked', true);
+			// 		$("#smSection").hide();
+			// 		$("#orkSection").show();
+			// 		$("#eldSection").hide();
+			// 	};
+			// 	if(race == "eld") {
+			// 		$("input[value='" + race + "']").prop('checked', true);
+			// 		$("#smSection").hide();
+			// 		$("#orkSection").hide();
+			// 		$("#eldSection").show();
+			// 	};
+			// 	showValues();
+			// };
 
-			var first_elite;
-			var second_elite;
-			var third_elite;
+			// var first_elite;
+			// var second_elite;
+			// var third_elite;
 
-			//url parser
-			var r = /[?|&](\w+)=(\w+)+/g;  //matches against a kv pair a=b
-			var query = r.exec(window.location.href);  //gets the first query from the url
+			// document.addEventListener('DOMContentLoaded', function() { 
+			// 	//url parser
+			// 	var r = /[?|&](\w+)=(\w+)+/g;  //matches against a kv pair a=b
+			// 	var query = r.exec(window.location.href);  //gets the first query from the url
 
-			while (query != null) {
-				$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
-				$('input[type="checkbox"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
-				
-				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "firstElite") {
-					var changed = query[2];
-					first_elite = changed;
-					var firstEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
-					$("#firstElite_name").text(firstEliteName);
-					$('#secondElite input.single-checkbox').each(function() {
-						disableRadio(changed, $(this));
-					});
-					$('#thirdElite input.single-checkbox').each(function() {
-						disableRadio(changed, $(this));
-					});
-					hideEliteDoctrines('#firstEliteDocs', query[2]);
-					var e = document.getElementById(changed);
-					$('td#firstEliteDocs').children().hide();
-					var e = 'td#firstEliteDocs #' + changed;
-					$(e).show();
-				}
-				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "secondElite") {
-					var changed = query[2];
-					second_elite = changed;
-					var secondEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
-					$("#secondElite_name").text(secondEliteName);
-					$('#firstElite input.single-checkbox').each(function() {
-						disableRadio(changed, $(this));
-					});
-					$('#thirdElite input.single-checkbox').each(function() {
-						disableRadio(changed, $(this));
-					});
-					hideEliteDoctrines('#secondEliteDocs', query[2]);
-					var e = document.getElementById(changed);
-					$('td#secondEliteDocs').children().hide();
-					var e = 'td#secondEliteDocs #' + changed;
-					$(e).show();
-				}
-				if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "thirdElite") {
-					var changed = query[2];
-					third_elite = changed;
-					var thirdEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
-					$("#thirdElite_name").text(thirdEliteName);
-					$('#secondElite input.single-checkbox').each(function() {
-						disableRadio(changed, $(this));
-					});
-					$('#firstElite input.single-checkbox').each(function() {
-						disableRadio(changed, $(this));
-					});
-					hideEliteDoctrines('#thirdEliteDocs', query[2]);
-					$('td#thirdEliteDocs').children().hide();
-					var e = 'td#thirdEliteDocs #' + changed;
-					$(e).show();
-				}
-				if (query[1] == "e1d") {
-					var firstEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
-					$("#firstEliteDoc_name").text(firstEliteDocName);
-					$("#firstEliteDoc_name").show();
-				}
-				if (query[1] == "e2Doc") {
-					var secondEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
-					$("#secondEliteDoc_name").text(secondEliteDocName);
-					$("#secondEliteDoc_name").show();
-				}
-				if (query[1] == "3rdEliteDoc") {
-					var thirdEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
-					$("#thirdEliteDoc_name").text(thirdEliteDocName);
-					$("#thirdEliteDoc_name").show();
-				}
-				showValues();
-				if (query[1] == "r") {
-					switchRaces($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]'))
-				}
-				$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]')
-				query = r.exec(window.location.href);  //repeats to get next capture
-			}
+			// 	while (query != null) {
+			// 		$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
+			// 		$('input[type="checkbox"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('checked',true);
+					
+			// 		if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "firstElite") {
+			// 			var changed = query[2];
+			// 			first_elite = changed;
+			// 			var firstEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+			// 			$("#firstElite_name").text(firstEliteName);
+			// 			$('#secondElite input.single-checkbox').each(function() {
+			// 				disableRadio(changed, $(this));
+			// 			});
+			// 			$('#thirdElite input.single-checkbox').each(function() {
+			// 				disableRadio(changed, $(this));
+			// 			});
+			// 			hideEliteDoctrines('#firstEliteDocs', query[2]);
+			// 			var e = document.getElementById(changed);
+			// 			$('td#firstEliteDocs').children().hide();
+			// 			var e = 'td#firstEliteDocs #' + changed;
+			// 			$(e).show();
+			// 		}
+			// 		if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "secondElite") {
+			// 			var changed = query[2];
+			// 			second_elite = changed;
+			// 			var secondEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+			// 			$("#secondElite_name").text(secondEliteName);
+			// 			$('#firstElite input.single-checkbox').each(function() {
+			// 				disableRadio(changed, $(this));
+			// 			});
+			// 			$('#thirdElite input.single-checkbox').each(function() {
+			// 				disableRadio(changed, $(this));
+			// 			});
+			// 			hideEliteDoctrines('#secondEliteDocs', query[2]);
+			// 			var e = document.getElementById(changed);
+			// 			$('td#secondEliteDocs').children().hide();
+			// 			var e = 'td#secondEliteDocs #' + changed;
+			// 			$(e).show();
+			// 		}
+			// 		if ($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').closest('div').attr('id') == "thirdElite") {
+			// 			var changed = query[2];
+			// 			third_elite = changed;
+			// 			var thirdEliteName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+			// 			$("#thirdElite_name").text(thirdEliteName);
+			// 			$('#secondElite input.single-checkbox').each(function() {
+			// 				disableRadio(changed, $(this));
+			// 			});
+			// 			$('#firstElite input.single-checkbox').each(function() {
+			// 				disableRadio(changed, $(this));
+			// 			});
+			// 			hideEliteDoctrines('#thirdEliteDocs', query[2]);
+			// 			$('td#thirdEliteDocs').children().hide();
+			// 			var e = 'td#thirdEliteDocs #' + changed;
+			// 			$(e).show();
+			// 		}
+			// 		if (query[1] == "e1d") {
+			// 			var firstEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+			// 			$("#firstEliteDoc_name").text(firstEliteDocName);
+			// 			$("#firstEliteDoc_name").show();
+			// 		}
+			// 		if (query[1] == "e2Doc") {
+			// 			var secondEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+			// 			$("#secondEliteDoc_name").text(secondEliteDocName);
+			// 			$("#secondEliteDoc_name").show();
+			// 		}
+			// 		if (query[1] == "3rdEliteDoc") {
+			// 			var thirdEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+			// 			$("#thirdEliteDoc_name").text(thirdEliteDocName);
+			// 			$("#thirdEliteDoc_name").show();
+			// 		}
+			// 		showValues();
+			// 		if (query[1] == "r") {
+			// 			switchRaces($('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]'))
+			// 		}
+			// 		$('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]')
+			// 		query = r.exec(window.location.href);  //repeats to get next capture
+			// 	}
+			// }, false);
 
-			$("#submit").click(submit);
+			// $("#submit").click(submit);
 
-			//Show parameters on page
-			function showValues() {
-				var str = $("form").serialize();
-				var url = window.location.href; // Returns full URL
-				url = url.split('index.html')[0]
-				str = url + "build.html?" + str;
-				$("#results").val(str);
-				$("#view").attr('href', str);
-			}
+			// //Show parameters on page
+			// function showValues() {
+			// 	var str = $("form").serialize();
+			// 	var url = window.location.href; // Returns full URL
+			// 	url = url.split('index.html')[0]
+			// 	str = url + "build.html?" + str;
+			// 	$("#results").val(str);
+			// 	$("#view").attr('href', str);
+			// }
 
-			$( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
-			$( "select" ).on( "change", showValues );
-			showValues();
+			// $( "input[type='checkbox'], input[type='radio']" ).on( "click", showValues );
+			// $( "select" ).on( "change", showValues );
+			// showValues();
 
-			$('.eliteDocs input').on('change', function(e) {
-				if ($(this).attr("checked", true)) {
-					$(this).parent('label').siblings('label').addClass("disabled");
-					$(this).parent('label').removeClass("disabled");
-				};
-			});
+			// $('.eliteDocs input').on('change', function(e) {
+			// 	if ($(this).attr("checked", true)) {
+			// 		$(this).parent('label').siblings('label').addClass("disabled");
+			// 		$(this).parent('label').removeClass("disabled");
+			// 	};
+			// });
 
-			//Doctrines limitation code
-			$('input.doctrines-checkbox').on('change', function(e) {
-				if ($(".doctrines-checkbox:checked").length == 3) {
-					$("#faction_doctrines input").each(function() {
-						$(this).parent('label').addClass("disabled");
-					});
-				};
-				if ($(".doctrines-checkbox:checked").length >= 4) {
-					$(this).prop('checked', false);
-				}
-				$("#faction_doctrines input").each(function() {
-					if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
-						$(this).parent('label').removeClass("disabled");
-					};
-				});
-				showValues();
-			});
+			// //Doctrines limitation code
+			// $('input.doctrines-checkbox').on('change', function(e) {
+			// 	if ($(".doctrines-checkbox:checked").length == 3) {
+			// 		$("#faction_doctrines input").each(function() {
+			// 			$(this).parent('label').addClass("disabled");
+			// 		});
+			// 	};
+			// 	if ($(".doctrines-checkbox:checked").length >= 4) {
+			// 		$(this).prop('checked', false);
+			// 	}
+			// 	$("#faction_doctrines input").each(function() {
+			// 		if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
+			// 			$(this).parent('label').removeClass("disabled");
+			// 		};
+			// 	});
+			// 	showValues();
+			// });
 
-			if ($(".doctrines-checkbox:checked").length == 3) {
-				$("#faction_doctrines input").each(function() {
-					$(this).parent('label').addClass("disabled");
-				});
-			};
-			$("#faction_doctrines input").each(function() {
-				if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
-					$(this).parent('label').removeClass("disabled");
-				};
-			});
+			// if ($(".doctrines-checkbox:checked").length == 3) {
+			// 	$("#faction_doctrines input").each(function() {
+			// 		$(this).parent('label').addClass("disabled");
+			// 	});
+			// };
+			// $("#faction_doctrines input").each(function() {
+			// 	if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
+			// 		$(this).parent('label').removeClass("disabled");
+			// 	};
+			// });
 
-			//Check for race switch
-			$('input[name="r"]').change(function() {
-				switchRaces($(this));
-			});		
+			// //Check for race switch
+			// $('input[name="r"]').change(function() {
+			// 	switchRaces($(this));
+			// });		
 
-			//Greyscale all other elites after three picked
-			if ($(".elites input.single-checkbox:checked").length == 3) {
-				$(".elites label").addClass("disabled");
-				$(".elites input.single-checkbox:checked").each(function() {
-					$(this).parent('label').removeClass("disabled");
-				})
-			};
+			// //Greyscale all other elites after three picked
+			// if ($(".elites input.single-checkbox:checked").length == 3) {
+			// 	$(".elites label").addClass("disabled");
+			// 	$(".elites input.single-checkbox:checked").each(function() {
+			// 		$(this).parent('label').removeClass("disabled");
+			// 	})
+			// };
 
-			//Greyscale all other elites after three picked
-			$('.elites input.single-checkbox').change(function() {
-				if ($(".elites input.single-checkbox:checked").length == 3) {
-					$(".elites label").addClass("disabled");
-					$(".elites input.single-checkbox:checked").each(function() {
-						$(this).parent('label').removeClass("disabled");
-					})
-				};
-			});	
-
-
-			//Disable selected elites in other columns
-			$('#firstElite input.single-checkbox').change(function() {
-				var changed = $(this).val();
-				first_elite = changed;
-				var firstEliteName = $(this).attr('alt');
-				$("#firstElite_name").text(firstEliteName);
-				$('#secondElite input.single-checkbox').each(function() {
-					disableRadio(changed, $(this));
-					showValues();
-				});
-				$('#thirdElite input.single-checkbox').each(function() {
-					disableRadio(changed, $(this));
-					showValues();
-				});
-				var e = document.getElementById(changed);
-				$('td#firstEliteDocs').children().hide();
-				var e = 'td#firstEliteDocs #' + changed;
-				$(e).show();
-			});
-			$('#secondElite input.single-checkbox').change(function() {
-				var changed = $(this).val();
-				second_elite = changed;
-				var secondEliteName = $(this).attr('alt');
-				$("#secondElite_name").text(secondEliteName);
-				$('#firstElite input.single-checkbox').each(function() {
-					disableRadio(changed, $(this));
-					showValues();
-				});
-				$('#thirdElite input.single-checkbox').each(function() {
-					disableRadio(changed, $(this));
-					showValues();
-				});
-				var e = document.getElementById(changed);
-				$('td#secondEliteDocs').children().hide();
-				var e = 'td#secondEliteDocs #' + changed;
-				$(e).show();
-			});
-			$('#thirdElite input.single-checkbox').change(function() {
-				var changed = $(this).val();
-				third_elite = changed;
-				var thirdEliteName = $(this).attr('alt');
-				$("#thirdElite_name").text(thirdEliteName);
-				$('#firstElite input.single-checkbox').each(function() {
-					disableRadio(changed, $(this));
-					showValues();
-				});
-				$('#secondElite input.single-checkbox').each(function() {
-					disableRadio(changed, $(this));
-					showValues();
-				});
-				var e = document.getElementById(changed);
-				$('td#thirdEliteDocs').children().hide();
-				var e = 'td#thirdEliteDocs #' + changed;
-				$(e).show();
-			});
+			// //Greyscale all other elites after three picked
+			// $('.elites input.single-checkbox').change(function() {
+			// 	if ($(".elites input.single-checkbox:checked").length == 3) {
+			// 		$(".elites label").addClass("disabled");
+			// 		$(".elites input.single-checkbox:checked").each(function() {
+			// 			$(this).parent('label').removeClass("disabled");
+			// 		})
+			// 	};
+			// });	
 
 
-			//Show Elite Doctrine Names
-			$('#firstEliteDocs input').change(function() {
-				var firstEliteDocName = $(this).attr('alt');
-				$("#firstEliteDoc_name").text(firstEliteDocName);
-				$("#firstEliteDoc_name").show();
-			});
+			// //Disable selected elites in other columns
+			// $('#firstElite input.single-checkbox').change(function() {
+			// 	var changed = $(this).val();
+			// 	first_elite = changed;
+			// 	var firstEliteName = $(this).attr('alt');
+			// 	$("#firstElite_name").text(firstEliteName);
+			// 	$('#secondElite input.single-checkbox').each(function() {
+			// 		disableRadio(changed, $(this));
+			// 		showValues();
+			// 	});
+			// 	$('#thirdElite input.single-checkbox').each(function() {
+			// 		disableRadio(changed, $(this));
+			// 		showValues();
+			// 	});
+			// 	var e = document.getElementById(changed);
+			// 	$('td#firstEliteDocs').children().hide();
+			// 	var e = 'td#firstEliteDocs #' + changed;
+			// 	$(e).show();
+			// });
+			// $('#secondElite input.single-checkbox').change(function() {
+			// 	var changed = $(this).val();
+			// 	second_elite = changed;
+			// 	var secondEliteName = $(this).attr('alt');
+			// 	$("#secondElite_name").text(secondEliteName);
+			// 	$('#firstElite input.single-checkbox').each(function() {
+			// 		disableRadio(changed, $(this));
+			// 		showValues();
+			// 	});
+			// 	$('#thirdElite input.single-checkbox').each(function() {
+			// 		disableRadio(changed, $(this));
+			// 		showValues();
+			// 	});
+			// 	var e = document.getElementById(changed);
+			// 	$('td#secondEliteDocs').children().hide();
+			// 	var e = 'td#secondEliteDocs #' + changed;
+			// 	$(e).show();
+			// });
+			// $('#thirdElite input.single-checkbox').change(function() {
+			// 	var changed = $(this).val();
+			// 	third_elite = changed;
+			// 	var thirdEliteName = $(this).attr('alt');
+			// 	$("#thirdElite_name").text(thirdEliteName);
+			// 	$('#firstElite input.single-checkbox').each(function() {
+			// 		disableRadio(changed, $(this));
+			// 		showValues();
+			// 	});
+			// 	$('#secondElite input.single-checkbox').each(function() {
+			// 		disableRadio(changed, $(this));
+			// 		showValues();
+			// 	});
+			// 	var e = document.getElementById(changed);
+			// 	$('td#thirdEliteDocs').children().hide();
+			// 	var e = 'td#thirdEliteDocs #' + changed;
+			// 	$(e).show();
+			// });
 
-			$('#secondEliteDocs input').change(function() {
-				var secondEliteDocName = $(this).attr('alt');
-				$("#secondEliteDoc_name").text(secondEliteDocName);
-				$("#secondEliteDoc_name").show();
-			});
 
-			$('#thirdEliteDocs input').change(function() {
-				var thirdEliteDocName = $(this).attr('alt');
-				$("#thirdEliteDoc_name").text(thirdEliteDocName);
-				$("#thirdEliteDoc_name").show();
-			});
+			// //Show Elite Doctrine Names
+			// $('#firstEliteDocs input').change(function() {
+			// 	var firstEliteDocName = $(this).attr('alt');
+			// 	$("#firstEliteDoc_name").text(firstEliteDocName);
+			// 	$("#firstEliteDoc_name").show();
+			// });
 
-			//tooltip code
-			$( function() {
-				$( document ).tooltip({
-					tooltipClass: "tooltips",
-					position: { 
-						my: "center bottom-20",
-                		at: "center top", 
-                		using: function( position, feedback ) {
-		                    $( this ).css( position );
-		                    $( this ).addClass( feedback.vertical );
-		                    //$( this ).addClass( feedback.horizontal );
-		                    // alert(feedback.vertical);
-		                    // alert(feedback.horizontal);
-		                }
-                	},
-					content: function () {
-						return this.getAttribute("title")
-					},
-				});
-			} );
+			// $('#secondEliteDocs input').change(function() {
+			// 	var secondEliteDocName = $(this).attr('alt');
+			// 	$("#secondEliteDoc_name").text(secondEliteDocName);
+			// 	$("#secondEliteDoc_name").show();
+			// });
 
-			//Copy to Clipboard code
-			function copyToClipboard() {
-				$('#results').select();
-				document.execCommand("copy");
-			}
+			// $('#thirdEliteDocs input').change(function() {
+			// 	var thirdEliteDocName = $(this).attr('alt');
+			// 	$("#thirdEliteDoc_name").text(thirdEliteDocName);
+			// 	$("#thirdEliteDoc_name").show();
+			// });
 
-			$('a#copy').click(function() {
-				copyToClipboard();
-			});
+			// //tooltip code
+			// $( function() {
+			// 	$( document ).tooltip({
+			// 		tooltipClass: "tooltips",
+			// 		position: { 
+			// 			my: "center bottom-20",
+   //              		at: "center top", 
+   //              		using: function( position, feedback ) {
+		 //                    $( this ).css( position );
+		 //                    $( this ).addClass( feedback.vertical );
+		 //                    //$( this ).addClass( feedback.horizontal );
+		 //                    // alert(feedback.vertical);
+		 //                    // alert(feedback.horizontal);
+		 //                }
+   //              	},
+			// 		content: function () {
+			// 			return this.getAttribute("title")
+			// 		},
+			// 	});
+			// } );
+
+			// //Copy to Clipboard code
+			// function copyToClipboard() {
+			// 	$('#results').select();
+			// 	document.execCommand("copy");
+			// }
+
+			// $('a#copy').click(function() {
+			// 	copyToClipboard();
+			// });
+		</script>
+		<script src="main.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAzO5PTmyYyftb6GkW2KmEAGRzOiCqlhOw",
+		    authDomain: "dow3builds.firebaseapp.com",
+		    databaseURL: "https://dow3builds.firebaseio.com",
+		    projectId: "dow3builds",
+		    storageBucket: "dow3builds.appspot.com",
+		    messagingSenderId: "1009802729447"
+		  };
+		  firebase.initializeApp(config);
 		</script>
 	</body>
 </html>

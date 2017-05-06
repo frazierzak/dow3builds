@@ -61,6 +61,7 @@ header#build_header #view {
 	width: 75px;
 	height: 14px;
 	display: inline-block;
+	background-position: bottom;
 }
 
 #spacemarines_button {
@@ -226,10 +227,10 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 	border: none;
 }
 #race-select label > input:checked + div{
-	background-position: bottom;
+	background-position: top;
 }
 #race-select label:hover > div {
-	background-position: bottom;
+	background-position: top;
 }
 label.disabled img {
 	filter: grayscale(100%);

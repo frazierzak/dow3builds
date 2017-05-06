@@ -1,0 +1,341 @@
+/*global window */
+/*property
+    addClass, at, attr, change, children, click, console, content, css, each,
+    exec, execCommand, getAttribute, hide, href, is, length, location, log, my,
+    on, parent, position, prop, removeAttr, removeClass, reset, select,
+    serialize, show, siblings, split, text, tooltip, tooltipClass, using, val,
+    vertical
+*/
+
+
+//Variables
+var first_elite;
+var second_elite;
+var third_elite;
+var changed;
+var firstEliteName;
+var secondEliteName;
+var thirdEliteName;
+var e;
+var firstEliteDocName;
+var secondEliteDocName;
+var thirdEliteDocName;
+
+//Clear code
+function clear() {
+    "use strict";
+    $("#form input").removeAttr("checked");
+    $("#form input").removeAttr("disabled");
+    $("#form label").removeClass("disabled");
+    $("#form label").removeClass("used");
+    $("#form")[0].reset();
+    $("#smSection").hide();
+    $("#orkSection").hide();
+    $("#eldSection").hide();
+}
+
+$("#clear").click(clear);
+
+function hideEliteDoctrines(elite, query) {
+    "use strict";
+    $(elite).children().each(function () {
+        if ($(this).attr("id") !== query) {
+            $(this).hide();
+        }
+    });
+}
+
+//Elite selection code
+function disableRadio(x, y, changed) {
+    "use strict";
+    $(x + ' input.single-checkbox').each(function () {
+        if ($(this).val() === changed) {
+            $(this).attr("disabled", true);
+            $(this).parent().addClass("used");
+        } else {
+            if ($(this).val() !== first_elite && $(this).val() !== second_elite && $(this).val() !== third_elite) {
+                $(this).parent().removeClass("used");
+                $(this).attr("disabled", false);
+            }
+        }
+    });
+    $(y + ' input.single-checkbox').each(function () {
+        if ($(this).val() === changed) {
+            $(this).attr("disabled", true);
+            $(this).parent().addClass("used");
+        } else {
+            if ($(this).val() !== first_elite && $(this).val() !== second_elite && $(this).val() !== third_elite) {
+                $(this).parent().removeClass("used");
+                $(this).attr("disabled", false);
+            }
+        }
+    });
+    
+}
+
+//Show parameters on page
+function showValues() {
+    "use strict";
+    var str = $("form").serialize();
+    var url = window.location.href; // Returns full URL
+    url = url.split('index.html')[0];
+    str = url + "build.html?" + str;
+    $("#results").val(str);
+    $("#view").attr('href', str);
+}
+
+//Race selection code
+function switchRaces(thisObj) {
+    "use strict";
+    var race = thisObj.val();
+    $("input").removeAttr("checked");
+    $("input").removeAttr("disabled");
+    $("label").removeClass("disabled");
+    $("label").removeClass("used");
+    $("#form")[0].reset();
+    if (race === "sm") {
+        $("input[value='" + race + "']").prop("checked", true);
+        $("#smSection").show();
+        $("#orkSection").hide();
+        $("#eldSection").hide();
+    }
+    if (race === "ork") {
+        $("input[value='" + race + "']").prop("checked", true);
+        $("#smSection").hide();
+        $("#orkSection").show();
+        $("#eldSection").hide();
+    }
+    if (race === "eld") {
+        $("input[value='" + race + "']").prop("checked", true);
+        $("#smSection").hide();
+        $("#orkSection").hide();
+        $("#eldSection").show();
+    }
+    showValues();
+}
+
+//url parser
+var r = /[?|&](\w+)=(\w+)+/g;  //matches against a kv pair a=b
+var query = r.exec(window.location.href);  //gets the first query from the url
+
+var parser = function() {
+    "use strict";
+    while (query !== null) {
+        $("input[type='radio'][name='" + query[1] + "'][value='" + query[2] + "']").attr("checked", true);
+        $("input[type='checkbox'][name='" + query[1] + "'][value='" + query[2] + "']").attr("checked", true);
+        switch(query[1]){
+            case "r":
+                switchRaces($("input[value='" + query[2] + "']"));
+                break;
+            case "e1":
+                first_elite = query[2];
+                disableRadio("#secondElite", "#thirdElite", first_elite);
+                firstEliteName = $("input[type='radio'][name='" + query[1] + "'][value='" + query[2] + "']").attr("alt");
+                $("#firstElite_name").text(firstEliteName);
+                hideEliteDoctrines("#firstEliteDocs", query[2]);
+                $('td#firstEliteDocs').children().hide();
+                e = 'td#firstEliteDocs #' + query[2];
+                $(e).show();
+                break;
+            case "e1d":
+                firstEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+                $("#firstEliteDoc_name").text(firstEliteDocName);
+                $("#firstEliteDoc_name").show();
+                break;
+            case "e2":
+                second_elite = query[2];
+                disableRadio("#firstElite", "#thirdElite", second_elite);
+                secondEliteName = $("input[type='radio'][name='" + query[1] + "'][value='" + query[2] + "']").attr("alt");
+                $("#secondElite_name").text(secondEliteName);
+                hideEliteDoctrines("#secondEliteDocs", query[2]);
+                $('td#secondEliteDocs').children().hide();
+                e = 'td#secondEliteDocs #' + query[2];
+                $(e).show();
+                break;
+            case "e2d":
+                secondEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+                $("#secondEliteDoc_name").text(secondEliteDocName);
+                $("#secondEliteDoc_name").show();
+                break;
+            case "e3":
+                third_elite = query[2];
+                disableRadio("#firstElite", "#secondElite", third_elite);
+                thirdEliteName = $("input[type='radio'][name='" + query[1] + "'][value='" + query[2] + "']").attr("alt");
+                $("#thirdElite_name").text(thirdEliteName);
+                hideEliteDoctrines("#thirdEliteDocs", query[2]);
+                $('td#thirdEliteDocs').children().hide();
+                e = 'td#thirdEliteDocs #' + query[2];
+                $(e).show();
+                break;
+            case "e3d":
+                thirdEliteDocName = $('input[type="radio"][name="'+query[1]+'"][value="'+query[2]+'"]').attr('alt');
+                $("#thirdEliteDoc_name").text(thirdEliteDocName);
+                $("#thirdEliteDoc_name").show();
+                break;
+            default:
+                window.console.log("Incorrect URL!");
+        }
+       
+        showValues();
+        query = r.exec(window.location.href);  //repeats to get next capture
+    }
+};
+
+parser();
+
+//Greys out other elite doctrine
+$('.eliteDocs input').on('change', function() {
+  "use strict";
+  if ($(this).attr("checked", true)) {
+    $(this).parent("label").siblings("label").addClass("disabled");
+    $(this).parent("label").removeClass("disabled");
+  }
+  showValues();
+});
+
+//Doctrines limitation code
+$('input.doctrines-checkbox').on('change', function() {
+  "use strict";
+  if ($(".doctrines-checkbox:checked").length === 3) {
+    $("#faction_doctrines input").each(function() {
+      $(this).parent("label").addClass("disabled");
+    });
+  }
+  if ($(".doctrines-checkbox:checked").length >= 4) {
+    $(this).prop("checked", false);
+  }
+  $("#faction_doctrines input").each(function() {
+    if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
+      $(this).parent("label").removeClass("disabled");
+    }
+  });
+  showValues();
+});
+
+if ($(".doctrines-checkbox:checked").length === 3) {
+  $("#faction_doctrines input").each(function() {
+    "use strict";
+    $(this).parent("label").addClass("disabled");
+  });
+}
+$("#faction_doctrines input").each(function() {
+  "use strict";
+  if($(this).is(':checked') || $(".doctrines-checkbox:checked").length < 3) {
+    $(this).parent("label").removeClass("disabled");
+  }
+});
+
+//Check for race switch
+$("input[name='r']").change(function() {
+  "use strict";
+  switchRaces($(this));
+});
+
+//Greyscale all other elites after three picked
+if ($(".elites input.single-checkbox:checked").length === 3) {
+  $(".elites label").addClass("disabled");
+  $(".elites input.single-checkbox:checked").each(function() {
+    "use strict";
+    $(this).parent("label").removeClass("disabled");
+  });
+}
+
+//Greyscale all other elites after three picked
+$('.elites input.single-checkbox').change(function() {
+  "use strict";
+  if ($(".elites input.single-checkbox:checked").length === 3) {
+    $(".elites label").addClass("disabled");
+    $(".elites input.single-checkbox:checked").each(function() {
+      $(this).parent("label").removeClass("disabled");
+    });
+  }
+});
+
+//Disable selected elites in other columns
+$('#firstElite input.single-checkbox').change(function() {
+  "use strict";
+  changed = $(this).val();
+  first_elite = changed;
+  firstEliteName = $(this).attr('alt');
+  $("#firstElite_name").text(firstEliteName);
+  disableRadio("#secondElite", "#thirdElite", first_elite);
+  $('td#firstEliteDocs').children().hide();
+  e = 'td#firstEliteDocs #' + changed;
+  $(e).show();
+});
+$('#secondElite input.single-checkbox').change(function() {
+  "use strict";
+  changed = $(this).val();
+  second_elite = changed;
+  secondEliteName = $(this).attr('alt');
+  $("#secondElite_name").text(secondEliteName);
+  disableRadio("#firstElite", "#thirdElite", second_elite);
+  $('td#secondEliteDocs').children().hide();
+  e = 'td#secondEliteDocs #' + changed;
+  $(e).show();
+});
+$('#thirdElite input.single-checkbox').change(function() {
+  "use strict";
+  changed = $(this).val();
+  third_elite = changed;
+  thirdEliteName = $(this).attr('alt');
+  $("#thirdElite_name").text(thirdEliteName);
+  disableRadio("#secondElite", "#firstElite", third_elite);
+  $('td#thirdEliteDocs').children().hide();
+  e = 'td#thirdEliteDocs #' + changed;
+  $(e).show();
+});
+
+
+//Show Elite Doctrine Names
+$('#firstEliteDocs input').change(function() {
+  "use strict";
+  firstEliteDocName = $(this).attr('alt');
+  $("#firstEliteDoc_name").text(firstEliteDocName);
+  $("#firstEliteDoc_name").show();
+});
+
+$('#secondEliteDocs input').change(function() {
+  "use strict";
+  secondEliteDocName = $(this).attr('alt');
+  $("#secondEliteDoc_name").text(secondEliteDocName);
+  $("#secondEliteDoc_name").show();
+});
+
+$('#thirdEliteDocs input').change(function() {
+  "use strict";
+  thirdEliteDocName = $(this).attr('alt');
+  $("#thirdEliteDoc_name").text(thirdEliteDocName);
+  $("#thirdEliteDoc_name").show();
+});
+
+//tooltip code
+$( function() {
+  "use strict";
+  $( document ).tooltip({
+    tooltipClass: "tooltips",
+    position: {
+      my: "center bottom-20",
+        at: "center top",
+        using: function( position, feedback ) {
+                $( this ).css( position );
+                $( this ).addClass( feedback.vertical );
+            }
+      },
+    content: function () {
+      return this.getAttribute("title");
+    }
+  });
+} );
+
+//Copy to Clipboard code
+function copyToClipboard() {
+  "use strict";
+  $('#results').select();
+  document.execCommand("copy");
+}
+
+$('a#copy').click(function() {
+  "use strict";
+  copyToClipboard();
+});
