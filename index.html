@@ -9,9 +9,65 @@
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="main.css">
-		
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAzO5PTmyYyftb6GkW2KmEAGRzOiCqlhOw",
+		    authDomain: "dow3builds.firebaseapp.com",
+		    databaseURL: "https://dow3builds.firebaseio.com",
+		    projectId: "dow3builds",
+		    storageBucket: "dow3builds.appspot.com",
+		    messagingSenderId: "1009802729447"
+		  };
+		  firebase.initializeApp(config);
+		  // Get a reference to the database service
+		  var database = firebase.database();
+		</script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+	    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+	    <script type="text/javascript">
+		initApp = function() {
+		firebase.auth().onAuthStateChanged(function(user) {
+		  if (user) {
+		    // User is signed in.
+		    var displayName = user.displayName;
+		    var email = user.email;
+		    var emailVerified = user.emailVerified;
+		    var photoURL = user.photoURL;
+		    var uid = user.uid;
+		    var providerData = user.providerData;
+		    user.getToken().then(function(accessToken) {
+		      document.getElementById('sign-in-status').textContent = 'Signed in with' + email;
+		      document.getElementById('sign-in').textContent = 'Sign out';
+		      // document.getElementById('account-details').textContent = JSON.stringify({
+		      //   displayName: displayName,
+		      //   email: email,
+		      //   emailVerified: emailVerified,
+		      //   photoURL: photoURL,
+		      //   uid: uid,
+		      //   accessToken: accessToken,
+		      //   providerData: providerData
+		      // }, null, '  ');
+		    });
+		  } else {
+		    // User is signed out.
+		    document.getElementById('sign-in-status').textContent = 'Currently not logged in!';
+		    document.getElementById('sign-in').textContent = 'Sign in';
+		    // document.getElementById('account-details').textContent = 'null';
+		  }
+		}, function(error) {
+			console.log(error);
+		});
+		};
+
+		window.addEventListener('load', function() {
+			initApp()
+		});
+		</script>
 	</head>
 	<body>
+		 <div id="firebaseui-auth-container"></div>
 		<header>
 			<form id="form">
 			<a id="logo" href="index.html"><img src="images/logo.png" /></a>
@@ -30,13 +86,22 @@
 				</label>
 			</div>
 			<div id="menu">
-				<button id="submit" title="Updates the URL of this page with your build. Bookmark this URL for saving the edit page."><img src="images/save.png" />Temporarily Save</button>
+				<!-- <button id="submit" title="Updates the URL of this page with your build. Bookmark this URL for saving the edit page."><img src="images/save.png" />Temporarily Save</button> -->
+				<a href="#" id="save" title="Updates the URL of this page with your build. Bookmark this URL for saving the edit page."><img src="images/save.png" />Temporarily Save</a>
 				<p id="share">Your build URL: <input type="text" id="results" title="This is your Build Page URL. You can click copy to the right to copy it to clipboard for sharing."/></p>
 				<a id="copy" title="Click this to copy the Build Page URL to your clipboard for sharing or bookmark this link for future viewing."><img src="images/copy.png" />Copy URL to Share</a>
 				<a href="#" id="view" title="Go to your Build Page"><img src="images/build.png" />View your Build Page</a>
 				<a href="#" id="clear" title="Clear the page and start over">Reset</a>
+				<div id="user_menu">
+					<div id="sign-in-status"></div>
+					<a href="signin.html" id="sign-in"></a>
+					<!-- <a id="account-details"></a> -->
+				</div>
 			</div>
 		</header>
+		<div id="notice">Test</div>
+		<div id="warning">Test</div>
+		<div id="error">Test</div>
 		<section>
 			<div id="smSection" style="display: none">
 				<table>
@@ -942,20 +1007,11 @@
 			// $('a#copy').click(function() {
 			// 	copyToClipboard();
 			// });
+		 	// Set the configuration for your app
+			// TODO: Replace with your project's config object
 		</script>
+		
+		
 		<script src="main.js"></script>
-		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
-		<script>
-		  // Initialize Firebase
-		  var config = {
-		    apiKey: "AIzaSyAzO5PTmyYyftb6GkW2KmEAGRzOiCqlhOw",
-		    authDomain: "dow3builds.firebaseapp.com",
-		    databaseURL: "https://dow3builds.firebaseio.com",
-		    projectId: "dow3builds",
-		    storageBucket: "dow3builds.appspot.com",
-		    messagingSenderId: "1009802729447"
-		  };
-		  firebase.initializeApp(config);
-		</script>
 	</body>
 </html>

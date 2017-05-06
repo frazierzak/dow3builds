@@ -80,8 +80,28 @@ function showValues() {
     var url = window.location.href; // Returns full URL
     url = url.split('index.html')[0];
     str = url + "build.html?" + str;
+    //writeUserData(ser, str);
     $("#results").val(str);
     $("#view").attr('href', str);
+}
+
+
+
+//Show parameters on page
+function saveValues() {
+    "use strict";
+    var str = $("form").serialize();
+    var url = window.location.href; // Returns full URL
+    url = url.split('index.html')[0];
+    str = url + "build.html?" + str;
+    var r = /[?|&](\w+)=(\w+)+/g;
+    var query = r.exec(window.location.href);
+    var buildId = "";
+    while (query !== null) {
+      buildId = buildId + query[2];
+      query = r.exec(window.location.href);
+    }
+    writeUserData(buildId, str);
 }
 
 //Race selection code
@@ -113,6 +133,33 @@ function switchRaces(thisObj) {
     }
     showValues();
 }
+var newPostKey = firebase.database().ref().child('builds').push().key;
+//Write to database
+function writeUserData(buildId, buildURL) {
+  var ref = firebase.database().ref("builds");
+  
+  //alert(newPostKey);
+  ref.once('value', function(snapshot) {
+    if (snapshot.hasChild(newPostKey)) {
+        //alert('exists');
+        $("#error").html("Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
+        $("#error").slideDown("slow");
+
+    } else {
+      firebase.database().ref('builds/' + newPostKey).set({
+        title: "example title",
+        buildURL: buildURL,
+        author: "example user id",
+        desc: "example description",
+        votes: 0
+      });
+    }
+  });  
+}
+
+$("#save").click( function(){
+  saveValues();
+})
 
 //url parser
 var r = /[?|&](\w+)=(\w+)+/g;  //matches against a kv pair a=b
@@ -172,11 +219,10 @@ var parser = function() {
                 $("#thirdEliteDoc_name").text(thirdEliteDocName);
                 $("#thirdEliteDoc_name").show();
                 break;
-            default:
-                window.console.log("Incorrect URL!");
         }
        
         showValues();
+        //saveValues();
         query = r.exec(window.location.href);  //repeats to get next capture
     }
 };

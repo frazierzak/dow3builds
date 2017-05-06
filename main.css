@@ -108,6 +108,18 @@ button:hover img {
 	filter: brightness(0) invert(1);
 }
 
+a#save {
+	font-size: 12px;
+	margin: 0 0 0 10px;
+	border-right: 1px solid white;
+	padding: 0 10px 0 0px;
+}
+
+a#save img {
+	margin-bottom: -3px;
+	margin-right: 5px;
+}
+
 a#copy {
 	font-size: 12px;
 	margin: 0 10px 0 0px;
@@ -159,7 +171,57 @@ a#clear {
 	font-size: 12px;
 	margin: 0 5px 0 0;
 	border-left: 1px solid white;
-	padding: 0 0 0 10px;
+	border-right: 1px solid white;
+	padding: 0 10px 0 10px;
+}
+
+#user_menu {
+	display: inline;
+	font-size: 12px;
+	text-align: right;
+}
+
+#user_menu div {
+	display: inline;
+	padding: 0 10px 0 0;
+	border-right: 1px solid white;
+}
+
+#sign-in {
+	margin: 0 0 0 5px;
+}
+
+#notice, #error, #warning {
+	display: block;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	padding: 8px 0;
+	font-size: 18px;
+	border-bottom: 1px solid white;
+	display: none;
+}
+
+#notice {
+	background: #2c722c;
+}
+
+#warning {
+	background: yellow;
+	color: black;
+}
+
+#error {
+	background: #933;
+}
+
+#error a {
+	color: white;
+	text-decoration: underline;
+}
+
+#error a:hover {
+	color: orange;
 }
 
 section {
