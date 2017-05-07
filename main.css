@@ -34,34 +34,52 @@ header#build_header #view {
 	margin: 0 0 0 10px;
 }
 
-#select_race {
+/*#select_race {
 	display: inline-block;
 	padding: 0;
-	margin: 0 0 0 10px;
+	margin: 0 0 0 5px;
 	font-size: 12px;
+}*/
+
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.clear {
+	clear: both;
 }
 
 #race-select {
 	display: inline;
 	text-align: center;
-	margin: 0 0 0 15px;
-	border-right: 1px solid white;
-	height: 14px;
+	margin: 0 10px 0 0;
+	/*border-right: 1px solid white;*/
+}
+
+
+#race-select p {
+	display: inline;
+	margin: 0 5px 0 0;
 }
 
 #race-select label {
 	font-size: 12px;
-}
-
-#race-select div {
+	display: inline;
 	cursor: pointer;
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
 }
-
-#race-select label div {
-	width: 75px;
-	height: 14px;
-	display: inline-block;
-	background-position: bottom;
+#race-select label:hover {
+	color: orange;
+}
+#race-select div {
+	display: inline;
+	cursor: pointer;
+	margin: 0 5px 0 0;	
 }
 
 #spacemarines_button {
@@ -76,10 +94,56 @@ header#build_header #view {
 	background: url('images/races/eldar_simple.png');
 }
 
-#menu {
+#menu, #sub_menu {
 	display: inline-block;
 	margin: 0 0 5px 0;
+	padding: 0 0 10px 0;
 	vertical-align: middle;
+	font-size: 12px;
+}
+
+#sub_menu {
+	border-top: 1px solid white;
+	display: block;
+	padding: 10px 0 5px 5px;
+	font-size: 0;
+}
+
+#sub_menu p {
+	display: inline-block;
+	margin: 0 0 0 10px;
+	font-size: 12px;
+	padding: 0 5px 0 0;
+}
+
+#sub_menu p input {
+	background: black;
+	color: orange;
+	font-family: 'Roboto Condensed', sans-serif;
+	border: 1px solid orange;
+	padding: 2px;
+	border-radius: 3px;
+	margin: 0 0 0 0;
+	font-size: 12px;
+}
+
+#sub_menu .left {
+	padding: 3px 0 0 0;
+}
+
+#menu a, #sub_menu a {
+	border-right: 1px solid white;
+	padding: 0 10px;
+	font-size: 12px;
+}
+
+#menu a img, #sub_menu a img {
+	margin-bottom: -3px;
+	margin-right: 5px;
+}
+
+#menu a:hover img, #sub_menu a:hover img {
+	filter: brightness(0) invert(1);
 }
 
 button {
@@ -109,86 +173,73 @@ button:hover img {
 }
 
 a#save {
-	font-size: 12px;
-	margin: 0 0 0 10px;
-	border-right: 1px solid white;
-	padding: 0 10px 0 0px;
+	/*font-size: 12px;*/
+	/*margin: 0 0 0 10px;*/
+	/*border-right: 1px solid white;*/
+	/*padding: 0 10px 0 0px;*/
 }
 
 a#save img {
-	margin-bottom: -3px;
-	margin-right: 5px;
+	/*margin-bottom: -3px;*/
+	/*margin-right: 5px;*/
 }
 
 a#copy {
-	font-size: 12px;
-	margin: 0 10px 0 0px;
+	/*font-size: 12px;*/
+	/*margin: 0 10px 0 0px;*/
 	cursor: pointer;
-	padding: 0 10px 0 0;
-	border-right: 1px solid white;
+	/*padding: 0 10px 0 0;*/
+	/*border-right: 1px solid white;*/
 }
 
 a#copy img {
-	margin-bottom: -3px;
-	margin-right: 5px;
+	/*margin-bottom: -3px;*/
+	/*margin-right: 5px;*/
 }
 
 a#copy:hover img {
-	filter: brightness(0) invert(1);
+	/*filter: brightness(0) invert(1);*/
 }
 
-p#share {
-	display: inline-block;
-	margin: 0 0 0 10px;
-	font-size: 12px;
-}
 
-p#share input {
-	background: black;
-	color: orange;
-	font-family: 'Roboto Condensed', sans-serif;
-	border: 1px solid orange;
-	padding: 2px;
-	border-radius: 3px;
-	margin: 0 10px 0 0;
-}
 
 a#view {
-	font-size: 12px;
-	margin: 0 10px 0 0;
+	/*font-size: 12px;*/
+	/*margin: 0 10px 0 0;*/
 }
 
 a#view img {
-	margin-bottom: -3px;
-	margin-right: 5px;
+	/*margin-bottom: -3px;*/
+	/*margin-right: 5px;*/
 }
 
 a#view:hover img {
-	filter: brightness(0) invert(1);
+	/*filter: brightness(0) invert(1);*/
 }
 
 a#clear {
-	font-size: 12px;
-	margin: 0 5px 0 0;
-	border-left: 1px solid white;
-	border-right: 1px solid white;
-	padding: 0 10px 0 10px;
+	/*font-size: 12px;*/
+	/*margin: 0 5px 0 0;*/
+	/*border-left: 1px solid white;*/
+	/*border-right: 1px solid white;*/
+	/*padding: 0 10px 0 10px;*/
 }
 
 #user_menu {
 	display: inline;
-	font-size: 12px;
+	/*font-size: 12px;
 	text-align: right;
+	padding: 0 0 0 5px;*/
 }
 
 #user_menu div {
 	display: inline;
-	padding: 0 10px 0 0;
+	padding: 0 10px 0 5px;
 	border-right: 1px solid white;
 }
 
-#sign-in {
-	margin: 0 0 0 5px;
+#user_menu p {
+	display: inline;
 }
 
 #notice, #error, #warning {
@@ -260,7 +311,7 @@ table tr td:last-child {
 
 table td.elites {
 	width: 15%;
-	min-width: 300px;
+	/*min-width: 300px;*/
 }
 
 table td.eliteDoctrines {
@@ -290,9 +341,11 @@ label > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
 }
 #race-select label > input:checked + div{
 	background-position: top;
+	color: orange;
 }
 #race-select label:hover > div {
 	background-position: top;
+	color: orange;
 }
 label.disabled img {
 	filter: grayscale(100%);
