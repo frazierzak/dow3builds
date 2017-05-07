@@ -109,7 +109,6 @@ function disableRadio(x, y, changed) {
             }
         }
     });
-    
 }
 
 //Show parameters on page
@@ -123,6 +122,14 @@ function showValues() {
     $("#view").attr('href', str);
 }
 
+function notice(type, str) {
+    "use strict";
+    $(type).html(str);
+    $(type).slideDown(500, function{
+      $(type).delay(5000).slideUp(500);
+    });
+}
+
 //Show parameters on page
 function saveValues() {
     "use strict";
@@ -131,15 +138,14 @@ function saveValues() {
     var r = /(\w+)=(\w+)+/g;
     var buildQ = r.exec(str);
     while (buildQ !== null) {
-      // alert(buildQ[1]);
-      // alert(buildQ[2]);
       values.push(buildQ[2]);
       buildQ = r.exec(str);
     }
-    if(values.length < 10) {
-      alert("Missing params");
+    if(values.length < 11) {
+      notice("#error", "Please Complete your build before saving.");
       return;
     }
+
     var url = window.location.href; // Returns full URL
     url = url.split('create.html')[0];
     str = url + "build.html?" + str;
@@ -163,8 +169,7 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
       var ref = firebase.database().ref("builds");
       ref.once('value', function(snapshot) {
         if (snapshot.hasChild(newPostKey)) {
-            $("#error").html("Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
-            $("#error").slideDown("slow");
+            notice("#error", "Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
         } else {
           firebase.database().ref('builds/' + newPostKey).set({
             buildURL: buildURL,
