@@ -138,7 +138,8 @@ function saveValues() {
       buildId = buildId + query[2];
       query = r.exec(window.location.href);
     }
-    writeUserData(buildId, str);
+    var title = $("#title").val();
+    writeUserData(title, buildId, str);
 }
 
 //Race selection code
@@ -172,7 +173,7 @@ function switchRaces(thisObj) {
 }
 var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
-function writeUserData(buildId, buildURL) {
+function writeUserData(title, buildId, buildURL) {
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var uid = user.uid;
