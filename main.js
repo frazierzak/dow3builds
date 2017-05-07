@@ -185,7 +185,7 @@ function writeUserData(title, buildId, buildURL) {
             $("#error").slideDown("slow");
         } else {
           firebase.database().ref('builds/' + newPostKey).set({
-            title: "example title",
+            title: title,
             buildURL: buildURL,
             author: uid,
             desc: "example description",
