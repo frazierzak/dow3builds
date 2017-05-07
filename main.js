@@ -136,6 +136,10 @@ function saveValues() {
       values.push(buildQ[2]);
       buildQ = r.exec(str);
     }
+    if(values.length() < 10) {
+      alert("Missing params");
+      break;
+    }
     var url = window.location.href; // Returns full URL
     url = url.split('create.html')[0];
     str = url + "build.html?" + str;
