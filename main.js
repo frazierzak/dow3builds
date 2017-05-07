@@ -127,21 +127,13 @@ function showValues() {
 function saveValues() {
     "use strict";
     var values = {};
-    // $("#form input").each(function() {
-    //     if ($(this).is(':checked')) {
-    //       values[$(this).attr("name")] = $(this).val();
-    //     }  
-    // });
-    // alert(values);
     var str = $("#form").serialize();
     var r = /(\w+)=(\w+)+/g;
     var buildQ = r.exec(str);
     while (buildQ !== null) {
       values[buildQ[1]] = buildQ[2];
-      alert(buildQ[1])
       buildQ = r.exec(str);
     }
-    alert(values.build_title);
     var url = window.location.href; // Returns full URL
     url = url.split('create.html')[0];
     str = url + "build.html?" + str;
@@ -159,25 +151,22 @@ function saveValues() {
 var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
 function writeUserData(buildTitle, buildId, buildURL, values) {
-  // alert(buildTitle);
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var uid = user.uid;
       var ref = firebase.database().ref("builds");
       ref.once('value', function(snapshot) {
         if (snapshot.hasChild(newPostKey)) {
-            //alert('exists');
             $("#error").html("Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
             $("#error").slideDown("slow");
         } else {
-          // alert(title);
           firebase.database().ref('builds/' + newPostKey).set({
+            title: values.build_title,
             buildURL: buildURL,
             author: uid,
             desc: "example description",
             votes: 0,
             r: values.r,
-            title: values.build_title,
             e1: values.e1,
             e1d: values.e1d,
             e2: values.e2,
