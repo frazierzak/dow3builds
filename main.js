@@ -174,7 +174,7 @@ var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
 function writeUserData(buildId, buildURL) {
   var ref = firebase.database().ref("builds");
-  var uid = user.uid;
+  // var uid = user.uid;
   //alert(newPostKey);
   ref.once('value', function(snapshot) {
     if (snapshot.hasChild(newPostKey)) {
