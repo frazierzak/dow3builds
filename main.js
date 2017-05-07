@@ -173,28 +173,30 @@ function switchRaces(thisObj) {
 var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
 function writeUserData(buildId, buildURL) {
-  var ref = firebase.database().ref("builds");
-  // var uid = user.uid;
-  //alert(newPostKey);
-  ref.once('value', function(snapshot) {
-    if (snapshot.hasChild(newPostKey)) {
-        //alert('exists');
-        $("#error").html("Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
-        $("#error").slideDown("slow");
-    } else {
-      firebase.database().ref('builds/' + newPostKey).set({
-        title: "example title",
-        buildURL: buildURL,
-        author: uid,
-        desc: "example description",
-        votes: 0
-      });
+  firebase.auth().onAuthStateChanged(function(user) {
+    if (user) {
+      var uid = user.uid;
+      var ref = firebase.database().ref("builds");
+      ref.once('value', function(snapshot) {
+        if (snapshot.hasChild(newPostKey)) {
+            //alert('exists');
+            $("#error").html("Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
+            $("#error").slideDown("slow");
+        } else {
+          firebase.database().ref('builds/' + newPostKey).set({
+            title: "example title",
+            buildURL: buildURL,
+            author: uid,
+            desc: "example description",
+            votes: 0
+          });
+        }
+      }); 
     }
-  });  
+  }); 
 }
 
 $("#save").click( function(){
-  alert("Hello!");
   saveValues();
 })
 
