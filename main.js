@@ -138,8 +138,8 @@ function saveValues() {
       buildId = buildId + query[2];
       query = r.exec(window.location.href);
     }
-    var title = $("#title").val();
-    writeUserData(title, buildId, str);
+    var buildTitle = $("#title").val();
+    writeUserData(buildTitle, buildId, str);
 }
 
 //Race selection code
@@ -173,8 +173,8 @@ function switchRaces(thisObj) {
 }
 var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
-function writeUserData(buildName, buildId, buildURL) {
-  alert(buildName);
+function writeUserData(buildTitle, buildId, buildURL) {
+  // alert(buildTitle);
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var uid = user.uid;
@@ -187,7 +187,7 @@ function writeUserData(buildName, buildId, buildURL) {
         } else {
           // alert(title);
           firebase.database().ref('builds/' + newPostKey).set({
-            title: buildName,
+            title: buildTitle,
             buildURL: buildURL,
             author: uid,
             desc: "example description",
