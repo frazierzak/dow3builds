@@ -131,6 +131,8 @@ function saveValues() {
     var r = /(\w+)=(\w+)+/g;
     var buildQ = r.exec(str);
     while (buildQ !== null) {
+      alert(buildQ[1]);
+      alert(buildQ[2]);
       values[buildQ[1]] = buildQ[2];
       buildQ = r.exec(str);
     }
