@@ -173,7 +173,8 @@ function switchRaces(thisObj) {
 }
 var newPostKey = firebase.database().ref().child('builds').push().key;
 //Write to database
-function writeUserData(title, buildId, buildURL) {
+function writeUserData(buildName, buildId, buildURL) {
+  alert(buildName);
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       var uid = user.uid;
@@ -184,8 +185,9 @@ function writeUserData(title, buildId, buildURL) {
             $("#error").html("Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
             $("#error").slideDown("slow");
         } else {
+          // alert(title);
           firebase.database().ref('builds/' + newPostKey).set({
-            title: title,
+            title: buildName,
             buildURL: buildURL,
             author: uid,
             desc: "example description",
