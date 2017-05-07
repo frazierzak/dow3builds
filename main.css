@@ -22,8 +22,6 @@ header {
 	border-bottom: 1px solid white;
 }
 
-
-
 header a#logo {
 	display: inline-block;
 	padding: 10px;
@@ -56,8 +54,9 @@ header#build_header #view {
 #race-select {
 	display: inline;
 	text-align: center;
-	margin: 0 10px 0 0;
-	/*border-right: 1px solid white;*/
+	font-size: 12px;
+	border-right: 1px solid white;
+	margin: 0 0 0 5px;
 }
 
 
@@ -67,19 +66,26 @@ header#build_header #view {
 }
 
 #race-select label {
-	font-size: 12px;
+	font-size: 0;
 	display: inline;
 	cursor: pointer;
-	margin: 0 0 0 0;
-	padding: 0 0 0 0;
 }
 #race-select label:hover {
 	color: orange;
 }
+#race-select label:after {
+	content: " - ";
+	font-size: 12px;
+	margin: 0 5px 0 10px;
+}
+#race-select label:last-child:after {
+	content: "";
+}
 #race-select div {
+	font-size: 12px;
 	display: inline;
-	cursor: pointer;
-	margin: 0 5px 0 0;	
+	cursor: pointer;	
+	font-weight: bold;
 }
 
 #spacemarines_button {
@@ -123,7 +129,7 @@ header#build_header #view {
 	border: 1px solid orange;
 	padding: 2px;
 	border-radius: 3px;
-	margin: 0 0 0 0;
+	margin: 0 0 0 5px;
 	font-size: 12px;
 }
 
