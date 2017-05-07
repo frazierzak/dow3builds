@@ -138,7 +138,7 @@ function saveValues() {
     }
     if(values.length() < 10) {
       alert("Missing params");
-      break;
+      return;
     }
     var url = window.location.href; // Returns full URL
     url = url.split('create.html')[0];
