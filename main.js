@@ -126,14 +126,14 @@ function showValues() {
 //Show parameters on page
 function saveValues() {
     "use strict";
-    var values = {};
+    var values = [];
     var str = $("#form").serialize();
     var r = /(\w+)=(\w+)+/g;
     var buildQ = r.exec(str);
     while (buildQ !== null) {
-      alert(buildQ[1]);
-      alert(buildQ[2]);
-      values[buildQ[1]] = buildQ[2];
+      // alert(buildQ[1]);
+      // alert(buildQ[2]);
+      values.push(buildQ[2]);
       buildQ = r.exec(str);
     }
     var url = window.location.href; // Returns full URL
@@ -163,21 +163,21 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
             $("#error").slideDown("slow");
         } else {
           firebase.database().ref('builds/' + newPostKey).set({
-            title: values.build_title,
             buildURL: buildURL,
             author: uid,
             desc: "example description",
             votes: 0,
-            r: values.r,
-            e1: values.e1,
-            e1d: values.e1d,
-            e2: values.e2,
-            e2d: values.e2d,
-            e3: values.e3,
-            e3d: values.e3d,
-            d1: values.d1,
-            d2: values.d2,
-            d3: values.d3
+            r: values[0],
+            title: values[1],
+            e1: values[2],
+            e1d: values[3],
+            e2: values[4],
+            e2d: values[5],
+            e3: values[6],
+            e3d: values[7],
+            d1: values[8],
+            d2: values[9],
+            d3: values[10]
           });
         }
       }); 
