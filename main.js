@@ -136,7 +136,7 @@ function saveValues() {
       values.push(buildQ[2]);
       buildQ = r.exec(str);
     }
-    if(values.length() < 10) {
+    if(values.length < 10) {
       alert("Missing params");
       return;
     }
