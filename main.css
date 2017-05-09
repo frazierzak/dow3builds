@@ -1,6 +1,33 @@
-*{
-	margin: 0;
-	padding: 0;
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+ol, ul {
+    list-style: none;
 }
 
 a {
@@ -49,6 +76,11 @@ header#build_header #view {
 
 .clear {
 	clear: both;
+}
+
+form {
+	display: block;
+	width: 100%;
 }
 
 #race-select {
@@ -128,7 +160,7 @@ header#build_header #view {
 	font-family: 'Roboto Condensed', sans-serif;
 	border: 1px solid orange;
 	padding: 2px;
-	border-radius: 3px;
+	border-radius: 2px;
 	margin: 0 0 0 5px;
 	font-size: 12px;
 }
@@ -253,8 +285,8 @@ a#clear {
 	color: white;
 	text-align: center;
 	vertical-align: middle;
-	padding: 8px 0;
-	font-size: 18px;
+	padding: 8px 20px;
+	font-size: 14px;
 	border-bottom: 1px solid white;
 	display: none;
 }
@@ -377,15 +409,21 @@ label.used img {
 .ui-tooltip-content {
 	padding: 10px;
 	font-size: 12px;
+	line-height: 18px;
 }
 
 .tooltips h2 {
-	font-weight: 400;
+	font-size: 18px;
+	line-height: 22px;
+	font-weight: bold;
 	color: #fff7c2;
+	margin: 0 0 5px 0;
 }
 
 .tooltips h3 {
-	font-weight: 400;
+	line-height: 16px;
+	font-weight: bold;
+	font-size: 18px;
 	margin: 0 0 5px 0;
 }
 
@@ -453,3 +491,73 @@ table#build_table tr td {
 .build_elites img {
 	/*margin: 0;*/
 }
+
+#description_holder {
+	width: 80%;
+	display: block;
+	margin: 0 auto;
+}
+
+#description_holder h1 {
+	text-align: center;
+	margin: 0 0 10px 0;
+}
+
+#description_holder textarea {
+	width: 100%;
+	padding: 10px;
+	min-height: 300px;
+	background: #171717;
+	color: white;
+	border: 1px solid orange;
+	border-radius: 2px;
+	font-family: 'Roboto Condensed', sans-serif;
+	line-height: 1.5;
+}
+
+table#build_list {
+}
+
+table#build_list td {
+	vertical-align: middle;
+	border-right: none;
+	border-bottom: 1px solid white;
+}
+
+table#build_list tr {
+	
+}
+
+table#build_list td img {
+	width: auto;
+	margin: 0 5px 0 0;
+}
+
+table#build_list th#votes_c {
+	width: 5%;
+}
+table#build_list th#race_c {
+	width: 10%;
+}
+table#build_list th#title_c {
+	width: 15%;
+}
+table#build_list th#author_c {
+	width: 10%;
+}
+table#build_list th#favorites_c {
+	width: 5%;
+}
+table#build_list th.elites_c {
+	width: 10%;
+}
+table#build_list th#doctrines_c {
+	width: 20%;
+}
+table#build_list th#doctrines_c {
+	width: 20%;
+}
+table#build_list th#view_c {
+	width: 5%;
+}
+

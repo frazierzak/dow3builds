@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dawn of War 3 Builds</title>
+		<meta name="description" content="Creat and share your custom Dawn of War 3 builds with doctrines, elites, and build orders">
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
+		<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
+		<script src="jquery-ui-1.12.1.custom/external/jquery/jquery.js"></script>
+		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
+		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
+		<link rel="stylesheet" type="text/css" href="main.css">
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+		<script>
+		  // Initialize Firebase
+		  var config = {
+		    apiKey: "AIzaSyAzO5PTmyYyftb6GkW2KmEAGRzOiCqlhOw",
+		    authDomain: "dow3builds.firebaseapp.com",
+		    databaseURL: "https://dow3builds.firebaseio.com",
+		    projectId: "dow3builds",
+		    storageBucket: "dow3builds.appspot.com",
+		    messagingSenderId: "1009802729447"
+		  };
+		  firebase.initializeApp(config);
+		  // Get a reference to the database service
+		  var database = firebase.database();
+		</script>
+		<script src="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.js"></script>
+	    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.1/firebaseui.css" />
+	</head>
+	<body>
+		 <div id="firebaseui-auth-container"></div>
+		<header>
+			<a id="logo" href="index.html"><img src="images/logo.png" /></a>
+			<div id="menu">
+				<a id="createBuild_button" href="create.html"><img src="images/create.png"/>Create a Build</a>
+				<a id="viewBuild_button" href="view.html"><img src="images/view.png"/>View Builds</a>
+				<div id="user_menu" class="logged_in">
+					<a id="yourBuilds_button" href="your_builds.html"><img src="images/builds.png"/>Your Builds (<span id="yourBuildNumber"></span>)</a>
+					<a id="yourfavorites_button" href="favorites.html"><img src="images/favorite.png"/>Your Favorites (<span id="yourFavNumber"></span>)</a>
+					<div id="sign-in-status"></div>
+					<a id="settings_button" href="settings.html"><img src="images/settings.png"/>Settings</a>
+				</div>
+				<a href="signin.html" id="sign-in"></a>
+			</div>
+		</header>
+		<div id="notice">Test</div>
+		<div id="warning">Test</div>
+		<div id="error">Test</div>
+		<section>
+			<table id="build_list" cellspacing="0">
+				<tr>
+					<th id="votes_c">Votes</th>
+					<th id="race_c">Race</th>
+					<th id="title_c">Title</th>
+					<th id="author_c">Author</th>
+					<th id="favorites_c">Favorites</th>
+					<th class="elites_c">Elite 1</th>
+					<th class="elites_c">Elite 2</th>
+					<th class="elites_c">Elite 3</th>
+					<th id="doctrines_c">Doctrines</th>
+					<th id="desc_c">Details</th>
+					<th id="view_c">View</th>
+				</tr>
+			</table>
+		</section>
+		<script src="allBuilds.js"></script>
+	</body>
+</html>
