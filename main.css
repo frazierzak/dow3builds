@@ -413,17 +413,13 @@ label.used img {
 }
 
 .tooltips h2 {
-	font-size: 18px;
-	line-height: 22px;
-	font-weight: bold;
+	font-size: 16px;
 	color: #fff7c2;
 	margin: 0 0 5px 0;
 }
 
 .tooltips h3 {
-	line-height: 16px;
-	font-weight: bold;
-	font-size: 18px;
+	font-size: 14px;
 	margin: 0 0 5px 0;
 }
 
@@ -516,48 +512,68 @@ table#build_table tr td {
 }
 
 table#build_list {
+	font-size: 14px;
 }
 
 table#build_list td {
 	vertical-align: middle;
 	border-right: none;
-	border-bottom: 1px solid white;
+	/*border-bottom: 1px dotted white;*/
 }
 
-table#build_list tr {
-	
+table#build_list tr:nth-child(2n) {
+	background: #141414;
 }
 
 table#build_list td img {
-	width: auto;
+	width: 40px;
+	height: auto;
 	margin: 0 5px 0 0;
 }
 
+table#build_list td img:nth-last-child(1) {
+	margin: 0;
+}
+
+table#build_list th {
+	font-size: 16px;
+	padding: 15px 0;
+}
+
 table#build_list th#votes_c {
-	width: 5%;
+	width: 1%;
+}
+table#build_list th#favorites_c {
+	width: 2%;
 }
 table#build_list th#race_c {
-	width: 10%;
+	width: 5%;
 }
 table#build_list th#title_c {
 	width: 15%;
 }
 table#build_list th#author_c {
-	width: 10%;
+	width: 15%;
 }
-table#build_list th#favorites_c {
-	width: 5%;
+table#build_list th#date_c {
+	width: 10%;
 }
 table#build_list th.elites_c {
 	width: 10%;
 }
 table#build_list th#doctrines_c {
-	width: 20%;
+	width: 15%;
 }
-table#build_list th#doctrines_c {
-	width: 20%;
+table#build_list th#desc_c {
+	width: 15%;
 }
 table#build_list th#view_c {
 	width: 5%;
 }
 
+table#build_list td.desc {
+	vertical-align: top;
+	text-align: left;
+	line-height: 16px;
+	font-weight: normal;
+}

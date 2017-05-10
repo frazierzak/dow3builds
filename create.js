@@ -21,6 +21,8 @@ var firstEliteDocName;
 var secondEliteDocName;
 var thirdEliteDocName;
 
+
+//Enable for testing
 var testing = true;
 
 //Clear code
@@ -35,8 +37,10 @@ function clear() {
     $("#eldSection").hide();
 }
 
+//Reset Form
 $("#clear").click(clear);
 
+//Hide Elite Doctrines
 function hideEliteDoctrines(elite, query) {
     $(elite).children().each(function() {
         if ($(this).attr("id") !== query) {
@@ -81,6 +85,7 @@ function showValues() {
     $("#view").attr('href', str);
 }
 
+//Notice Code
 function notice(type, str) {
     $(type).text(str);
     $(type).slideDown(500, function() {
@@ -88,10 +93,12 @@ function notice(type, str) {
     });
 }
 
+//Blink Element
 function flash(element) {
     $(element).fadeIn(200).fadeOut(200).fadeIn(200).fadeOut(200).fadeIn(200);
 }
 
+//Validate Form
 function reportIncomplete() {
     var message = "";
     //alert($("input[type='radio'][name='r']:checked").length);
@@ -135,7 +142,7 @@ function reportIncomplete() {
     notice("#error", "The following sections are not complete: " + message);
 }
 
-//Show parameters on page
+//Build Array for Saving
 function saveValues() {
     var values = [];
     var str = $("#form").serialize();
@@ -143,17 +150,15 @@ function saveValues() {
     var buildQ = r.exec(str);
     while (buildQ !== null) {
         values.push(buildQ[2]);
-        alert(buildQ[2]);
         buildQ = r.exec(str);
     }
-    //alert(values[11]);
+    values[11] = $("textarea[name='description']").val();
     if ($("textarea[name='description']").val().length !== 0) {
         var desc = true;
     } else {
         var desc = false;
         values[11] = "";
     }
-    //alert(values.length);
     if (desc) {
         if (values.length < 12) {
             reportIncomplete();
@@ -183,21 +188,30 @@ function saveValues() {
     writeUserData(buildTitle, buildId, str, values);
 }
 
-
-
 //Write to database
 function writeUserData(buildTitle, buildId, buildURL, values) {
     //Grab key
     var newPostKey = firebase.database().ref().child('builds').push().key;
+
+    //Grab Current Date
+    var currentdate = new Date().toDateString(); 
+
+    //Check if testing
     if (testing) {
+        //Grab firebase "builds" child
         var ref = firebase.database().ref("builds");
+        var uid = "tester";
+
+        //Take snapshot of database child
         ref.once('value', function(snapshot) {
+            //Check if key is already in database
             if (snapshot.hasChild(newPostKey)) {
-                notice("#error", "Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
+                notice("#error", "Sorry, this build has already been saved. You can view it <a href=build.html?=" + newPostKey + ">here.</a>");
             } else {
+                //Add entry to database
                 firebase.database().ref('builds/' + newPostKey).set({
                     buildURL: buildURL,
-                    author: "uid",
+                    author: uid,
                     votes: 1,
                     favs: 0,
                     r: values[0],
@@ -211,20 +225,61 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
                     d1: values[8],
                     d2: values[9],
                     d3: values[10],
-                    desc: values[11]
+                    desc: values[11],
+                    dateC: currentdate,
+                    dateU: currentdate
                 });
+                firebase.database().ref('users/' + uid + '/builds/' + newPostKey).set({
+                    buildURL: buildURL,
+                    votes: 1,
+                    favs: 0,
+                    r: values[0],
+                    title: values[1],
+                    e1: values[2],
+                    e1d: values[3],
+                    e2: values[4],
+                    e2d: values[5],
+                    e3: values[6],
+                    e3d: values[7],
+                    d1: values[8],
+                    d2: values[9],
+                    d3: values[10],
+                    desc: values[11],
+                    dateC: currentdate,
+                    dateU: currentdate
+                });
+
             }
         });
     } else {
+        //Check for Authentication
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
                 var uid = user.uid;
                 var ref = firebase.database().ref("builds");
                 ref.once('value', function(snapshot) {
                     if (snapshot.hasChild(newPostKey)) {
-                        notice("#error", "Sorry, this build has already been submitted. You can view it <a href=" + buildURL + ">here.</a>");
+                        notice("#error", "Sorry, this build has already been saved. You can view it <a href=build.html?=" + newPostKey + ">here.</a>");
                     } else {
                         firebase.database().ref('builds/' + newPostKey).set({
+                            buildURL: buildURL,
+                            author: uid,
+                            votes: 1,
+                            favs: 0,
+                            r: values[0],
+                            title: values[1],
+                            e1: values[2],
+                            e1d: values[3],
+                            e2: values[4],
+                            e2d: values[5],
+                            e3: values[6],
+                            e3d: values[7],
+                            d1: values[8],
+                            d2: values[9],
+                            d3: values[10],
+                            desc: values[11]
+                        });
+                        firebase.database().ref('users/' + uid + '/builds/' + newPostKey).set({
                             buildURL: buildURL,
                             author: uid,
                             votes: 1,
@@ -249,6 +304,7 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
     }
 }
 
+//Save Button
 $("#save").click(function() {
     saveValues();
 })

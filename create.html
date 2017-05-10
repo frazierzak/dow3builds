@@ -9,7 +9,9 @@
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="main.css">
-		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-app.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/3.9.0/firebase-database.js"></script>
 		<script>
 		  // Initialize Firebase
 		  var config = {
@@ -32,7 +34,7 @@
 		<header>
 			<a id="logo" href="index.html"><img src="images/logo.png" /></a>
 			<div id="menu">
-				<a id="viewBuild_button" href="allBuilds.html"><img src="images/view.png"/>View Builds</a>
+				<a id="viewBuild_button" href="builds.html"><img src="images/view.png"/>View Builds</a>
 				<div id="user_menu" class="logged_in">
 					<a id="yourBuilds_button" href="your_builds.html"><img src="images/builds.png"/>Your Builds (<span id="yourBuildNumber"></span>)</a>
 					<a id="yourfavorites_button" href="favorites.html"><img src="images/favorite.png"/>Your Favorites (<span id="yourFavNumber"></span>)</a>
@@ -170,21 +172,21 @@
 						<div class="eliteDocs" id="cha">
 							<label>
 								<input type="radio" name="e1d" value="chac" alt="Diomedes' Command - Final Slam" />
-								<img src="images/sm/doctrines/finalslam.png" title="<h2>Diomedes' Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
+								<img src="images/sm/elitedoctrines/diomedes1.png" title="<h2>Diomedes's Command - Final Slam</h2>Instead of dying, the Dreadnought activates Slam and Heals enough to avoid death. Only triggers once. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
 							</label>
 							<label>
 								<input type="radio" name="e1d" value="chap" alt="Diomedes' Presence - Rosarius" />
-								<img src="images/sm/elitedoctrines/diomedes2.png" title="<h2>Diomedes' Presence - Rosarius</h2>When Diomedes is deployed, elites become temporarirly Invulnerable for a duration instead of dying. Has a long Cooldown between uses.">
+								<img src="images/sm/elitedoctrines/diomedes2.png" title="<h2>Diomedes's Presence - Rosarius</h2>When Diomedes is deployed, elites become temporarirly Invulnerable for a duration instead of dying. Has a long Cooldown between uses.">
 							</label>
 						</div><!-- diomedes -->
 						<div class="eliteDocs" id="gab">
 							<label>
 								<input type="radio" name="e1d" value="gabc" alt="Gabriel Angelos' Command - Slam Barrier" />
-								<img src="images/sm/elitedoctrines/gabriel1.png" title="<h2>Gabriel Angelos' Command - Slam Barrier</h2>The Dreadnought's Slam ability creates a temporary barrier. Absorbs shots and Reflects projectiles. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
+								<img src="images/sm/elitedoctrines/gabriel1.png" title="<h2>Gabriel Angelos's Command - Slam Barrier</h2>The Dreadnought's Slam ability creates a temporary barrier. Absorbs shots and Reflects projectiles. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine.">
 							</label>
 							<label>
 								<input type="radio" name="e1d" value="gabp" alt="Gabriel Angelos' Presence - Inspiring Drop" />
-								<img src="images/sm/elitedoctrines/gabriel2.png" title="<h2>Gabriel Angelos' Presence - Inspiring Drop</h2>When Gabriel is deployed, Drop Pods Heal in a Circle upon landing.">
+								<img src="images/sm/elitedoctrines/gabriel2.png" title="<h2>Gabriel Angelos's Presence - Inspiring Drop</h2>When Gabriel is deployed, Drop Pods Heal in a Circle upon landing.">
 							</label>
 						</div><!-- gabriel -->
 						<div class="eliteDocs" id="ter">
@@ -650,6 +652,7 @@
 			</div>
 			</form>
 		</section>
-		<script src="main.js"></script>
+		<script src="firebase.js"></script>
+		<script src="create.js"></script>
 	</body>
 </html>
