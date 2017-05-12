@@ -13,7 +13,7 @@ initApp = function() {
                 document.getElementById('sign-in').textContent = 'Sign out';
             });
         } else {
-            // $(".logged_in").hide();
+            //$(".logged_in").hide();
             // User is signed out.
             document.getElementById('sign-in-status').textContent = 'Currently not logged in!';
             document.getElementById('sign-in').textContent = 'Sign in';

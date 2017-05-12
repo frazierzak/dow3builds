@@ -1,5 +1,7 @@
 "use strict";
 
+var testing = true;
+
 //Get Race Name and Description Function
 function getRaceData(build) {
     switch (build.r) {
@@ -58,6 +60,8 @@ function getEliteData(elite, tip) {
             tip = "<h2>Imperial Knight Solaria</h2><h3>Nuker</h3>Super Heavy ranged walker built to deal exceptional area of effect damage to all targets. Sustained attacks will cause her to overheat, reducing movement speed but adding unique properties to her abilities.";
             break;
     }
+
+
     return [elite, tip];
 }
 
@@ -263,178 +267,77 @@ function getDocData(doc, docTip) {
     }
     return [doc, docTip];
 }
-
-var search = "";
-
-$("#searchButton").click( function() {
-    search = $("#searchBox").val();
-    var searchAlt = $("#searchButton").attr("alt");
-    window.location.href = "builds.html?search=" + search + searchAlt;
-})
-
-jQuery(document).on('keydown', 'input#searchBox', function(ev) {
-    if(ev.which === 13) {
-        search = $("#searchBox").val();
-        var searchAlt = $("#searchButton").attr("alt");
-        window.location.href = "builds.html?search=" + search + searchAlt;
-
-        // Avoid form submit
-        return false;
-    }
-});
-
-var filter = "sm";
-var sort = "title";
-
-var r = /(?:\?|&(?:amp;)?)([^=&#]+)(?:=?([^&#]*))/gi; //matches against a kv pair a=b
-var query = r.exec(window.location.href); //gets the first query from the url
-
-var parser = function() {
-    while (query !== null) {
-        switch (query[1]) {
-            case "filter":
-                switch (query[2]) {
-                    case "sm":
-                        document.getElementById("sortTitle").href="builds.html?filter=sm&sort=title";
-                        document.getElementById("sortVotes").href="builds.html?filter=sm&sort=votes";
-                        document.getElementById("sortFav").href="builds.html?filter=sm&sort=fav";
-                        document.getElementById("sortDate").href="builds.html?filter=sm&sort=date";
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&filter=sm");
-                        $("#filterSm").addClass('selected');
-                        filter = "sm";
-                        break;
-                    case "ork":
-                        document.getElementById("sortTitle").href="builds.html?filter=ork&sort=title";
-                        document.getElementById("sortVotes").href="builds.html?filter=ork&sort=votes";
-                        document.getElementById("sortFav").href="builds.html?filter=ork&sort=fav";
-                        document.getElementById("sortDate").href="builds.html?filter=ork&sort=date";
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&filter=ork");
-                        $("#filterOrk").addClass('selected');
-                        filter = "ork"
-                        break;
-                    case "eld":
-                        document.getElementById("sortTitle").href="builds.html?filter=eld&sort=title";
-                        document.getElementById("sortVotes").href="builds.html?filter=eld&sort=votes";
-                        document.getElementById("sortFav").href="builds.html?filter=eld&sort=fav";
-                        document.getElementById("sortDate").href="builds.html?filter=eld&sort=date";
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&filter=eld");
-                        $("#filterEld").addClass('selected');
-                        filter = "eld"
-                        break;
-                }
-                break;
-            case "sort":
-                switch (query[2]) {
-                    case "title":
-                        $("#sortTitle").addClass('selected');
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&sort=title");
-                        sort = "title";
-                        break;
-                    case "votes":
-                        $("#sortVotes").addClass('selected');
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&sort=votes");
-                        sort = "votes";
-                        break;
-                    case "fav":
-                        $("#sortFav").addClass('selected');
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&sort=favs");
-                        sort = "favs";
-                        break;
-                    case "date":
-                        $("#sortDate").addClass('selected');
-                        var searchAlt = $("#searchButton").attr("alt");
-                        $("#searchButton").attr("alt", searchAlt + "&sort=dateU");
-                        sort = "dateU";
-                        break;
-
-                }
-                break;
-            case "search":
-                search = query[2];
-                search = search.toLowerCase().replace("%20", " ");
-                break;
-
-        }
-        query = r.exec(window.location.href); //repeats to get next capture
-    }
+if (testing) {
+    var uid = "tester";
 }
-
-//Note to self. Try removing entries in the forEach below that don't match the queries above for in-client filtering.
-
-parser();
-
-var ref = firebase.database().ref("builds").orderByChild(sort);
-
-ref.on("value", function(snapshot) {
+var ref = firebase.database().ref('users/' + uid + '/builds/');
+ref.once("value").then(function(snapshot) {
     snapshot.forEach(function(childSnapshot) {
-        var remove = false;
         var build = childSnapshot.val();
-        if (build.r != filter) {
-            remove = true;
-        }
 
-        if (!~build.title.toLowerCase().indexOf(search)) {
-            remove = true;
-        }
+        //Get Race Name and Description
+        getRaceData(build);
 
-        if (!remove) {
-            //Get Race Name and Description
-            getRaceData(build);
+        //Get Elite Name and Description
+        var e1 = getEliteData(build.e1);
+        build.e1 = e1[0];
+        build.e1tip = e1[1];
+        var e2 = getEliteData(build.e2);
+        build.e2 = e2[0];
+        build.e2tip = e2[1];
+        var e3 = getEliteData(build.e3);
+        build.e3 = e3[0];
+        build.e3tip = e3[1];
 
-            //Get Elite Name and Description
-            var e1 = getEliteData(build.e1);
-            build.e1 = e1[0];
-            build.e1tip = e1[1];
-            var e2 = getEliteData(build.e2);
-            build.e2 = e2[0];
-            build.e2tip = e2[1];
-            var e3 = getEliteData(build.e3);
-            build.e3 = e3[0];
-            build.e3tip = e3[1];
+        //Get Elite Doctrine Names and Descriptions      
+        var e1d = getEliteDocData(build.e1d)
+        build.e1d = e1d[0];
+        build.e1dtip = e1d[1];
+        var e2d = getEliteDocData(build.e2d)
+        build.e2d = e2d[0];
+        build.e2dtip = e2d[1];
+        var e3d = getEliteDocData(build.e3d)
+        build.e3d = e3d[0];
+        build.e3dtip = e3d[1];
 
-            //Get Elite Doctrine Names and Descriptions      
-            var e1d = getEliteDocData(build.e1d)
-            build.e1d = e1d[0];
-            build.e1dtip = e1d[1];
-            var e2d = getEliteDocData(build.e2d)
-            build.e2d = e2d[0];
-            build.e2dtip = e2d[1];
-            var e3d = getEliteDocData(build.e3d)
-            build.e3d = e3d[0];
-            build.e3dtip = e3d[1];
+        //Get Doctrine Names and Descriptions      
+        var d1 = getDocData(build.d1)
+        build.d1 = d1[0];
+        build.d1tip = d1[1];
+        var d2 = getDocData(build.d2)
+        build.d2 = d2[0];
+        build.d2tip = d2[1];
+        var d3 = getDocData(build.d3)
+        build.d3 = d3[0];
+        build.d3tip = d3[1];
 
-            //Get Doctrine Names and Descriptions      
-            var d1 = getDocData(build.d1)
-            build.d1 = d1[0];
-            build.d1tip = d1[1];
-            var d2 = getDocData(build.d2)
-            build.d2 = d2[0];
-            build.d2tip = d2[1];
-            var d3 = getDocData(build.d3)
-            build.d3 = d3[0];
-            build.d3tip = d3[1];
-
-            //Check description lenght and shorten if longer than 141 characters
-            if (build.desc.length > 141) {
-                build.desc = build.desc.substring(0, 138) + '...';
-            } else {
-                if (build.desc.length === 0) {
-                    build.desc = "None";
-                }
+        //Check description lenght and shorten if longer than 141 characters
+        if (build.desc.length > 141) {
+            build.desc = build.desc.substring(0, 138) + '...';
+        } else {
+            if (build.desc.length === 0) {
+                build.desc = "None";
             }
+        }
 
-            //Create rows for each build
-            $("#build_list tr#start").after(
-                "<tr><td>" + build.votes + "</td><td>" + build.favs + "</td><td><img src='images/races/" + build.race + ".png' title='" + build.rTip + "' /></td><td><a href='view.html?" + childSnapshot.key + "'>" + build.title + "</a></td><td><a href='user.html?=" + build.author + "'>"+ build.author + "</a></td><td>"+ build.dateU +"<td><img src='images/" + build.r + "/elites/" + build.e1 + ".png' title='" + build.e1tip + "'/><img src='images/" + build.r + "/elitedoctrines/" + build.e1d + ".png' title='" + build.e1dtip + "'/></td><td><img src='images/" + build.r + "/elites/" + build.e2 + ".png' title='" + build.e2tip + "'/><img src='images/" + build.r + "/elitedoctrines/" + build.e2d + ".png' title='" + build.e2dtip + "'/><td><img src='images/" + build.r + "/elites/" + build.e3 + ".png' title='" + build.e3tip + "'/><img src='images/" + build.r + "/elitedoctrines/" + build.e3d + ".png' title='" + build.e3dtip + "'/></td></td><td><img src='images/" + build.r + "/doctrines/" + build.d1 + ".png' title='" + build.d1tip + "'/><img src='images/" + build.r + "/doctrines/" + build.d2 + ".png' title='" + build.d2tip + "'/><img src='images/" + build.r + "/doctrines/" + build.d3 + ".png' title='" + build.d3tip + "'/></td><td class='desc'>" + build.desc + "</td><td><a href='view.html?" + childSnapshot.key + "'>View</a></td></tr>"
-            );
-        };
+        //Create rows for each build
+        $("#build_list").append(
+            "<tr>" + 
+                "<td>" + build.votes + "</td>" + 
+                "<td>" + build.favs + "</td>" + 
+                "<td><img src='images/races/" + build.race + ".png' title='" + build.rTip + "' /></td>" + 
+                "<td><a href='view.html?" + childSnapshot.key + "'>" + build.title + "</a></td>" + 
+                "<td>"+ build.dateU +"</td>" + 
+                "<td><img src='images/" + build.r + "/elites/" + build.e1 + ".png' title='" + build.e1tip + "'/><img src='images/" + build.r + "/elitedoctrines/" + build.e1d + ".png' title='" + build.e1dtip + "'/></td>" + 
+                "<td><img src='images/" + build.r + "/elites/" + build.e2 + ".png' title='" + build.e2tip + "'/><img src='images/" + build.r + "/elitedoctrines/" + build.e2d + ".png' title='" + build.e2dtip + "'/></td>" + 
+                "<td><img src='images/" + build.r + "/elites/" + build.e3 + ".png' title='" + build.e3tip + "'/><img src='images/" + build.r + "/elitedoctrines/" + build.e3d + ".png' title='" + build.e3dtip + "'/></td>" + 
+                "<td><img src='images/" + build.r + "/doctrines/" + build.d1 + ".png' title='" + build.d1tip + "'/><img src='images/" + build.r + "/doctrines/" + build.d2 + ".png' title='" + build.d2tip + "'/><img src='images/" + build.r + "/doctrines/" + build.d3 + ".png' title='" + build.d3tip + "'/></td>" + 
+                "<td class='desc'>" + build.desc + "</td>" + 
+                "<td><a href='view.html?" + childSnapshot.key + "'>View</a> | <a href='edit.html?" + childSnapshot.key + "'>Edit</a> | <a href='#' id='deleteBuild' alt='" + childSnapshot.key + "'>Delete</a></td>" + 
+            "</tr>"
+        );
     });
+
 });
 
 //tooltip code

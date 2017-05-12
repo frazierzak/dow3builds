@@ -11,9 +11,19 @@
 		<link rel="stylesheet" type="text/css" href="main.css">
 	</head>
 	<body>
-		<header id="build_header">
+		<header>
 			<a id="logo" href="index.html"><img src="images/logo.png" /></a>
-			<a href="#" id="view">Edit this Build</a>
+			<div id="menu">
+				<a id="createBuild_button" href="create.html"><img src="images/create.png"/>Create New Build</a>
+				<a id="viewBuild_button" href="builds.html"><img src="images/view.png"/>View All Builds (<span id="allBuildsNumber"></span>)</a>
+				<div id="user_menu">
+					<a id="yourBuilds_button" href="your_builds.html"><img src="images/create.png"/>Your Builds (<span id="yourBuildNumber"></span>)</a>
+					<a id="yourfavorites_button" href="favorites.html"><img src="images/favorite.png"/>Your Favorites (<span id="yourFavNumber"></span>)</a>
+					<a id="settings_button" href="settings.html"><img src="images/settings.png"/>Settings</a>
+				</div>
+				<div id="sign-in-status"></div>
+				<a href="signin.html" id="sign-in"></a>
+			</div>
 		</header>
 		<section id="build_section">
 			

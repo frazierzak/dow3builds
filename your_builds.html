@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Dawn of War 3 Builds</title>
+		<title>Dawn of War 3 Builds - Your Builds</title>
 		<meta name="description" content="Creat and share your custom Dawn of War 3 builds with doctrines, elites, and build orders">
 		<meta http-equiv="content-type" content="text/html;charset=UTF-8">
 		<link href="jquery-ui-1.12.1.custom/jquery-ui.css" rel="stylesheet">
@@ -32,35 +32,15 @@
 		<header>
 			<a id="logo" href="index.html"><img src="images/logo.png" /></a>
 			<div id="menu">
-				<a id="createBuild_button" href="create.html"><img src="images/create.png"/>Create New Build</a>
-				<a id="viewBuild_button" href="builds.html"><img src="images/view.png"/>View All Builds (<span id="allBuildsNumber"></span>)</a>
+				<a id="createBuild_button" href="create.html"><img src="images/create.png"/>Create a Build</a>
+				<a id="viewBuild_button" href="builds.html"><img src="images/view.png"/>View Builds</a>
 				<div id="user_menu" class="logged_in">
 					<a id="yourBuilds_button" href="your_builds.html"><img src="images/builds.png"/>Your Builds (<span id="yourBuildNumber"></span>)</a>
 					<a id="yourfavorites_button" href="favorites.html"><img src="images/favorite.png"/>Your Favorites (<span id="yourFavNumber"></span>)</a>
+					<div id="sign-in-status"></div>
 					<a id="settings_button" href="settings.html"><img src="images/settings.png"/>Settings</a>
 				</div>
-				<div id="sign-in-status"></div>
 				<a href="signin.html" id="sign-in"></a>
-			</div>
-			<div id="sub_menu">
-				<div class="sub_menu_section">
-					<p>Filter:</p>
-					<a id="filterSm" href="builds.html?filter=sm">Space Marines</a>
-					<a id="filterOrk" href="builds.html?filter=orks">Orks</a>
-					<a id="filterEld" href="builds.html?filter=eldar">Eldar</a>
-				</div>
-				<div class="sub_menu_section">
-					<p>Sort:</p>
-					<a id="sortTitle" href="builds.html?sort=title">Title</a>
-					<a id="sortVotes" href="builds.html?sort=votes">Votes</a>
-					<a id="sortFav" href="builds.html?sort=fav">Favorited</a>
-					<a id="sortDate" href="builds.html?sort=date">Date</a>
-				</div>
-				<div class="sub_menu_section">
-					<p>Search:</p>
-					<input id="searchBox" type="text" placeholder="Search Titles Here" />
-					<a id="searchButton" alt=""></a>
-				</div>
 			</div>
 		</header>
 		<div id="notice">Test</div>
@@ -68,23 +48,22 @@
 		<div id="error">Test</div>
 		<section>
 			<table id="build_list" cellspacing="0">
-				<tr id="start">
+				<tr>
 					<th id="votes_c">Votes</th>
 					<th id="favorites_c"><img src="images/favorite.png" /></th>
 					<th id="race_c">Race</th>
 					<th id="title_c">Title</th>
-					<th id="author_c">Author</th>
 					<th id="date_c">Date</th>
 					<th class="elites_c">Elite 1</th>
 					<th class="elites_c">Elite 2</th>
 					<th class="elites_c">Elite 3</th>
 					<th id="doctrines_c">Doctrines</th>
 					<th id="desc_c">Details</th>
-					<th id="view_c">View</th>
+					<th id="view_c">Actions</th>
 				</tr>
 			</table>
 		</section>
 		<script src="firebase.js"></script>
-		<script src="builds.js"></script>
+		<script src="your_builds.js"></script>
 	</body>
 </html>

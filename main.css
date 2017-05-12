@@ -39,6 +39,10 @@ a:hover {
 	color: white;
 }
 
+input[type="text"]:focus {
+	border-color: white;
+}
+
 body {
 	background: black;
 	color: white;
@@ -53,6 +57,7 @@ header a#logo {
 	display: inline-block;
 	padding: 10px;
 	border-right: 1px solid white;
+	margin: 0 10px 0 0;
 }
 
 header#build_header #view {
@@ -88,7 +93,7 @@ form {
 	text-align: center;
 	font-size: 12px;
 	border-right: 1px solid white;
-	margin: 0 0 0 5px;
+	margin: 0 10px 0 5px;
 }
 
 
@@ -132,7 +137,7 @@ form {
 	background: url('images/races/eldar_simple.png');
 }
 
-#menu, #sub_menu {
+#menu {
 	display: inline-block;
 	margin: 0 0 5px 0;
 	padding: 0 0 10px 0;
@@ -143,15 +148,11 @@ form {
 #sub_menu {
 	border-top: 1px solid white;
 	display: block;
-	padding: 10px 0 5px 5px;
-	font-size: 0;
+	font-size: 12px;
 }
 
 #sub_menu p {
 	display: inline-block;
-	margin: 0 0 0 10px;
-	font-size: 12px;
-	padding: 0 5px 0 0;
 }
 
 #sub_menu p input {
@@ -161,18 +162,21 @@ form {
 	border: 1px solid orange;
 	padding: 2px;
 	border-radius: 2px;
-	margin: 0 0 0 5px;
-	font-size: 12px;
+	margin: 0 10px 0 0;
 }
 
-#sub_menu .left {
-	padding: 3px 0 0 0;
+#sub_menu .left, #sub_menu .right {
+	padding: 5px;
 }
 
-#menu a, #sub_menu a {
-	border-right: 1px solid white;
-	padding: 0 10px;
-	font-size: 12px;
+#sub_menu a {
+	padding: 8px 0;
+	margin: 0 10px 0 0;
+}
+
+#menu a {
+	margin: 0 10px 0 0;
+
 }
 
 #menu a img, #sub_menu a img {
@@ -182,6 +186,55 @@ form {
 
 #menu a:hover img, #sub_menu a:hover img {
 	filter: brightness(0) invert(1);
+}
+
+.sub_menu_section {
+	display: inline-block;
+	border-right: 1px solid white;
+	padding: 8px 5px 8px 10px;
+	font-size: 12px;
+}
+
+.sub_menu_section p {
+	margin: 0 5px 0 0;
+}
+
+.sub_menu_section a {
+	border-right: none;
+	font-size: 12px;
+	/*margin: 0 5px 0 0;*/
+}
+
+.sub_menu_section input {
+	margin: 0 5px 0 0;
+	background: black;
+	color: orange;
+	font-family: 'Roboto Condensed', sans-serif;
+	border: 1px solid orange;
+	padding: 2px;
+	border-radius: 2px;
+	min-width: 200px;
+}
+
+.sub_menu_section #searchButton {
+	background: url('images/search.png') no-repeat;
+	margin-top: 4px;
+	margin-left: -28px;
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	position: absolute;
+	cursor: pointer;
+}
+
+.sub_menu_section #searchButton:hover {
+	filter: brightness(0) invert(1);
+}
+
+#sign-in-status {
+	display: inline;
+	padding: 0 10px 0 5px;
+	/*border-right: 1px solid white;*/
 }
 
 button {
@@ -210,64 +263,12 @@ button:hover img {
 	filter: brightness(0) invert(1);
 }
 
-a#save {
-	/*font-size: 12px;*/
-	/*margin: 0 0 0 10px;*/
-	/*border-right: 1px solid white;*/
-	/*padding: 0 10px 0 0px;*/
-}
-
-a#save img {
-	/*margin-bottom: -3px;*/
-	/*margin-right: 5px;*/
-}
-
 a#copy {
-	/*font-size: 12px;*/
-	/*margin: 0 10px 0 0px;*/
 	cursor: pointer;
-	/*padding: 0 10px 0 0;*/
-	/*border-right: 1px solid white;*/
-}
-
-a#copy img {
-	/*margin-bottom: -3px;*/
-	/*margin-right: 5px;*/
-}
-
-a#copy:hover img {
-	/*filter: brightness(0) invert(1);*/
-}
-
-
-
-a#view {
-	/*font-size: 12px;*/
-	/*margin: 0 10px 0 0;*/
-}
-
-a#view img {
-	/*margin-bottom: -3px;*/
-	/*margin-right: 5px;*/
-}
-
-a#view:hover img {
-	/*filter: brightness(0) invert(1);*/
-}
-
-a#clear {
-	/*font-size: 12px;*/
-	/*margin: 0 5px 0 0;*/
-	/*border-left: 1px solid white;*/
-	/*border-right: 1px solid white;*/
-	/*padding: 0 10px 0 10px;*/
 }
 
 #user_menu {
 	display: inline;
-	/*font-size: 12px;
-	text-align: right;
-	padding: 0 0 0 5px;*/
 }
 
 #user_menu div {
@@ -510,7 +511,6 @@ table#build_table tr td {
 }
 
 #description_holder textarea {
-	width: 100%;
 	padding: 10px;
 	min-height: 300px;
 	background: #171717;
@@ -518,7 +518,7 @@ table#build_table tr td {
 	border: 1px solid orange;
 	border-radius: 2px;
 	font-family: 'Roboto Condensed', sans-serif;
-	line-height: 1.5;
+	line-height: 1.5em;
 }
 
 table#build_list {
@@ -538,7 +538,7 @@ table#build_list tr:nth-child(2n) {
 table#build_list td img {
 	width: 40px;
 	height: auto;
-	margin: 0 5px 0 0;
+	margin: 0 5px;
 }
 
 table#build_list td img:nth-last-child(1) {
@@ -551,39 +551,43 @@ table#build_list th {
 }
 
 table#build_list th#votes_c {
-	width: 1%;
+	width: 3%;
 }
 table#build_list th#favorites_c {
-	width: 2%;
+	width: 3%;
 }
 table#build_list th#race_c {
-	width: 5%;
+	width: 3%;
 }
 table#build_list th#title_c {
 	width: 15%;
 }
 table#build_list th#author_c {
-	width: 15%;
+	width: 5%;
 }
 table#build_list th#date_c {
-	width: 10%;
+	width: 5%;
 }
 table#build_list th.elites_c {
-	width: 10%;
+	width: 5%;
 }
 table#build_list th#doctrines_c {
-	width: 15%;
+	width: 7%;
 }
 table#build_list th#desc_c {
 	width: 15%;
 }
 table#build_list th#view_c {
-	width: 5%;
+	width: 8%;
 }
 
 table#build_list td.desc {
-	vertical-align: top;
+	vertical-align: middle;
 	text-align: left;
-	line-height: 16px;
+	line-height: 1.4em;
 	font-weight: normal;
+}
+
+#sub_menu a.selected {
+	color: yellow;
 }

@@ -25,6 +25,25 @@ var thirdEliteDocName;
 //Enable for testing
 var testing = true;
 
+if (testing) {
+    var user = "tester";
+}
+
+//Get Number of Builds User has made
+var ref = firebase.database().ref("users/" + user);
+ref.once("value").then(function(snapshot) {
+    var a = snapshot.child("builds").numChildren();
+    var b = snapshot.child("favs").numChildren();
+    $("#yourBuildNumber").text(a);
+    $("#yourFavNumber").text(b);
+  });
+
+var ref = firebase.database().ref("builds");
+ref.once("value").then(function(snapshot) {
+    var a = snapshot.numChildren();
+    $("#allBuildsNumber").text(a);
+  });
+
 //Clear code
 function clear() {
     $("#form input").removeAttr("checked");
@@ -142,6 +161,12 @@ function reportIncomplete() {
     notice("#error", "The following sections are not complete: " + message);
 }
 
+//Capitalize First Letter of String
+function jsUcfirst(string) 
+{
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
 //Build Array for Saving
 function saveValues() {
     var values = [];
@@ -152,6 +177,9 @@ function saveValues() {
         values.push(buildQ[2]);
         buildQ = r.exec(str);
     }
+    var upperTitle = $("input[name='build_title']").val();
+    upperTitle = jsUcfirst(upperTitle);
+    values[1] = upperTitle;
     values[11] = $("textarea[name='description']").val();
     if ($("textarea[name='description']").val().length !== 0) {
         var desc = true;
