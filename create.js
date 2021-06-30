@@ -20,6 +20,7 @@ var e;
 var firstEliteDocName;
 var secondEliteDocName;
 var thirdEliteDocName;
+var html;
 
 
 //Enable for testing
@@ -51,13 +52,14 @@ function clear() {
     $("#form label").removeClass("disabled");
     $("#form label").removeClass("used");
     $("#form")[0].reset();
-    $("#smSection").hide();
-    $("#orkSection").hide();
-    $("#eldSection").hide();
+    $("#description_holder, #createTable, #button_holder").hide();
+    $("#selectRaceNotice").show();
+    var divsToClear = "#firstElite, #firstElite_name, #firstEliteDocsHolder, #firstEliteDoc_name, #secondElite, #secondElite_name, #secondEliteDocsHolder, #secondEliteDoc_name, #thirdElite, #thirdElite_name, #thirdEliteDocsHolder, #thirdEliteDoc_name, #infantry_docs, #vehicle_docs, #structure_docs, #faction_docs";
+    $(divsToClear).html("");
 }
 
 //Reset Form
-$("#clear").click(clear);
+$(".clear").click(clear);
 
 //Hide Elite Doctrines
 function hideEliteDoctrines(elite, query) {
@@ -92,21 +94,49 @@ function disableRadio(x, y, changed) {
             }
         }
     });
+    showValues();
 }
 
 //Show parameters on page
 function showValues() {
-    var str = $("form").serialize();
+    //var str = $("form#form").serialize();
+    var values = [];
+    var r = $('input[name=r]:checked', '#form').val();
+    values.push(r);
+    var e1 = $('input[name=e1]:checked', '#form').val();
+    values.push(e1);
+    var e1d = $('input[name=e1d]:checked', '#form').val();
+    values.push(e1d);
+    var e2 = $('input[name=e2]:checked', '#form').val();
+    values.push(e2);
+    var e2d = $('input[name=e2d]:checked', '#form').val();
+    values.push(e2d);
+    var e3 = $('input[name=e3]:checked', '#form').val();
+    values.push(e3);
+    var e3d = $('input[name=e3d]:checked', '#form').val();
+    values.push(e3d);
+    $('#faction_doctrines input:checked').each(function() {
+        values.push($(this).attr('value'));
+    });
+
+    //Generate URL
+    values.clean(undefined);
+    var str = "";
+    $.each(values, function(ind,val) {
+        str = str + val + ",";
+    });
+    var str = str.slice(0,-1);
     var url = window.location.href; // Returns full URL
     url = url.split('create.html')[0];
     str = url + "build.html?" + str;
     $("#results").val(str);
-    $("#view").attr('href', str);
+    //$("#view").attr('href', str);
 }
 
 //Notice Code
 function notice(type, str) {
-    $(type).text(str);
+    type = "#"+type;
+    $(type).html(str);
     $(type).slideDown(500, function() {
         $(type).delay(8000).slideUp(500);
     });
@@ -157,8 +187,12 @@ function reportIncomplete() {
         flash($("#doctrineHead"));
         message = message + "Three Faction Doctrines not selected, ";
     }
+    if ($("textarea#shortDesc").val().length > 140) {
+        flash($("#shortDescHead"));
+        message = message + "Short Description is more than 140 characters, "
+    }
     message = message.replace(/(,\s*$)/g, ".");
-    notice("#error", "The following sections are not complete: " + message);
+    notice("error", "The following sections are not complete: " + message);
 }
 
 //Capitalize First Letter of String
@@ -167,62 +201,147 @@ function jsUcfirst(string)
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+//Clean elements from array
+Array.prototype.clean = function(deleteValue) {
+  for (var i = 0; i < this.length; i++) {
+    if (this[i] == deleteValue) {         
+      this.splice(i, 1);
+      i--;
+    }
+  }
+  return this;
+};
+
+var newPostKey = firebase.database().ref().child('builds').push().key;
+
 //Build Array for Saving
-function saveValues() {
+function saveValues(newPostKey) {
+    console.log(newPostKey);
     var values = [];
-    var str = $("#form").serialize();
-    var r = /(\w+)=(\w+)+/g;
-    var buildQ = r.exec(str);
-    while (buildQ !== null) {
-        values.push(buildQ[2]);
-        buildQ = r.exec(str);
-    }
-    var upperTitle = $("input[name='build_title']").val();
-    upperTitle = jsUcfirst(upperTitle);
-    values[1] = upperTitle;
-    values[11] = $("textarea[name='description']").val();
-    if ($("textarea[name='description']").val().length !== 0) {
-        var desc = true;
+    var r = $('input[name=r]:checked', '#form').val();
+    console.log(r);
+    values.push(r);
+    var e1 = $('input[name=e1]:checked', '#form').val();
+    console.log(e1);
+    values.push(e1);
+    var e1d = $('input[name=e1d]:checked', '#form').val();
+    console.log(e1d);
+    values.push(e1d);
+    var e2 = $('input[name=e2]:checked', '#form').val();
+    console.log(e2);
+    values.push(e2);
+    var e2d = $('input[name=e2d]:checked', '#form').val();
+    console.log(e2d);
+    values.push(e2d);
+    var e3 = $('input[name=e3]:checked', '#form').val();
+    console.log(e3);
+    values.push(e3);
+    var e3d = $('input[name=e3d]:checked', '#form').val();
+    console.log(e3d);
+    values.push(e3d);
+    $('#faction_doctrines input:checked').each(function() {
+        console.log($(this).attr('value'));
+        values.push($(this).attr('value'));
+    });
+
+    //Generate URL
+    values.clean(undefined);
+    var url = "view.html?";
+    $.each(values, function(ind,val) {
+        url = url + val + ",";
+        console.log(url);
+    });
+    var url = url.slice(0,-1);
+    console.log(url);
+
+    var title = $("input[name='build_title']").val();
+    console.log(title);
+    values.push(title);
+    var shortDesc = $("textarea#shortDesc").val();
+    console.log(shortDesc);
+    values.push(shortDesc);
+    var longDesc = simplemde.value();
+    console.log(longDesc);
+    values.push(longDesc);
+    values.clean(undefined);
+    console.log("Values array is: " + values);
+    console.log("Length of Values: " + values.length);
+    if (shortDesc.length !== 0) {
+        var shortDescPresent = true;
+        console.log("shortDesc is present");
     } else {
-        var desc = false;
-        values[11] = "";
+        var shortDescPresent = false;
+        //shortDesc = "";
+        console.log("shortDesc is not present");
     }
-    if (desc) {
-        if (values.length < 12) {
+    if (longDesc.length !== 0) {
+        var longDescPresent = true;
+        console.log("longDesc is present");
+    } else {
+        var longDescPresent = false;
+        //longDesc = "";
+        console.log("longDesc is not present");
+    }
+    if (values.length < 13) {
+        console.log("values length is less than 14");
+        if (shortDescPresent && longDescPresent) {
+            console.log("shortDesc and longDesc are present");
             reportIncomplete();
             return;
         }
-    } else {
-        if (values.length < 11) {
-            reportIncomplete();
-            return;
+        if ((shortDescPresent && !longDescPresent) || (!shortDescPresent && longDescPresent)) {
+            console.log("shortDesc or longDesc are missing");
+            if (values.length < 12) {
+                console.log("values length is less than 12");
+                reportIncomplete();
+                return;
+            }
+        }
+        if (!shortDescPresent && !longDescPresent) {
+            console.log("shortDesc and longDesc are missing");
+            if (values.length < 11) {
+                console.log("values length is less than 11");
+                reportIncomplete();
+                return;
+            }
         }
     }
-    if (values[1].length < 5) {
+    if (title.length < 5) {
+        console.log("Title is less than 5 characters");
         reportIncomplete();
         return;
     }
-    var url = window.location.href; // Returns full URL
-    url = url.split('create.html')[0];
-    str = url + "build.html?" + str;
-    var r = /[?|&](\w+)=(\w+)+/g;
-    var query = r.exec(window.location.href);
-    var buildId = "";
-    while (query !== null) {
-        buildId = buildId + query[2];
-        query = r.exec(window.location.href);
+    if (shortDesc.length > 140) {
+        console.log("Short Description is more than 140 characters");
+        reportIncomplete();
+        return;
     }
-    var buildTitle = $("#title").val();
-    writeUserData(buildTitle, buildId, str, values);
+    
+    
+    // var url = window.location.href; // Returns full URL
+    // url = url.split('create.html')[0];
+    // str = url + "build.html?" + str;
+    // var r = /[?|&](\w+)=(\w+)+/g;
+    // var query = r.exec(window.location.href);
+    // var buildId = "";
+    // while (query !== null) {
+    //     buildId = buildId + query[2];
+    //     query = r.exec(window.location.href);
+    // }
+    // var buildTitle = $("#title").val();
+    //writeUserData(values, newPostKey);
+
 }
 
 //Write to database
-function writeUserData(buildTitle, buildId, buildURL, values) {
+function writeUserData(values, newPostKey) {
     //Grab key
-    var newPostKey = firebase.database().ref().child('builds').push().key;
+    //var newPostKey = firebase.database().ref().child('builds').push().key;
+    var buildURL = "view.html?id=" + newPostKey;
+    console.log(buildURL);
 
     //Grab Current Date
-    var currentdate = new Date().toDateString(); 
+    var currentdate = Date.now();
 
     //Check if testing
     if (testing) {
@@ -231,17 +350,17 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
         var uid = "tester";
 
         //Take snapshot of database child
-        ref.once('value', function(snapshot) {
+        ref.once("value", function (snapshot) {
             //Check if key is already in database
             if (snapshot.hasChild(newPostKey)) {
-                notice("#error", "Sorry, this build has already been saved. You can view it <a href=build.html?=" + newPostKey + ">here.</a>");
+                notice("error", "Sorry, this build has already been saved. You can view and edit it <a href=view.html?=" + newPostKey + ">here.</a>");
             } else {
                 //Add entry to database
-                firebase.database().ref('builds/' + newPostKey).set({
+                firebase.database().ref("builds/" + newPostKey).set({
                     buildURL: buildURL,
                     author: uid,
                     votes: 1,
-                    favs: 0,
+                    favCount: 0,
                     r: values[0],
                     title: values[1],
                     e1: values[2],
@@ -253,14 +372,16 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
                     d1: values[8],
                     d2: values[9],
                     d3: values[10],
-                    desc: values[11],
+                    shortDesc: values[11],
+                    longDesc: values[12],
                     dateC: currentdate,
                     dateU: currentdate
                 });
-                firebase.database().ref('users/' + uid + '/builds/' + newPostKey).set({
+                firebase.database().ref("users/" + uid + "/builds/" + newPostKey).set({
                     buildURL: buildURL,
+                    author: uid,
                     votes: 1,
-                    favs: 0,
+                    favCount: 0,
                     r: values[0],
                     title: values[1],
                     e1: values[2],
@@ -272,11 +393,12 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
                     d1: values[8],
                     d2: values[9],
                     d3: values[10],
-                    desc: values[11],
+                    shortDesc: values[11],
+                    longDesc: values[12],
                     dateC: currentdate,
                     dateU: currentdate
                 });
-
+                notice("notice", "Build Submitted! You can view and edit it <a href=\"view.html?id=" + newPostKey + "\">here</a>.");
             }
         });
     } else {
@@ -285,15 +407,16 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
             if (user) {
                 var uid = user.uid;
                 var ref = firebase.database().ref("builds");
-                ref.once('value', function(snapshot) {
+                ref.once("value", function (snapshot) {
                     if (snapshot.hasChild(newPostKey)) {
-                        notice("#error", "Sorry, this build has already been saved. You can view it <a href=build.html?=" + newPostKey + ">here.</a>");
+                        notice("error", "Sorry, this build has already been saved. You can view and edit it <a href=view.html?=" + newPostKey + ">here.</a>");
                     } else {
-                        firebase.database().ref('builds/' + newPostKey).set({
+                        //Add entry to database
+                        firebase.database().ref("builds/" + newPostKey).set({
                             buildURL: buildURL,
                             author: uid,
                             votes: 1,
-                            favs: 0,
+                            favCount: 0,
                             r: values[0],
                             title: values[1],
                             e1: values[2],
@@ -305,13 +428,16 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
                             d1: values[8],
                             d2: values[9],
                             d3: values[10],
-                            desc: values[11]
+                            shortDesc: values[11],
+                            longDesc: values[12],
+                            dateC: currentdate,
+                            dateU: currentdate
                         });
-                        firebase.database().ref('users/' + uid + '/builds/' + newPostKey).set({
+                        firebase.database().ref("users/" + uid + "/builds/" + newPostKey).set({
                             buildURL: buildURL,
                             author: uid,
                             votes: 1,
-                            favs: 0,
+                            favCount: 0,
                             r: values[0],
                             title: values[1],
                             e1: values[2],
@@ -323,8 +449,12 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
                             d1: values[8],
                             d2: values[9],
                             d3: values[10],
-                            desc: values[11]
+                            shortDesc: values[11],
+                            longDesc: values[12],
+                            dateC: currentdate,
+                            dateU: currentdate
                         });
+                        notice("notice", "Build Submitted! You can view and edit it <a href=\"view.html?id=" + newPostKey + "\">here</a>.");
                     }
                 });
             }
@@ -333,36 +463,99 @@ function writeUserData(buildTitle, buildId, buildURL, values) {
 }
 
 //Save Button
-$("#save").click(function() {
-    saveValues();
+$(document).on('click', '.save', function() {
+    saveValues(newPostKey);
 })
 
 //Race selection code
 function switchRaces(thisObj) {
+    clear();
     var race = thisObj.val();
-    $("input").removeAttr("checked");
-    $("input").removeAttr("disabled");
-    $("label").removeClass("disabled");
-    $("label").removeClass("used");
-    $("#form")[0].reset();
+    $("#description_holder, #createTable, #button_holder").show();
+    $("#selectRaceNotice").hide();
     if (race === "sm") {
         $("input[value='" + race + "']").prop("checked", true);
-        $("#smSection").show();
-        $("#orkSection").hide();
-        $("#eldSection").hide();
+        var x;
+        jQuery.getJSON("json/spacemarines.json", function(data) {
+            for(x=1; x < 4; x += 1) {
+                $.each(data.elites, function(cat, val) {
+                    var eliteLabel = "<label>" + 
+                        "<input class=\"single-checkbox\" type=\"radio\" name=\"e" + x + "\" value=\"" + val.value + "\" alt=\"" + val.title + "\" />" + 
+                        "<img title=\"<h2>" + val.title + "</h2><h3>" + val.role + "</h3>" + val.desc + "\" src=\"images/" + race + "/elites/" + val.src + ".png\"/>" + 
+                        "</label>";
+                    var eliteDocClass = "<div class=\"eliteDocs\" id=\"" + val.value + "\">" +
+                        "<label>" +
+                            "<input type=\"radio\" name=\"e" + x + "d\" value=\"" + val.docs[0].value + "\" alt=\"" + val.docs[0].name + "\" />" +
+                            "<img src=\"images/" + race + "/elitedoctrines/" + val.docs[0].src + ".png\" title=\"<h2>" + val.docs[0].name + "</h2>" + val.docs[0].desc + "\" />" +
+                        "</label>" +
+                        "<label>" +
+                            "<input type=\"radio\" name=\"e" + x + "d\" value=\"" + val.docs[1].value + "\" alt=\"" + val.docs[1].name + "\" />" +
+                                "<img src=\"images/" + race + "/elitedoctrines/" + val.docs[1].src + ".png\" title=\"<h2>" + val.docs[1].name + "</h2>" + val.docs[1].desc + "\" />" +
+                            "</label>" +
+                        "</div>";
+                    switch (x) {
+                        case 1:
+                            $("#firstElite").append(eliteLabel);
+                            $("#firstEliteDocsHolder").append(eliteDocClass);
+                            break;
+                        case 2:
+                            $("#secondElite").append(eliteLabel);
+                            $("#secondEliteDocsHolder").append(eliteDocClass);
+                            break;
+                        case 3:
+                            $("#thirdElite").append(eliteLabel);
+                            $("#thirdEliteDocsHolder").append(eliteDocClass);
+                            break;
+                    }
+                })
+            }
+            $.each(data.doctrines, function(cat, val) {
+                console.log(cat);
+                console.log(val);
+                $.each(val.infantry, function(cat, val) {
+                    var infantryDocs = "<label>" +
+                    "<input class=\"doctrines-checkbox\" type=\"checkbox\" name=\"doc\" value=\"" + val.value + "\" alt=\"" + val.name + "\" />" +
+                    "<img title=\"<h2>" + val.name + "</h2>" + val.desc + "\" src=\"images/" + race + "/doctrines/" + val.src + ".png\">";
+                    $("#infantry_docs").append(infantryDocs);
+                });
+                $.each(val.vehicle, function(cat, val) {
+                    var vehicleDocs = "<label>" +
+                    "<input class=\"doctrines-checkbox\" type=\"checkbox\" name=\"doc\" value=\"" + val.value + "\" alt=\"" + val.name + "\" />" +
+                    "<img title=\"<h2>" + val.name + "</h2>" + val.desc + "\" src=\"images/" + race + "/doctrines/" + val.src + ".png\">";
+                    $("#vehicle_docs").append(vehicleDocs);
+                });
+                $.each(val.structure, function(cat, val) {
+                    var structureDocs = "<label>" +
+                    "<input class=\"doctrines-checkbox\" type=\"checkbox\" name=\"doc\" value=\"" + val.value + "\" alt=\"" + val.name + "\" />" +
+                    "<img title=\"<h2>" + val.name + "</h2>" + val.desc + "\" src=\"images/" + race + "/doctrines/" + val.src + ".png\">";
+                    $("#structure_docs").append(structureDocs);
+                });
+                $.each(val.faction, function(cat, val) {
+                    var factionDocs = "<label>" +
+                    "<input class=\"doctrines-checkbox\" type=\"checkbox\" name=\"doc\" value=\"" + val.value + "\" alt=\"" + val.name + "\" />" +
+                    "<img title=\"<h2>" + val.name + "</h2>" + val.desc + "\" src=\"images/" + race + "/doctrines/" + val.src + ".png\">";
+                    $("#faction_docs").append(factionDocs);
+                });
+                
+            });
+        });
+        $("#factionEliteSelection").html("<h1>Space Marines Elite Selection</h1>");
     }
     if (race === "ork") {
         $("input[value='" + race + "']").prop("checked", true);
         $("#smSection").hide();
         $("#orkSection").show();
         $("#eldSection").hide();
+        $("#factionEliteSelection").html("<h1>Orks Elite Selection</h1>");
     }
     if (race === "eld") {
         $("input[value='" + race + "']").prop("checked", true);
         $("#smSection").hide();
         $("#orkSection").hide();
         $("#eldSection").show();
+        $("#factionEliteSelection").html("<h1>Eldar Elite Selection</h1>");
     }
+    $("#createTable").show();
     showValues();
 }
 
@@ -434,7 +627,7 @@ var parser = function() {
 parser();
 
 //Greys out other elite doctrine
-$('.eliteDocs input').on('change', function() {
+$(document).on('change', '.eliteDocs input', function() {
     if ($(this).attr("checked", true)) {
         $(this).parent("label").siblings("label").addClass("disabled");
         $(this).parent("label").removeClass("disabled");
@@ -447,7 +640,7 @@ $("textarea[name='description']").on('change', function() {
 });
 
 //Doctrines limitation code
-$('input.doctrines-checkbox').on('change', function() {
+$(document).on('change', 'input.doctrines-checkbox', function() {
     if ($(".doctrines-checkbox:checked").length === 3) {
         $("#faction_doctrines input").each(function() {
             $(this).parent("label").addClass("disabled");
@@ -489,7 +682,7 @@ if ($(".elites input.single-checkbox:checked").length === 3) {
 }
 
 //Greyscale all other elites after three picked
-$('.elites input.single-checkbox').change(function() {
+$(document).on('change', '.elites input.single-checkbox', function() {
     if ($(".elites input.single-checkbox:checked").length === 3) {
         $(".elites label").addClass("disabled");
         $(".elites input.single-checkbox:checked").each(function() {
@@ -499,52 +692,57 @@ $('.elites input.single-checkbox').change(function() {
 });
 
 //Disable selected elites in other columns
-$('#firstElite input.single-checkbox').change(function() {
+$(document).on('change', '#firstElite input.single-checkbox', function() {
     changed = $(this).val();
     first_elite = changed;
     firstEliteName = $(this).attr('alt');
     $("#firstElite_name").text(firstEliteName);
     disableRadio("#secondElite", "#thirdElite", first_elite);
-    $('td#firstEliteDocs').children().hide();
+    $("#firstEliteDoc_name").html("");
+    $('#firstEliteDocsHolder').children().hide();
     e = 'td#firstEliteDocs #' + changed;
     $(e).show();
 });
-$('#secondElite input.single-checkbox').change(function() {
+
+$(document).on('change', '#secondElite input.single-checkbox', function() {
     changed = $(this).val();
     second_elite = changed;
     secondEliteName = $(this).attr('alt');
     $("#secondElite_name").text(secondEliteName);
     disableRadio("#firstElite", "#thirdElite", second_elite);
-    $('td#secondEliteDocs').children().hide();
+    $("#secondEliteDoc_name").html("");
+    $('#secondEliteDocsHolder').children().hide();
     e = 'td#secondEliteDocs #' + changed;
     $(e).show();
 });
-$('#thirdElite input.single-checkbox').change(function() {
+
+$(document).on('change', '#thirdElite input.single-checkbox', function() {
     changed = $(this).val();
     third_elite = changed;
     thirdEliteName = $(this).attr('alt');
     $("#thirdElite_name").text(thirdEliteName);
     disableRadio("#secondElite", "#firstElite", third_elite);
-    $('td#thirdEliteDocs').children().hide();
+    $("#thirdEliteDoc_name").html("");
+    $('#thirdEliteDocsHolder').children().hide();
     e = 'td#thirdEliteDocs #' + changed;
     $(e).show();
 });
 
 
 //Show Elite Doctrine Names
-$('#firstEliteDocs input').change(function() {
+$(document).on('change', '#firstEliteDocs input', function () {
     firstEliteDocName = $(this).attr('alt');
     $("#firstEliteDoc_name").text(firstEliteDocName);
     $("#firstEliteDoc_name").show();
 });
 
-$('#secondEliteDocs input').change(function() {
+$(document).on('change', '#secondEliteDocs input', function () {
     secondEliteDocName = $(this).attr('alt');
     $("#secondEliteDoc_name").text(secondEliteDocName);
     $("#secondEliteDoc_name").show();
 });
 
-$('#thirdEliteDocs input').change(function() {
+$(document).on('change', '#thirdEliteDocs input', function () {
     thirdEliteDocName = $(this).attr('alt');
     $("#thirdEliteDoc_name").text(thirdEliteDocName);
     $("#thirdEliteDoc_name").show();
@@ -570,10 +768,47 @@ $(function() {
 
 //Copy to Clipboard code
 function copyToClipboard() {
+    var values = [];
+    var r = $('input[name=r]:checked', '#form').val();
+    console.log(r);
+    values.push(r);
+    var e1 = $('input[name=e1]:checked', '#form').val();
+    console.log(e1);
+    values.push(e1);
+    var e1d = $('input[name=e1d]:checked', '#form').val();
+    console.log(e1d);
+    values.push(e1d);
+    var e2 = $('input[name=e2]:checked', '#form').val();
+    console.log(e2);
+    values.push(e2);
+    var e2d = $('input[name=e2d]:checked', '#form').val();
+    console.log(e2d);
+    values.push(e2d);
+    var e3 = $('input[name=e3]:checked', '#form').val();
+    console.log(e3);
+    values.push(e3);
+    var e3d = $('input[name=e3d]:checked', '#form').val();
+    console.log(e3d);
+    values.push(e3d);
+    $('#faction_doctrines input:checked').each(function() {
+        console.log($(this).attr('value'));
+        values.push($(this).attr('value'));
+    });
+
+    //Generate URL
+    values.clean(undefined);
+    var url = "view.html?";
+    $.each(values, function(ind,val) {
+        url = url + val + ",";
+        console.log(url);
+    });
+    var url = url.slice(0,-1);
+    console.log(url);
+    $('#results').val(url);
     $('#results').select();
     document.execCommand("copy");
 }
 
-$('a#copy').click(function() {
+$('a.copy').click(function() {
     copyToClipboard();
 });

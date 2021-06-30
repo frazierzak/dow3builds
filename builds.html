@@ -45,16 +45,17 @@
 			<div id="sub_menu">
 				<div class="sub_menu_section">
 					<p>Filter:</p>
+					<a id="filterAll" href="builds.html?filter=all">All</a>
 					<a id="filterSm" href="builds.html?filter=sm">Space Marines</a>
-					<a id="filterOrk" href="builds.html?filter=orks">Orks</a>
-					<a id="filterEld" href="builds.html?filter=eldar">Eldar</a>
+					<a id="filterOrk" href="builds.html?filter=ork">Orks</a>
+					<a id="filterEld" href="builds.html?filter=eld">Eldar</a>
 				</div>
 				<div class="sub_menu_section">
 					<p>Sort:</p>
-					<a id="sortTitle" href="builds.html?sort=title">Title</a>
-					<a id="sortVotes" href="builds.html?sort=votes">Votes</a>
-					<a id="sortFav" href="builds.html?sort=fav">Favorited</a>
-					<a id="sortDate" href="builds.html?sort=date">Date</a>
+					<a class="sortTitle" href="builds.html?sort=title">Title</a>
+					<a class="sortVotes" href="builds.html?sort=votes">Votes</a>
+					<a class="sortFav" href="builds.html?sort=fav">Favorited</a>
+					<a class="sortDate" href="builds.html?sort=date">Date Last Updated</a>
 				</div>
 				<div class="sub_menu_section">
 					<p>Search:</p>
@@ -68,20 +69,21 @@
 		<div id="error">Test</div>
 		<section>
 			<table id="build_list" cellspacing="0">
-				<tr id="start">
-					<th id="votes_c">Votes</th>
-					<th id="favorites_c"><img src="images/favorite.png" /></th>
+				<tr id="tHead">
+					<th id="votes_c"><a class="sortVotes" href="builds.html?sort=votes">Votes</a></th>
+					<th id="favorites_c"><a class="sortFav" href="builds.html?sort=fav"><img src="images/favorite.png" /></a></th>
 					<th id="race_c">Race</th>
-					<th id="title_c">Title</th>
+					<th id="title_c"><a class="sortTitle" href="builds.html?sort=title">Title</a></th>
 					<th id="author_c">Author</th>
-					<th id="date_c">Date</th>
+					<th id="date_c"><a class="sortDate" href="builds.html?sort=date">Date Last Updated</a></th>
 					<th class="elites_c">Elite 1</th>
 					<th class="elites_c">Elite 2</th>
 					<th class="elites_c">Elite 3</th>
 					<th id="doctrines_c">Doctrines</th>
 					<th id="desc_c">Details</th>
-					<th id="view_c">View</th>
+					<th id="view_c">Actions</th>
 				</tr>
+				<tr id="start"></tr>
 			</table>
 		</section>
 		<script src="firebase.js"></script>

@@ -17,6 +17,9 @@ time, mark, audio, video {
     font-size: 100%;
     font: inherit;
     vertical-align: baseline;
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+	-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+	box-sizing: border-box;
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -64,12 +67,9 @@ header#build_header #view {
 	margin: 0 0 0 10px;
 }
 
-/*#select_race {
-	display: inline-block;
-	padding: 0;
-	margin: 0 0 0 5px;
-	font-size: 12px;
-}*/
+strong {
+	font-weight: bold;
+}
 
 .left {
 	float: left;
@@ -162,7 +162,7 @@ form {
 	border: 1px solid orange;
 	padding: 2px;
 	border-radius: 2px;
-	margin: 0 10px 0 0;
+	margin: 0 10px 0 5px;
 }
 
 #sub_menu .left, #sub_menu .right {
@@ -193,6 +193,7 @@ form {
 	border-right: 1px solid white;
 	padding: 8px 5px 8px 10px;
 	font-size: 12px;
+	position: relative;
 }
 
 .sub_menu_section p {
@@ -203,6 +204,22 @@ form {
 	border-right: none;
 	font-size: 12px;
 	/*margin: 0 5px 0 0;*/
+}
+
+a.down:after, a.up:after {
+	content: ' ';
+	width: 16px;
+	height: 10px;
+	display: inline-block;
+	margin: 0 0 0 5px;
+}
+
+a.down:after {
+	background: url('images/arrowDown.png') no-repeat;
+}
+
+a.up:after {
+	background: url('images/arrowUp.png') no-repeat;
 }
 
 .sub_menu_section input {
@@ -218,13 +235,12 @@ form {
 
 .sub_menu_section #searchButton {
 	background: url('images/search.png') no-repeat;
-	margin-top: 4px;
-	margin-left: -28px;
-	display: inline-block;
 	width: 16px;
-	height: 16px;
-	position: absolute;
-	cursor: pointer;
+    height: 16px;
+    position: absolute;
+    cursor: pointer;
+    right: 6px;
+    top: 12px;
 }
 
 .sub_menu_section #searchButton:hover {
@@ -320,6 +336,13 @@ section {
 
 section#build_section {
 	text-align: center;
+}
+
+#selectRaceNotice {
+	text-align: center;
+	font-size: 24px;
+    line-height: 2em;
+    padding: 5px 20px;
 }
 
 table {
@@ -495,30 +518,54 @@ table#build_table tr td {
 .build_races img, .build_elites img, .build_doctrines img, .build_elite_docs {
 	display: none;
 }
-.build_elites img {
-	/*margin: 0;*/
-}
 
 #description_holder {
-	width: 80%;
+	width: 100%;
 	display: block;
-	margin: 0 auto;
+	margin: 20px auto 0;
+	display: none;
+}
+#description_holder .left {
+	width: 33%;
+}
+#description_holder .right {
+	width: 66%;
 }
 
-#description_holder h1 {
+#description_holder h1.descTitle {
 	text-align: center;
+	font-size: 24px;
 	margin: 0 0 10px 0;
 }
 
-#description_holder textarea {
-	padding: 10px;
-	min-height: 300px;
-	background: #171717;
-	color: white;
-	border: 1px solid orange;
-	border-radius: 2px;
-	font-family: 'Roboto Condensed', sans-serif;
-	line-height: 1.5em;
+#description_holder h2.descTitle {
+	text-align: center;
+	font-size: 14px;
+	margin: 0 0 10px 0;
+}
+
+#description_holder #shortDesc {
+	background: #191919;
+    border: 1px solid #ffa500;
+    border-radius: 4px;
+    width: 94%;
+    min-height: 351px;
+    color: white;
+    padding: 10px;
+    font-size: 16px;
+    font-family: 'Roboto Condensed', sans-serif;
+}
+
+#shortDesc span {
+	color: green;
+}
+.character-count {
+    padding: 8px 10px;
+    font-size: 12px;
+    color: #959694;
+    text-align: left;
+    cursor: default;
+    display: block;
 }
 
 table#build_list {
@@ -528,6 +575,7 @@ table#build_list {
 table#build_list td {
 	vertical-align: middle;
 	border-right: none;
+	padding: 20px 10px;
 	/*border-bottom: 1px dotted white;*/
 }
 
@@ -536,49 +584,40 @@ table#build_list tr:nth-child(2n) {
 }
 
 table#build_list td img {
-	width: 40px;
-	height: auto;
-	margin: 0 5px;
+	margin: 0 2.5%;
+	vertical-align: middle;
 }
 
 table#build_list td img:nth-last-child(1) {
-	margin: 0;
+	margin: 0 0 0 2.5%;
 }
 
 table#build_list th {
 	font-size: 16px;
-	padding: 15px 0;
+	padding: 15px 10px;
 }
 
 table#build_list th#votes_c {
-	width: 3%;
+	text-align: left;
+	/*min-width: 100px;*/
 }
 table#build_list th#favorites_c {
-	width: 3%;
+	text-align: left;
+	/*min-width: 100px;*/
 }
 table#build_list th#race_c {
-	width: 3%;
+	/*min-width: 60px;*/
+
 }
 table#build_list th#title_c {
 	width: 15%;
 }
+
 table#build_list th#author_c {
-	width: 5%;
-}
-table#build_list th#date_c {
-	width: 5%;
-}
-table#build_list th.elites_c {
-	width: 5%;
-}
-table#build_list th#doctrines_c {
-	width: 7%;
+	width: 10%;
 }
 table#build_list th#desc_c {
-	width: 15%;
-}
-table#build_list th#view_c {
-	width: 8%;
+	width: 20%;
 }
 
 table#build_list td.desc {
@@ -588,6 +627,187 @@ table#build_list td.desc {
 	font-weight: normal;
 }
 
-#sub_menu a.selected {
+a.selected {
 	color: yellow;
+}
+
+table#build_list td img.raceImage {
+	max-width: 60px;
+}
+
+.voteTd, .favTd {
+	text-align: left;
+	padding: 0 20px 0;
+}
+
+.arrowHolder {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    margin: 0 10px 0 0;
+}
+
+.not-faved, .faved {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url('images/favorite.png');
+	cursor: pointer;
+	margin: 0 10px 0 0;
+}
+
+.not-faved, .faved:hover {
+	filter: brightness(0) invert(1);
+}
+
+.not-faved:hover, .faved {
+	filter: none;
+}
+
+.favNum {
+	display: inline-block;
+	position: relative;
+	bottom: 2px;
+}
+
+.voteHolder {
+	display: inline-block;
+	position: relative;
+	bottom: 7px;
+}
+
+.voteUp, .voteDown {
+	display: inline-block;
+	width: 16px;
+	height: 10px;
+	cursor: pointer;
+	filter: brightness(0) invert(1);
+}
+
+.voteUp:hover, .voteDown:hover {
+	filter: none;
+}
+
+.voteUp {
+	background-image: url('images/arrowUp.png');
+}
+
+.voteDown {
+	background-image: url('images/arrowDown.png');
+}
+
+.eliteTd img {
+	max-width: 60px;
+	height: auto;
+	width: 45%;
+	min-width: 40px;
+}
+
+.eliteTd img:nth-last-child(1) {
+	width: 35%;
+	max-width: 40px;
+	min-width: 35px;
+}
+
+.docTd img {
+	max-width: 60px;
+	width: 25%;
+	min-width: 35px;
+}
+
+.CodeMirror {
+	background: #191919;
+	color: white;
+	border-color: #ffa500;
+	cursor: text;
+	height: 324px;
+}
+
+.CodeMirror-cursor {
+	border-left: 1px solid #fff;
+}
+
+.editor-toolbar {
+	opacity: 1;
+	background: black;
+	border-color: #ffa500;
+	color: #fff;
+}
+
+.editor-toolbar:hover {
+	opacity: 1;
+}
+
+.editor-toolbar a {
+	color: #ffa500 !important;
+}
+
+.editor-toolbar a.active, .editor-toolbar a:hover {
+	background: black;
+	color: white !important;
+	border: 1px solid #ffa500;
+}
+
+.editor-toolbar i.separator {
+	opacity: 1;
+	border: none;
+	border-right: 1px solid #ffa500;
+	border-right-color: #ffa500;
+}
+
+#viewDescription {
+	width: 80%;
+	margin: 0 auto;
+}
+
+#descriptionText {
+	text-align: left;
+}
+
+#descriptionText h1 {
+	font-size: 24px;
+}
+
+#button_holder {
+	width: 100%;
+	margin: 0 auto;
+	display: block;
+	font-size: 0;
+
+
+}
+#button_holder a {
+	width: 45%;
+	display: inline-block;
+	padding: 20px;
+	font-size: 18px;
+	text-align: center;
+	background: black;
+	color: #ffa500;
+	cursor: pointer;
+	border: 1px solid #ffa500;
+	border-radius: 4px;
+	font-weight: bold;
+	margin: 0 1% 0 0;
+}
+
+#button_holder a#bottom_save {
+	margin: 0;
+}
+
+#button_holder a#bottom_reset {
+	width: 8%;
+	margin: 0 1% 0 0;
+}
+
+#button_holder a:hover {
+	color: black;
+	background: #ffa500;
+}
+
+#button_holder span {
+	display: block;
+	font-size: 14px;
+	margin: 5px 0 0 0;
+	font-weight: normal;
 }

@@ -9,6 +9,7 @@
 		<script src="jquery-ui-1.12.1.custom/jquery-ui.js"></script>
 		<link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet"> 
 		<link rel="stylesheet" type="text/css" href="main.css">
+		<script src="showdown.min.js"></script>
 	</head>
 	<body>
 		<header>
@@ -26,7 +27,7 @@
 			</div>
 		</header>
 		<section id="build_section">
-			
+			<p id="showdownExample"></p>
 		
 		<table id="build_table">
 			<tr>
@@ -113,6 +114,10 @@
 			
 			<img title="<h2>Solaria's Presence - Inferno Missiles</h2>When Solaria is deployed, Whirlwind rockets leave behind a pool of fire when they explode. Causes Damage over time in a Circle." src="images/sm/elitedoctrines/imperialknightsolaria1.png" alt="imsp">
 			<img title="<h2>Solaria's Command - Fire on Move</h2>Tactical Marines equipped with bolters can fire on the move but do so less rapidly than when stationary. When reaching Level 8, this Doctrine is unlocked to be equipped as an Army Doctrine." src="images/sm/doctrines/fireonmove.png" alt="imsc">
+		</div><!-- build_elite_docs -->
+		<div id="viewDescription">
+		<h1>Description</h1>
+			<div id="descriptionText"></div>
 		</div>
 		</section>
 		<script>
@@ -180,6 +185,13 @@
 					},
 				});
 			} );
+
+			//Showdown code
+			var converter = new showdown.Converter(),
+				text = "#hello, markdown!",
+				html = converter.makeHtml(text);
+			$("#descriptionText").html(html);
 		</script>
+
 	</body>
 </html>
